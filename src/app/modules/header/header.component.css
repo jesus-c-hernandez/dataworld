@@ -1,3 +1,6 @@
 #navbarNav{
     justify-content: right;
 }
+.nav-link{
+    font-weight: 600;
+}

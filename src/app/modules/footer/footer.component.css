@@ -1,5 +1,4 @@
 footer{
-    position: fixed;
     width: 100%;
     height: auto;
     bottom: 0;
@@ -23,4 +22,20 @@ footer{
 .redes-sociales{
     /* background-color: blueviolet; */
     margin: 1rem 2rem 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.iconos{
+    text-align: center;
+}
+@media only screen and (max-width: 768px){
+    footer{
+      flex-direction: column;
+    }
+    .redes-sociales{
+        margin: 0;
+        text-align: center;
+    }
 }

@@ -1,34 +1,63 @@
 .tiempo-actual{
-    display: flex;
-    width: 25rem;
-    height: 15rem;
-    background-position: center center;
+    /* display: flex; */
+    width: 100%;
+    height: 30%;
+    background-repeat: no-repeat;
+    background-position: top center;
     background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 1rem 0;
 }
-.info-temp{
-    display: flex;
+.tiempo-actual p{
+    margin: 0;
+    padding: 0;
 }
-.info-temp p{
-    text-shadow: 1px 1px 2px black;
+@media only screen and (max-width: 768px){
+    .tiempo-actual{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40%;
+    }
+    /* .ciudad-actual{
+        padding-top: 8rem;
+    } */
+  }
+.ciudad-actual{
+    font-size: 1.3rem;
+    font-weight: 600;
+    /* text-shadow: ; */
 }
 .temp-actual{
     font-size: 45px;
     font-weight: 900;
 }
-.clima-por-horas{
-    position: relative;
-    overflow: hidden;
-    background-color: red;
-    width: 50rem;
-    height: 10rem;
+.pronosticos-dash{
+    display: flex;
 }
-.clima-por-horas img{
+.contenedor-medio{
+    flex-basis: calc(100% / 2);
+    margin: 1rem;
+    background-color: #E0E0E0;
+    padding: 1rem;
+    border-left: 5px solid #55E94A;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.contenedor-medio:last-child{
+    border-left: 5px solid #D0F53D;
+}
+.por-columna{
+    display: flex;
+    justify-content: space-evenly;
     width: 100%;
 }
-.clima-por-horas p{
-    position: absolute;
-    font-size: 15rem;
+.columna{
+    text-align: center;
 }
-.clima-por-dias{
-    background-color: yellow;
+@media only screen and (max-width: 768px){
+    .pronosticos-dash{
+      flex-direction: column;
+    }
 }
