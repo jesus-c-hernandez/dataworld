@@ -1,0 +1,26 @@
+footer{
+    position: fixed;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    background-color: #5B605B;
+    color: white;
+    display: flex;
+    justify-content: right;
+}
+#logo-white{
+    width: 100px;
+    height: 100px;
+    margin-top: 1rem;
+}
+.en-medio{
+    /* background-color: aqua; */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.redes-sociales{
+    /* background-color: blueviolet; */
+    margin: 1rem 2rem 1rem 0;
+}
