@@ -12,6 +12,8 @@
     width: 100%;
     height: auto;
     text-align: center;
+    border: none;
+    background-color: transparent;
 }
 .ampliar img{
     width: 2.5rem;
@@ -21,6 +23,7 @@
     grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: repeat(3, auto);
     padding: 1rem;
+    /* margin-left: 10rem; */
     /* height: 80%; */
 }
 .temp-actual-small{
@@ -54,7 +57,6 @@
 .por-columna{
     display: flex;
     justify-content: space-evenly;
-    min-width: 53rem;
 }
 .columna{
     min-width: 7rem;
@@ -73,6 +75,9 @@
     grid-row-end: 3;
     border-color: #69B6D0;
 }
+#condAd{
+    border-color: #69B6D0;
+}
 .contenedor-cond-ad{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -88,6 +93,9 @@
     border-top: 1px solid #5B605B;
     text-align: center;
 }
+#condAdSmall .cond-ad{
+    border: none;
+} 
 .icono-cond-ad{
     grid-column: 1;
     width: 2.5rem;
@@ -102,7 +110,7 @@
     grid-column: 3;
 }
 /* AMPLIACIONES */
-.ampliar-contenedor{
+.ampliar-horas{
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -110,7 +118,19 @@
     overflow-x: scroll;
     max-width: 53rem;
 }
-.contenedor-small{
+.ampliar-dias{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    overflow-x: scroll;
+    max-width: 53rem;
+}
+.contenedor-horas-small{
+    grid-column: 1;
+    grid-row: 2;
+}
+.contenedor-dias-small{
     grid-column: 1;
     grid-row: 2;
 }
@@ -121,14 +141,19 @@
     min-width: 1rem;
 }
 .condicion-adicional-small{
-    grid-column: 1;
+
+    /* grid-column: 1;
     grid-row: 3;
-    height: 10rem;
-    overflow: hidden;
+    height: auto;
+    overflow: hidden; */
 }
 .contenedor-cond-ad-small{
     display: grid;
-    grid-template-columns: repeat(3, 6rem);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.contenedor-cond-ad-small button{
+    grid-column: 2;
 }
 .cond-ad-small{
     border: none;
@@ -142,17 +167,13 @@
     /* visibility: hidden; */
     display: none;
 }
-.info-hora{
+.info-columna{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
-.info-hora p{
-    /* border-top: 1px solid black; */
-    
-}
-.icono-hora{
+.icono-columna{
     display: flex;
     flex-direction: column;
     align-items: center;
