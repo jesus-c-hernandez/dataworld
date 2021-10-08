@@ -1,0 +1,162 @@
+.contenedor-info-clima{
+    background-color: #e0e0e0;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    border-left: 5px solid #55E94A;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ampliar{
+    /* background-color: red; */
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.ampliar img{
+    width: 2.5rem;
+}
+.contenedor-clima{
+    display: grid;
+    grid-template-columns: repeat(3, 33.3%);
+    grid-template-rows: repeat(3, auto);
+    padding: 1rem;
+    /* height: 80%; */
+}
+.temp-actual-small{
+    grid-column: 1;
+    grid-row: 1;
+    margin: 1rem;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    background-repeat: no-repeat;
+    background-position:  top center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.ciudad-actual{
+    font-size: 1.3rem;
+    font-weight: 600;
+    /* text-shadow: ; */
+}
+.temp-actual{
+    font-size: 45px;
+    font-weight: 900;
+}
+/* en las próximas horas */
+.clima-horas{
+    grid-column: 2;
+    grid-row: 1;
+}
+.por-columna{
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 53rem;
+}
+.columna{
+    min-width: 7rem;
+}
+/* en los próximos días */
+.clima-dias{
+    grid-column: 3;
+    grid-row: 1;
+    border-color: #D0F53D;
+}
+/* condiciones adicionales */
+.condiciones-adicionales{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border-color: #69B6D0;
+}
+.contenedor-cond-ad{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 5rem);
+}
+.cond-ad{
+    /* background-color: red; */
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1;
+    align-items: center;
+    border-top: 1px solid #5B605B;
+    text-align: center;
+}
+.icono-cond-ad{
+    grid-column: 1;
+    width: 2.5rem;
+}
+.icono-cond-ad img{
+    width: 100%;
+}
+.cond-ad p:first-child{
+    grid-column: 2;
+}
+.cond-ad p:last-child{
+    grid-column: 3;
+}
+/* AMPLIACIONES */
+.ampliar-contenedor{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    overflow-x: scroll;
+    max-width: 53rem;
+}
+.contenedor-small{
+    grid-column: 1;
+    grid-row: 2;
+}
+.contenedor-small .por-columna{
+    min-width: 100%;
+}
+.contenedor-small .por-columna .columna{
+    min-width: 1rem;
+}
+.condicion-adicional-small{
+    grid-column: 1;
+    grid-row: 3;
+    height: 10rem;
+    overflow: hidden;
+}
+.contenedor-cond-ad-small{
+    display: grid;
+    grid-template-columns: repeat(3, 6rem);
+}
+.cond-ad-small{
+    border: none;
+    width: auto;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cond-ad-small .condicion{
+    /* visibility: hidden; */
+    display: none;
+}
+.info-hora{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.info-hora p{
+    /* border-top: 1px solid black; */
+    
+}
+.icono-hora{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.esconder{
+    display: none;
+}
