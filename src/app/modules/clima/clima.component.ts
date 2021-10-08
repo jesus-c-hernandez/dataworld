@@ -12,4 +12,17 @@ export class ClimaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //ampliar En los proximos días
+  public ampliar(idSmall:string, idBig:string) {
+    console.log('hola');
+    //reducir big
+    var big = document.getElementById(idBig);
+    big.classList.toggle("ampliar-contenedor");
+    big.classList.toggle("contenedor-small");
+    //ampliar idSmall
+    var small = document.getElementById(idSmall);
+    small.classList.toggle("contenedor-small");
+    small.classList.toggle("ampliar-contenedor");
+  }
+
 }

@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+//Rutas
+import { APP_ROUTING } from './app.routes';
+
+//Servicios
+
+//Componentes
 import { AppComponent } from './app.component';
 import { ClimaComponent } from './modules/clima/clima.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,7 +22,8 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     DashboardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    APP_ROUTING
   ],
   providers: [],
   bootstrap: [AppComponent]
