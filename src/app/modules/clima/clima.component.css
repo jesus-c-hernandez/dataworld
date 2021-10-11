@@ -1,3 +1,4 @@
+/* GLOBALES */
 .contenedor-info-clima{
     background-color: #e0e0e0;
     margin: 1rem;
@@ -18,6 +19,7 @@
 .ampliar img{
     width: 2.5rem;
 }
+/* MODULO CLIMA */
 .contenedor-clima{
     display: grid;
     grid-template-columns: repeat(3, 33.3%);
@@ -25,6 +27,18 @@
     padding: 1rem;
     /* margin-left: 10rem; */
     /* height: 80%; */
+}
+@media only screen and (max-width: 1260px){
+    .contenedor-clima{
+        grid-template-rows: repeat(3, auto);
+        grid-template-rows: 15% 15% 70%;
+    }
+}
+@media only screen and (max-width: 600px){
+    .contenedor-clima{
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(4, auto);
+    }
 }
 .temp-actual-small{
     grid-column: 1;
@@ -40,6 +54,20 @@
     align-items: center;
     justify-content: space-evenly;
 }
+@media only screen and (max-width: 1260px){
+    .temp-actual-small{
+        grid-row-start: 1;
+        grid-row-end: 3;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 600px){
+    .temp-actual-small{
+        grid-column: 1;
+        grid-row: 1;
+    }
+}
 .ciudad-actual{
     font-size: 1.3rem;
     font-weight: 600;
@@ -54,9 +82,29 @@
     grid-column: 2;
     grid-row: 1;
 }
+@media only screen and (max-width: 1260px){
+    .clima-horas{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+}
+@media only screen and (max-width: 600px){
+    .clima-horas{
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
 .por-columna{
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: none;
+    align-items: center;
+}
+@media only screen and (max-width: 1260px){
+    .por-columna{
+        justify-content: center;
+    }
 }
 .columna{
     min-width: 7rem;
@@ -67,6 +115,19 @@
     grid-row: 1;
     border-color: #D0F53D;
 }
+@media only screen and (max-width: 1260px){
+    .clima-dias{
+        grid-row: 2;
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+}
+@media only screen and (max-width: 600px){
+    .clima-dias{
+        grid-column: 1;
+        grid-row: 3;
+    }
+}
 /* condiciones adicionales */
 .condiciones-adicionales{
     grid-column-start: 1;
@@ -75,6 +136,17 @@
     grid-row-end: 3;
     border-color: #69B6D0;
 }
+@media only screen and (max-width: 1260px){
+    .condiciones-adicionales{
+        grid-row: 3;
+    }
+}
+@media only screen and (max-width: 600px){
+    .condiciones-adicionales{
+        grid-column: 1;
+        grid-row: 4;
+    }
+}
 #condAd{
     border-color: #69B6D0;
 }
@@ -82,6 +154,18 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(6, 5rem);
+}
+@media only screen and (max-width: 850px){
+    .contenedor-cond-ad{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+    }
+}
+@media only screen and (max-width: 600px){
+    .contenedor-cond-ad{
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(18, auto);
+    }
 }
 .cond-ad{
     /* background-color: red; */
@@ -116,7 +200,7 @@
     grid-row-start: 1;
     grid-row-end: 4;
     overflow-x: scroll;
-    max-width: 53rem;
+    /* max-width: 53rem; */
 }
 .ampliar-dias{
     grid-column-start: 2;
@@ -124,7 +208,7 @@
     grid-row-start: 1;
     grid-row-end: 4;
     overflow-x: scroll;
-    max-width: 53rem;
+    /* max-width: 53rem; */
 }
 .contenedor-horas-small{
     grid-column: 1;
@@ -174,9 +258,13 @@
     text-align: center;
 }
 .icono-columna{
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.icono-columna img{
+    /* width: 100%; */
 }
 .esconder{
     display: none;
