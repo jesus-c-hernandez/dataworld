@@ -30,6 +30,12 @@ footer{
 .iconos{
     text-align: center;
 }
+.icono{
+    width: 2rem;
+}
+.icono img{
+    width: 100%;
+}
 @media only screen and (max-width: 768px){
     footer{
       flex-direction: column;
