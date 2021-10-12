@@ -12,6 +12,10 @@ import { ClimaComponent } from './modules/clima/clima.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { CrimenComponent } from './modules/crimen/crimen.component';
+import { SaludComponent } from './modules/salud/salud.component';
+import { NosotrosComponent } from './modules/nosotros/nosotros.component';
+import { ContactoComponent } from './modules/contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     ClimaComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    CrimenComponent,
+    SaludComponent,
+    NosotrosComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
