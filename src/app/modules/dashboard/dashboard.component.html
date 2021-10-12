@@ -5,8 +5,8 @@
         <div class="icono-temp">
             <img src="../assets/img/soleado-icon.png" alt="icono">
         </div>
-        <p class="temp-actual">21°</p>
-        <p class="ciudad-actual">Torreón, Coahuila, MX</p>
+        <p class="temp-actual">{{ weather.main.temp }}°</p>
+        <p class="ciudad-actual">{{ weather.name}}, {{weather.sys.country}}</p>
 </div>
 
 <div class="container pronosticos-dash">

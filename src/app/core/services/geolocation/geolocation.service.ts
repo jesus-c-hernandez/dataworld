@@ -12,10 +12,10 @@ export class GeolocationService {
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resp => {
-                resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
+                resolve({lon: resp.coords.longitude, lat: resp.coords.latitude});
             },
             err => {
-                reject({lat: 25.55904, lng: -103.497728});
+                reject({lat: 25.55904, lon: -103.497728});
           });
     });
 }
