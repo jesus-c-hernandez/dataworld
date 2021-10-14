@@ -26,16 +26,12 @@ export class DashboardComponent implements OnInit {
   async currentWeather () {
     const {lat, lon} = await this.geolocationService.getPosition();
     console.log('POS', lat ,lon);
+
+    this.sharedService.setLocation( lat, lon );
     
     this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
       console.log('RESP', resp);
-      this.weather = resp.data;
-      this.sharedService.setCurrentWeather( this.weather );
-
-      const auxWeather = this.sharedService.getCurrentWeather();
-
-      console.log('AUX', auxWeather);
-      
+      this.weather = resp.data;      
 
       console.log('Wea', this.weather); 
 

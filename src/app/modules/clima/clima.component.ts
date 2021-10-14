@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class ClimaComponent implements OnInit {
   loading = true;
 
   constructor(
+    private weatherService: WeatherService,
     private sharedService: SharedService
   ) { }
 
@@ -162,10 +164,17 @@ export class ClimaComponent implements OnInit {
   }
 
   init() {
-    this.weather = this.sharedService.getCurrentWeather();
-    console.log('WEA', this.weather);
-    
-    this.loading = false;
+
+    const {lat, lon } = this.sharedService.getlocation();
+
+    this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
+      console.log('RESP', resp);
+      this.weather = resp.data;      
+
+      console.log('Wea', this.weather); 
+
+      this.loading = false;
+    });
   }
 
 }
