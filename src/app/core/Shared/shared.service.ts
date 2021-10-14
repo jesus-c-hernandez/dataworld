@@ -5,15 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
 
-  currentWeather : any;
+  lat: number = 0;
+  lon: number = 0;
 
   constructor() { }
 
-  getCurrentWeather () {
-    return this.currentWeather;
+  getlocation () {
+    return {lat: this.lat,
+            lon: this.lon
+          };
   }
 
-  setCurrentWeather( weather ) {
-    this.currentWeather = weather;
+  setLocation( lat: number, lon: number ) {
+    this.lat = lat;
+    this.lon = lon;
   }
 }
