@@ -1,49 +1,51 @@
 <!-- tiempo actual -->
-<div class="tiempo-actual shadow" style="
-      background-image: url('../assets/img/day-sky.jpg');
-    ">
-        <div class="icono-temp">
-            <img src="../assets/img/soleado-icon.png" alt="icono">
-        </div>
-        <p class="temp-actual">{{ weather.main.temp }}°</p>
-        <p class="ciudad-actual">{{ weather.name}}, {{weather.sys.country}}</p>
-</div>
-
-<div class="container pronosticos-dash">
-    <!-- clima por horas -->
-    <div class="contenedor-medio shadow">
-        <h3>En las próximas horas</h3>
-        <div class="por-columna">
-            <div class="columna">
+<div *ngIf="!loading">
+    <div class="tiempo-actual shadow" style="
+          background-image: url('../assets/img/day-sky.jpg');
+        ">
+            <div class="icono-temp">
                 <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p>03:00pm</p>
             </div>
-            <div class="columna">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p>04:00pm</p>
-            </div>
-            <div class="columna">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p>05:00pm</p>
-            </div>
-        </div>
+            <p class="temp-actual">{{ weather.main.temp }}°</p>
+            <p class="ciudad-actual">{{ weather.name}}, {{weather.sys.country}}</p>
     </div>
-
-    <!-- clima por días -->
-    <div class="contenedor-medio shadow">
-        <h3>En los próximos días</h3>
-        <div class="por-columna">
-            <div class="columna">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p class="dia">Martes</p>
+    
+    <div class="container pronosticos-dash">
+        <!-- clima por horas -->
+        <div class="contenedor-medio shadow">
+            <h3>En las próximas horas</h3>
+            <div class="por-columna">
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p>03:00pm</p>
+                </div>
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p>04:00pm</p>
+                </div>
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p>05:00pm</p>
+                </div>
             </div>
-            <div class="columna">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p class="dia">Miércoles</p>
-            </div>
-            <div class="columna">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
-                <p class="dia">Jueves</p>
+        </div>
+    
+        <!-- clima por días -->
+        <div class="contenedor-medio shadow">
+            <h3>En los próximos días</h3>
+            <div class="por-columna">
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p class="dia">Martes</p>
+                </div>
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p class="dia">Miércoles</p>
+                </div>
+                <div class="columna">
+                    <img src="../assets/img/soleado-icon.png" alt="icono">
+                    <p class="dia">Jueves</p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
+import { SharedService } from 'src/app/core/Shared/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,12 @@ import { WeatherService } from 'src/app/core/services/weather/weather.service';
 export class DashboardComponent implements OnInit {
 
   weather: any;
+  loading = true;
 
   constructor(
     private geolocationService: GeolocationService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private sharedService: SharedService
     ) { }
 
   ngOnInit(): void {
@@ -27,7 +30,16 @@ export class DashboardComponent implements OnInit {
     this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
       console.log('RESP', resp);
       this.weather = resp.data;
+      this.sharedService.setCurrentWeather( this.weather );
+
+      const auxWeather = this.sharedService.getCurrentWeather();
+
+      console.log('AUX', auxWeather);
+      
+
       console.log('Wea', this.weather); 
+
+      this.loading = false;
     });
     
   }
