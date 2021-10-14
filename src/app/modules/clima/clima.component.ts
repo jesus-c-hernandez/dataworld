@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/core/Shared/shared.service';
 
 @Component({
   selector: 'app-clima',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClimaComponent implements OnInit {
 
-  constructor() { }
+  weather : any;
+  loading = true;
+
+  constructor(
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
+    this.init();
   }
 
   public horasIsSmall : boolean = true;
@@ -152,6 +159,13 @@ export class ClimaComponent implements OnInit {
     big.classList.toggle("clima-horas");
     //quiero hacer pequeño al de los dias
     small.classList.toggle("clima-dias");
+  }
+
+  init() {
+    this.weather = this.sharedService.getCurrentWeather();
+    console.log('WEA', this.weather);
+    
+    this.loading = false;
   }
 
 }
