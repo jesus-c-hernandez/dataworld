@@ -13,6 +13,12 @@
     margin: 0;
     padding: 0;
 }
+.icono-temp{
+    width: 100%;
+}
+.icono-temp img{
+    width: 5rem;
+}
 @media only screen and (max-width: 768px){
     .tiempo-actual{
       display: flex;
@@ -55,6 +61,10 @@
 }
 .columna{
     text-align: center;
+    width: 4rem;
+}
+.columna img{
+    width: 100%;
 }
 @media only screen and (max-width: 768px){
     .pronosticos-dash{

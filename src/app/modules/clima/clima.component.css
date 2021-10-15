@@ -77,6 +77,12 @@
     font-size: 45px;
     font-weight: 900;
 }
+/* .icono-temp{
+    width: 5rem;
+} */
+.icono-temp img{
+    width: 100%;
+}
 /* en las próximas horas */
 .clima-horas{
     grid-column: 2;
@@ -258,13 +264,13 @@
     text-align: center;
 }
 .icono-columna{
-    width: 100%;
+    width: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .icono-columna img{
-    /* width: 100%; */
+    width: 100%;
 }
 .esconder{
     display: none;

@@ -27,5 +27,18 @@ export class WeatherService {
     )
   }
 
+  getCurrentWeatherByHours( lat: number, lon: number, hours:number) {
+    const url = `${base_url}/current-weather/future?lat=${lat}&lon=${lon}&cnt=${hours}`;
+    
+    return this.http.get(url).pipe(
+      map((resp) => {
+        return {
+          result: resp['result'],
+          data: resp['data']
+        }
+      })
+    )
+  }
+
 
 }
