@@ -11,6 +11,7 @@ import { SharedService } from 'src/app/core/Shared/shared.service';
 export class DashboardComponent implements OnInit {
 
   weather: any;
+  weather3 : any;
   loading = true;
 
   constructor(
@@ -34,6 +35,14 @@ export class DashboardComponent implements OnInit {
       this.weather = resp.data;      
 
       console.log('Wea', this.weather); 
+
+      this.loading = false;
+    });
+
+    this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
+      this.weather3 = resp.data;      
+
+      console.log('weather3', this.weather3); 
 
       this.loading = false;
     });

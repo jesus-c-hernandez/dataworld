@@ -10,6 +10,8 @@ import { SharedService } from 'src/app/core/Shared/shared.service';
 export class ClimaComponent implements OnInit {
 
   weather : any;
+  weather3 : any;
+  weather5 : any; 
   loading = true;
 
   constructor(
@@ -132,37 +134,6 @@ export class ClimaComponent implements OnInit {
     }
   }
 
-  //ampliar En los proximos días
-  public ampliar(idSmall:string, idBig:string) {
-    //reducir big
-    var big = document.getElementById(idBig);
-    big.classList.toggle("ampliar-contenedor");
-    big.classList.toggle("contenedor-small");
-    var infoHora = document.getElementById("infoHora");
-    big.classList.toggle("clima-horas");
-    infoHora.classList.toggle("esconder");
-    //horas is big, muestra dias5, no tiene esconder
-    //esconder lo tiene dias3
-    var dias3 = document.getElementById("dias3");
-    var dias5 = document.getElementById("dias5");
-    dias3.classList.toggle("esconder");
-    dias5.classList.toggle("esconder");
-    //condiciones adicionales
-    let condAd = document.getElementById("condAd");
-    // condAd.classList.toggle("condicion-adicional-small");
-    condAd.classList.toggle("condiciones-adicionales");
-    //conAd contenedor 
-    let condAdCont = document.getElementById("condAd-cont");
-    condAdCont.classList.toggle("contenedor-cond-ad");
-    // condAdCont.classList.toggle("contenedor-cond-ad-small");
-    var small = document.getElementById(idSmall);
-    small.classList.toggle("contenedor-small");
-    small.classList.toggle("ampliar-contenedor");
-    big.classList.toggle("clima-horas");
-    //quiero hacer pequeño al de los dias
-    small.classList.toggle("clima-dias");
-  }
-
   init() {
 
     const {lat, lon } = this.sharedService.getlocation();
@@ -172,6 +143,23 @@ export class ClimaComponent implements OnInit {
       this.weather = resp.data;      
 
       console.log('Wea', this.weather); 
+
+      this.loading = false;
+    });
+
+    this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
+      this.weather3 = resp.data;      
+
+      console.log('weather3', this.weather3); 
+
+      this.loading = false;
+    });
+
+    this.weatherService.getCurrentWeatherByHours( lat, lon, 5).subscribe( (resp) => {
+      console.log('RESP', resp);
+      this.weather5 = resp.data;      
+
+      console.log('Wea', this.weather5); 
 
       this.loading = false;
     });

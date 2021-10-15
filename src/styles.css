@@ -8,6 +8,12 @@ body{
 .main-container{
     margin-top: 0px;
 }
+.icono{
+  width: 3rem;
+}
+.icono img{
+  width: 100%;
+}
 
 /* ANIMACIONES */
 .animated {

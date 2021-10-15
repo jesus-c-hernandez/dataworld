@@ -3,8 +3,8 @@
     <div class="tiempo-actual shadow" style="
           background-image: url('../assets/img/day-sky.jpg');
         ">
-            <div class="icono-temp">
-                <img src="../assets/img/soleado-icon.png" alt="icono">
+            <div class=" icono-temp">
+                <img src="../assets/icons/{{weather.weather[0].description}}.png" alt="icono">
             </div>
             <p class="temp-actual">{{ weather.main.temp }}°</p>
             <p class="ciudad-actual">{{ weather.name}}, {{weather.sys.country}}</p>
@@ -16,16 +16,16 @@
             <h3>En las próximas horas</h3>
             <div class="por-columna">
                 <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p>03:00pm</p>
+                    <img src="../assets/icons/{{weather3.list[0].weather[0].description}}.png" alt="icono">
+                    <p>{{ weather3.list[0].dt_txt | date:'shortTime'}}</p>
                 </div>
                 <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p>04:00pm</p>
+                    <img src="../assets/icons/{{weather3.list[1].weather[0].description}}.png" alt="icono">
+                    <p>{{ weather3.list[1].dt_txt | date:'shortTime'}}</p>
                 </div>
                 <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p>05:00pm</p>
+                    <img src="../assets/icons/{{weather3.list[2].weather[0].description}}.png" alt="icono">
+                    <p>{{ weather3.list[2].dt_txt | date:'shortTime'}}</p>
                 </div>
             </div>
         </div>
