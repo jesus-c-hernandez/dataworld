@@ -842,7 +842,7 @@
                         <img src="../assets/icons/temp_min.png" alt="temp_min">
                     </div>
                     <p class="condicion">Temperatura mínima</p>
-                    <p>{{weather.main.temp_min}}°</p>
+                    <p>{{weather.main.temp_min | noData:'°'}}</p>
                 </div>
                 <!-- condicion adicional -->
                 <div class="cond-ad">

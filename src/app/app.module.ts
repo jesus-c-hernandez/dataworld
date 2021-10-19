@@ -17,6 +17,7 @@ import { CrimenComponent } from './modules/crimen/crimen.component';
 import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
 import { ContactoComponent } from './modules/contacto/contacto.component';
+import { NoDataPipe } from './Pipes/no-data.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ContactoComponent } from './modules/contacto/contacto.component';
     CrimenComponent,
     SaludComponent,
     NosotrosComponent,
-    ContactoComponent
+    ContactoComponent,
+    NoDataPipe
   ],
   imports: [
     BrowserModule,
