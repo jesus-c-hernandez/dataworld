@@ -1,0 +1,47 @@
+.info-covid{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cuadro-info{
+    flex-basis: calc(100% / 4);
+    background-color: #e3e3e3;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 5px solid green;
+    margin: 10px;
+    padding: 5px;
+    
+}
+@media only screen and (max-width: 1200px){
+    .cuadro-info{
+        flex-basis: calc(100% / 3);
+    }
+}
+@media only screen and (max-width: 576px){
+    .cuadro-info{
+        flex-basis: 100%;
+    }
+}
+.cifra{
+    font-size: 22px;
+    text-align: right;
+    margin-right: 15px;
+}
+#casos-hoy{
+    border-color: #E94A4A;
+}
+#casos-activos{
+    border-color: #7BD5F5;
+}
+#def-hoy{
+    border-color: #5B605B;
+}
+#casos-totales{
+    border-color: #D0F53D;
+}
+#recuperados{
+    border-color: #55E94A;
+}
+#def-totales{
+    border-color: #2A93D5;
+}
