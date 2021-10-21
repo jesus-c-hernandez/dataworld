@@ -43,3 +43,7 @@ body{
   .fadeIn {
     animation-name: fadeIn;
   }
+
+  .load {
+    margin: 280px 0 280px 0;
+}
