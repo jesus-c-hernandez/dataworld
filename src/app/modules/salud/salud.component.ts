@@ -87,7 +87,10 @@ export class SaludComponent implements OnInit {
     // this.covidData.testTotals = this.datos[6];
 
     console.log('covidData', this.covidData);
-    this.loading = false;
+
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
 

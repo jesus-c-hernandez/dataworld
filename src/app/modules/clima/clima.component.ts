@@ -143,16 +143,12 @@ export class ClimaComponent implements OnInit {
       this.weather = resp.data;      
 
       console.log('Wea', this.weather); 
-
-      this.loading = false;
     });
 
     this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
       this.weather3 = resp.data;      
 
       console.log('weather3', this.weather3); 
-
-      this.loading = false;
     });
 
     this.weatherService.getCurrentWeatherByHours( lat, lon, 5).subscribe( (resp) => {
@@ -160,9 +156,11 @@ export class ClimaComponent implements OnInit {
       this.weather5 = resp.data;      
 
       console.log('Wea', this.weather5); 
-
-      this.loading = false;
     });
+
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
 }

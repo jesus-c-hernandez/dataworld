@@ -1,94 +1,129 @@
-<div *ngIf="!loading" class="row gap-3 fluid-container"><!-- inicia contenedor de todo -->
+<div *ngIf="loading" class="load">
+  <div class="row justify-content-center">
+    <div class="col-1 align-self-center">
+      <app-radar-spinner
+        [animationDuration]="1000"
+        [size]="150"
+        [color]="'#51D5EA'"
+      ></app-radar-spinner>
+    </div>
+  </div>
+</div>
 
-    <div class="row container"><!-- inicio columna derecha -->
+<div *ngIf="!loading" class="row gap-3 fluid-container">
+  <!-- inicia contenedor de todo -->
 
-        <div class="col-lg container"><!-- inicio mapa -->
-            <h1>Mapa</h1>
-        </div><!-- fin mapa -->
-        
-        <div class="col-lg container"><!-- inicio info-covid -->
+  <div class="row container">
+    <!-- inicio columna derecha -->
 
-            <div class="row fluid-container"><!-- inicio barra búsqueda -->
-                <h2>Cambiar ubicación</h2>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Buscar ubicación" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
-                </div>
-            </div><!-- fin barra búsqueda -->
-    
-            <div class="row"><!-- inicio contenedor cuadros info -->
-                <h1>Información general</h1>
-                <div class="info-covid">
+    <div class="col-lg container">
+      <!-- inicio mapa -->
+      <h1>Mapa</h1>
+    </div>
+    <!-- fin mapa -->
 
-                    <div class="col cuadro-info" id="casos-hoy">
-                        <h5>Casos de hoy</h5>
-                        <p class="cifra">{{datos[0] | number}}</p>
-                    </div>
-                    <div class="col cuadro-info" id="casos-activos">
-                        <h5>Casos activos</h5>
-                        <p class="cifra">{{datos[1] | number}}</p>
-                    </div>
-                    <div class="col cuadro-info" id="def-hoy">
-                        <h5>Defunciones de hoy</h5>
-                        <p class="cifra">{{datos[2] | number}}</p>
-                    </div>
-    
-                    <div class="col cuadro-info" id="casos-totales">
-                        <h5>Casos totales</h5>
-                        <p class="cifra">{{datos[3] | number}}</p>
-                    </div>
-                    <div class="col cuadro-info" id="recuperados">
-                        <h5>Recuperados</h5>
-                        <p class="cifra">{{datos[4] | number}}</p>
-                    </div>
-                    <div class="col cuadro-info" id="def-totales">
-                        <h5>Defunciones totales</h5>
-                        <p class="cifra">{{datos[5] | number}}</p>
-                    </div>
-                </div>
-                
-            </div><!-- fin contenedor cuadros info -->
+    <div class="col-lg container">
+      <!-- inicio info-covid -->
 
-        </div><!-- fin info-covid -->
+      <div class="row fluid-container">
+        <!-- inicio barra búsqueda -->
+        <h2>Cambiar ubicación</h2>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar ubicación"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+      <!-- fin barra búsqueda -->
 
-    </div><!-- fin columna derecha -->
-    
-    <div class="row container"><!-- inicio gráficas -->
-        <h1>Gráficas</h1>
-    </div><!-- fin gráficas -->
-    
-    <div class="container"><!-- inicio estadísticas -->
-        <h1>Estadísticas</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Ubicación</th>
-                  <th scope="col">Total de casos</th>
-                  <th scope="col">Casos diarios</th>
-                  <th scope="col">Muertes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-        </table>
-    </div><!-- fin estadísticas -->
+      <div class="row">
+        <!-- inicio contenedor cuadros info -->
+        <h1>Información general</h1>
+        <div class="info-covid">
+          <div class="col cuadro-info" id="casos-hoy">
+            <h5>Casos de hoy</h5>
+            <p class="cifra">{{ datos[0] | number }}</p>
+          </div>
+          <div class="col cuadro-info" id="casos-activos">
+            <h5>Casos activos</h5>
+            <p class="cifra">{{ datos[1] | number }}</p>
+          </div>
+          <div class="col cuadro-info" id="def-hoy">
+            <h5>Defunciones de hoy</h5>
+            <p class="cifra">{{ datos[2] | number }}</p>
+          </div>
 
-</div><!-- fin contenedor de todo -->
+          <div class="col cuadro-info" id="casos-totales">
+            <h5>Casos totales</h5>
+            <p class="cifra">{{ datos[3] | number }}</p>
+          </div>
+          <div class="col cuadro-info" id="recuperados">
+            <h5>Recuperados</h5>
+            <p class="cifra">{{ datos[4] | number }}</p>
+          </div>
+          <div class="col cuadro-info" id="def-totales">
+            <h5>Defunciones totales</h5>
+            <p class="cifra">{{ datos[5] | number }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- fin contenedor cuadros info -->
+    </div>
+    <!-- fin info-covid -->
+  </div>
+  <!-- fin columna derecha -->
+
+  <div class="row container">
+    <!-- inicio gráficas -->
+    <h1>Gráficas</h1>
+  </div>
+  <!-- fin gráficas -->
+
+  <div class="container">
+    <!-- inicio estadísticas -->
+    <h1>Estadísticas</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Ubicación</th>
+          <th scope="col">Total de casos</th>
+          <th scope="col">Casos diarios</th>
+          <th scope="col">Muertes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- fin estadísticas -->
+</div>
+<!-- fin contenedor de todo -->
