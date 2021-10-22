@@ -4,6 +4,7 @@
 
         <div class="col-lg container"><!-- inicio mapa -->
             <h1>Mapa</h1>
+            <div id="map" class=""></div>
         </div><!-- fin mapa -->
         
         <div class="col-lg container"><!-- inicio info-covid -->
@@ -22,28 +23,28 @@
 
                     <div class="col cuadro-info" id="casos-hoy">
                         <h5>Casos de hoy</h5>
-                        <p class="cifra">{{datos[0] | number}}</p>
+                        <p class="cifra">{{todayCases[0].data | number}}</p>
                     </div>
                     <div class="col cuadro-info" id="casos-activos">
                         <h5>Casos activos</h5>
-                        <p class="cifra">{{datos[1] | number}}</p>
+                        <p class="cifra">{{activeCases[0].data | number}}</p>
                     </div>
                     <div class="col cuadro-info" id="def-hoy">
                         <h5>Defunciones de hoy</h5>
-                        <p class="cifra">{{datos[2] | number}}</p>
+                        <p class="cifra">{{todayDeaths[0].data | number}}</p>
                     </div>
     
                     <div class="col cuadro-info" id="casos-totales">
                         <h5>Casos totales</h5>
-                        <p class="cifra">{{datos[3] | number}}</p>
+                        <p class="cifra">{{cases[0].data | number}}</p>
                     </div>
                     <div class="col cuadro-info" id="recuperados">
                         <h5>Recuperados</h5>
-                        <p class="cifra">{{datos[4] | number}}</p>
+                        <p class="cifra">{{recoveredCases[0].data | number}}</p>
                     </div>
                     <div class="col cuadro-info" id="def-totales">
                         <h5>Defunciones totales</h5>
-                        <p class="cifra">{{datos[5] | number}}</p>
+                        <p class="cifra">{{totalDeaths[0].data | number}}</p>
                     </div>
                 </div>
                 
@@ -90,5 +91,4 @@
               </tbody>
         </table>
     </div><!-- fin estadísticas -->
-
 </div><!-- fin contenedor de todo -->

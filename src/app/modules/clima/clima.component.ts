@@ -27,6 +27,49 @@ export class ClimaComponent implements OnInit {
   public diasIsSmall : boolean = true;
   public condAdIsSmall : boolean = false;
 
+  //para saber si mostrar o no la info adicional
+  public mostrarInfoHoras : boolean = false;
+  public mostrarInfoDias : boolean = false;
+  public mostrarInfoCondAd : boolean = true;
+
+  public proxDias = [
+    {
+      dia : "Lunes",
+      descripcion : "cielo claro",
+      temp_max: "35",
+      temp_min: "20",
+      speed: "15"
+    },
+    {
+      dia : "Martes",
+      descripcion : "cielo claro",
+      temp_max: "35",
+      temp_min: "20",
+      speed: "15"
+    },
+    {
+      dia : "Miércoles",
+      descripcion : "cielo claro",
+      temp_max: "35",
+      temp_min: "20",
+      speed: "15"
+    },
+    {
+      dia : "Jueves",
+      descripcion : "cielo claro",
+      temp_max: "35",
+      temp_min: "20",
+      speed: "15"
+    },
+    {
+      dia : "Viernes",
+      descripcion : "cielo claro",
+      temp_max: "35",
+      temp_min: "20",
+      speed: "15"
+    }
+  ];
+
   public toggle(indice:number){
     //proxHoras | proxDias
     let proxHoras = document.getElementById("proxHoras");
@@ -131,6 +174,58 @@ export class ClimaComponent implements OnInit {
       condAdCont.classList.add("esconder");
       // condAdCont.classList.add("contenedor-cond-ad-small");
       botonCondAd.classList.remove("esconder");
+    }
+  }
+
+  bajar(idAbajo: string, idArriba1: string, idArriba2:string){
+    const abajo = document.getElementById(idAbajo);
+    const arriba1 = document.getElementById(idArriba1);
+    const arriba2 = document.getElementById(idArriba2);
+
+    //agregar la clase abajo al que se quiera bajar
+    abajo.classList.add("abajo");
+    //preguntar cuál es el que está abajo
+    switch(idAbajo){
+      case "proximasHoras":
+        //mostrar info adicional de las horas
+        this.mostrarInfoHoras = true;
+        this.mostrarInfoDias = false;
+        this.mostrarInfoCondAd = false;
+        break;
+      case "proximosDias":
+        //mostrar info adicional de las horas
+        this.mostrarInfoHoras = false;
+        this.mostrarInfoDias = true;
+        this.mostrarInfoCondAd = false;
+        break;
+      case "condicionesAd":
+        //mostrar info adicional de las horas
+        this.mostrarInfoHoras = false;
+        this.mostrarInfoDias = false;
+        this.mostrarInfoCondAd = true;
+        break;
+      default:
+        //mostrar info adicional de las horas
+        this.mostrarInfoHoras = false;
+        this.mostrarInfoDias = false;
+        this.mostrarInfoCondAd = true;
+        break;
+    }
+    
+    //validar que los que se quieran subir no tengan la clase abajo
+    if(arriba1.classList.contains("abajo")){
+      arriba1.classList.remove("abajo");
+    }
+    if(arriba2.classList.contains("abajo")){
+      arriba2.classList.remove("abajo");
+    }
+    //agregar la clase arriba al que se quiera subir
+    //validar si que no la tenga
+    if(!arriba1.classList.contains("arriba")){
+      arriba1.classList.add("arriba");
+    }
+    if(!arriba2.classList.contains("arriba")){
+      arriba2.classList.add("arriba");
     }
   }
 
