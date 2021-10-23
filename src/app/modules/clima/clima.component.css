@@ -1,5 +1,36 @@
+#contenedorTodo{
+    border: 5px solid red;
+    display: flex;
+    flex-wrap: wrap;
+}
+.arriba{
+    flex-basis: calc( (100% / 3) - 30px);
+}
+.abajo{
+    flex-basis: 100%;
+    order: 1;
+}
+#temperaturaActual{
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    background-repeat: no-repeat;
+    background-position:  top center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 5px;
+}
+@media only screen and (max-width: 992px){
+    .arriba{
+        flex-basis: calc((100% / 2) - 20px);
+    }
+}
+@media only screen and (max-width: 576px){
+    .arriba{
+        flex-basis: 100%;
+    }
+}
 /* GLOBALES */
-.contenedor-info-clima{
+#proximasHoras, #proximosDias, #condicionesAd{
     background-color: #e0e0e0;
     margin: 1rem;
     padding: 1rem 2rem;
@@ -7,9 +38,69 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+#proximasHoras{
+    border-color: #55E94A;
+}
+#proximosDias{
+    border-color: #D0F53D;
+}
+#condicionesAd{
+    border-color: #69B6D0;
+}
+.icono{
+    width: 6rem;
+}
+.icono img{
+    width: 100%;
+}
+/* TEMP ACTUAL */
+.temp-actual{
+    font-size: 45px;
+    font-weight: 900;
+}
+.ciudad-actual{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+@media only screen and (max-width: 768px){
+    .contenedorTempAct{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .temp-actual{
+        justify-content: center;
+    }
+    .ciudad-actual{
+        justify-content: center;
+    }
+}
+
+/* PROXIMAS HORAS */
+.columna{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* PRÓXIMOS DÍAS */
+.contenedor-columnas{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+@media only screen and (max-width: 1200px){
+    .contenedor-columnas .columna{
+        flex-basis: calc(100%/2);
+    }
+}
+
+/* GLOBALES
+
 
 .ampliar{
-    /* background-color: red; */
+    /* background-color: red;
     width: 100%;
     height: auto;
     text-align: center;
@@ -19,14 +110,14 @@
 .ampliar img{
     width: 2.5rem;
 }
-/* MODULO CLIMA */
+/* MODULO CLIMA
 .contenedor-clima{
     display: grid;
     grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: repeat(3, auto);
     padding: 1rem;
-    /* margin-left: 10rem; */
-    /* height: 80%; */
+    /* margin-left: 10rem;
+    /* height: 80%;
 }
 @media only screen and (max-width: 1260px){
     .contenedor-clima{
@@ -71,7 +162,7 @@
 .ciudad-actual{
     font-size: 1.3rem;
     font-weight: 600;
-    /* text-shadow: ; */
+    /* text-shadow: ;
 }
 .temp-actual{
     font-size: 45px;
@@ -79,11 +170,11 @@
 }
 /* .icono-temp{
     width: 5rem;
-} */
+}
 .icono-temp img{
     width: 100%;
 }
-/* en las próximas horas */
+/* en las próximas horas
 .clima-horas{
     grid-column: 2;
     grid-row: 1;
@@ -115,7 +206,7 @@
 .columna{
     min-width: 7rem;
 }
-/* en los próximos días */
+/* en los próximos días
 .clima-dias{
     grid-column: 3;
     grid-row: 1;
@@ -134,7 +225,7 @@
         grid-row: 3;
     }
 }
-/* condiciones adicionales */
+/* condiciones adicionales
 .condiciones-adicionales{
     grid-column-start: 1;
     grid-column-end: 4;
@@ -174,7 +265,7 @@
     }
 }
 .cond-ad{
-    /* background-color: red; */
+    /* background-color: red;
     margin: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -199,14 +290,14 @@
 .cond-ad p:last-child{
     grid-column: 3;
 }
-/* AMPLIACIONES */
+/* AMPLIACIONES
 .ampliar-horas{
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 4;
     overflow-x: scroll;
-    /* max-width: 53rem; */
+    /* max-width: 53rem;
 }
 .ampliar-dias{
     grid-column-start: 2;
@@ -214,7 +305,7 @@
     grid-row-start: 1;
     grid-row-end: 4;
     overflow-x: scroll;
-    /* max-width: 53rem; */
+    /* max-width: 53rem;
 }
 .contenedor-horas-small{
     grid-column: 1;
@@ -235,7 +326,7 @@
     /* grid-column: 1;
     grid-row: 3;
     height: auto;
-    overflow: hidden; */
+    overflow: hidden;
 }
 .contenedor-cond-ad-small{
     display: grid;
@@ -248,13 +339,13 @@
 .cond-ad-small{
     border: none;
     width: auto;
-    /* background-color: red; */
+    /* background-color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .cond-ad-small .condicion{
-    /* visibility: hidden; */
+    /* visibility: hidden;
     display: none;
 }
 .info-columna{
@@ -274,4 +365,4 @@
 }
 .esconder{
     display: none;
-}
+}*/

@@ -1,18 +1,214 @@
-<div *ngIf="loading" class="load">
-  <div class="row justify-content-center">
-    <div class="col-1 align-self-center">
-      <app-radar-spinner
-        [animationDuration]="1000"
-        [size]="150"
-        [color]="'#51D5EA'"
-      ></app-radar-spinner>
+<div *ngIf="!loading">
+    <!-- contenedor de todo -->
+    <div id="contenedorTodo" class="fluid-container">
+
+        <!-- temperatura actual -->
+        <div id="temperaturaActual" class="container arriba contenedor-info-clima"style="
+        background-image: url('../assets/img/day-sky.jpg');">
+            <div class="row contenedorTempAct">
+                <div class="icono">
+                    <img src="../assets/icons/{{ weather.weather[0].description}}.png" alt="icono">
+                </div>
+                <div class="col">
+                    <p class="row justify-content-md-center temp-actual">{{ weather.main.temp | noData:'°'}}</p>
+                    <p class="row ciudad-actual">{{ weather.name | noData}}, {{weather.sys.country | noData}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- proximas horas -->
+        <div id="proximasHoras" class="container arriba" (click)="bajar('proximasHoras','proximosDias','condicionesAd')">
+            <div class="container">
+                <h3>En las próximas horas</h3>
+                <div class="row fluid-container">
+                    <!-- automatizar esto para que me traiga las próximas 3 horas -->
+                    <div  *ngFor="let hora of weather3.list" class="col columna">
+                        <div class="icono">
+                            <img src="../assets/icons/{{hora.weather[0].description}}.png" alt="Ícono">
+                        </div>
+                        <p class="hora">{{hora.dt_txt | date : 'shortTime'}}</p>
+                        <!-- este panel muestra la info adicional que solo se muestra cuando está abajo -->
+                        <div *ngIf="mostrarInfoHoras">
+                            <hr>
+                            <!-- temperatura minima -->
+                            <div class="icono">
+                                <img src="../assets/icons/temp_min.png" alt="icono">
+                            </div>
+                            <p>Temperatura mínima</p>
+                            <p>{{dia.temp_min}}</p>
+                            <!-- temperatura minima -->
+                            <div class="icono">
+                                <img src="../assets/icons/temp_max.png" alt="icono">
+                            </div>
+                            <p>Temperatura máxima</p>
+                            <p>{{dia.temp_max}}</p>
+                            <!-- temperatura minima -->
+                            <div class="icono">
+                                <img src="../assets/icons/speed.png" alt="icono">
+                            </div>
+                            <p>Velocidad del viento</p>
+                            <p>{{dia.speed}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="load">
+          <div class="row justify-content-center">
+            <div class="col-1 align-self-center">
+              <app-radar-spinner
+                [animationDuration]="1000"
+                [size]="150"
+                [color]="'#51D5EA'"
+              ></app-radar-spinner>
+            </div>
+          </div>
+        </div>
+        <!-- proximos dias -->
+        <div id="proximosDias" class="container arriba" (click)="bajar('proximosDias','proximasHoras','condicionesAd')">
+            <div class="container">
+                <h3>En los próximos días</h3>
+                <div class="row fluid-container">
+                    <!-- automatizado -->
+                    <div class="contenedor-columnas">
+                        <div *ngFor="let dia of proxDias; let i = index">
+                            <div *ngIf="i < 3" class="columna">
+                                <div class="icono">
+                                    <img src="../assets/icons/{{dia.descripcion}}.png" alt="icono">
+                                </div>
+                                <p class="dia">{{dia.dia}}</p>
+                                <div *ngIf="mostrarInfoDias">
+                                    <hr>
+                                    <!-- temperatura minima -->
+                                    <div class="icono">
+                                        <img src="../assets/icons/temp_min.png" alt="icono">
+                                    </div>
+                                    <p>Temperatura mínima</p>
+                                    <p>{{dia.temp_min}}</p>
+                                    <!-- temperatura minima -->
+                                    <div class="icono">
+                                        <img src="../assets/icons/temp_max.png" alt="icono">
+                                    </div>
+                                    <p>Temperatura máxima</p>
+                                    <p>{{dia.temp_max}}</p>
+                                    <!-- temperatura minima -->
+                                    <div class="icono">
+                                        <img src="../assets/icons/speed.png" alt="icono">
+                                    </div>
+                                    <p>Velocidad del viento</p>
+                                    <p>{{dia.speed}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- condiciones adicionales -->
+        <div id="condicionesAd" class="container abajo" (click)="bajar('condicionesAd','proximasHoras','proximosDias')">
+          <div>
+            
+          </div>
+        </div>
     </div>
-  </div>
 </div>
+    <!-- <div class="contenedor-clima">
+        
+        <!-- clima por horas | ampliar-contenedor  
+        <div class="contenedor-info-clima clima-horas shadow" id="proxHoras" > 
+            <h3>En las próximas horas</h3>
+            <div class="por-columna" id="horas3">
+
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather3.list[0].weather[0].description}}.png" alt="icono">
+                        <p class="hora">{{ weather3.list[0].dt_txt | date:'shortTime' }}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather3.list[0].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather3.list[0].main.temp_max}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather3.list[0].main.temp_min}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather3.list[0].visibility}}m</p>
+                    </div>
+                </div>
+
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather3.list[1].weather[0].description}}.png" alt="icono">
+                        <p class="hora">{{ weather3.list[1].dt_txt | date:'shortTime' }}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather3.list[1].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather3.list[1].main.temp_max}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather3.list[1].main.temp_min}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather3.list[1].visibility}}m</p>
+                    </div>
+                </div>
+
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather3.list[2].weather[0].description}}.png" alt="icono">
+                        <p class="hora">{{ weather3.list[2].dt_txt | date:'shortTime' }}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather3.list[2].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather3.list[2].main.temp_max}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather3.list[2].main.temp_min}}°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather3.list[2].visibility}}m</p>
+                    </div>
+                </div>
+
 
 <div *ngIf="!loading">
   <div class="contenedor-clima">
-    <!-- temperarura actual -->
+    <!-- temperarura actual -
     <div
       class="temp-actual-small shadow row"
       style="background-image: url('../assets/img/day-sky.jpg')"
@@ -33,1033 +229,875 @@
       </div>
     </div>
 
-    <!-- clima por horas | ampliar-contenedor  -->
-    <div class="contenedor-info-clima clima-horas shadow" id="proxHoras">
-      <h3>En las próximas horas</h3>
-      <div class="por-columna" id="horas3">
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather3.list[0].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p class="hora">
-              {{ weather3.list[0].dt_txt | date: "shortTime" }}
-            </p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather3.list[0].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather3.list[0].main.temp_max }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather3.list[0].main.temp_min }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather3.list[0].visibility }}m</p>
-          </div>
-        </div>
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather5.list[0].weather[0].description}}.png" alt="icono">
+                        <p>{{weather5.list[0].dt_txt | date:'shortTime'}}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather5.list[0].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather5.list[0].main.temp_max}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather5.list[0].main.temp_min}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather5.list[0].visibility}}</p>
+                    </div>
+                </div>
+                
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather5.list[1].weather[0].description}}.png" alt="icono">
+                        <p>{{weather5.list[1].dt_txt | date:'shortTime'}}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather5.list[1].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather5.list[1].main.temp_max}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather5.list[1].main.temp_min}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather5.list[1].visibility}}</p>
+                    </div>
+                </div>
 
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather3.list[1].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p class="hora">
-              {{ weather3.list[1].dt_txt | date: "shortTime" }}
-            </p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather3.list[1].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather3.list[1].main.temp_max }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather3.list[1].main.temp_min }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather3.list[1].visibility }}m</p>
-          </div>
-        </div>
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather5.list[2].weather[0].description}}.png" alt="icono">
+                        <p>{{weather5.list[2].dt_txt | date:'shortTime'}}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather5.list[2].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather5.list[2].main.temp_max}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather5.list[2].main.temp_min}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather5.list[2].visibility}}</p>
+                    </div>
+                </div>
 
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather3.list[2].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p class="hora">
-              {{ weather3.list[2].dt_txt | date: "shortTime" }}
-            </p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather3.list[2].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather3.list[2].main.temp_max }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather3.list[2].main.temp_min }}°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather3.list[2].visibility }}m</p>
-          </div>
-        </div>
-      </div>
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather5.list[3].weather[0].description}}.png" alt="icono">
+                        <p>{{weather5.list[3].dt_txt | date:'shortTime'}}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather5.list[3].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather5.list[3].main.temp_max}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather5.list[3].main.temp_min}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather5.list[3].visibility}}</p>
+                    </div>
+                </div>
 
-      <div class="por-columna esconder" id="horas5">
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather5.list[0].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p>{{ weather5.list[0].dt_txt | date: "shortTime" }}</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather5.list[0].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather5.list[0].main.temp_max }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather5.list[0].main.temp_min }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather5.list[0].visibility }}</p>
-          </div>
-        </div>
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/icons/{{weather5.list[4].weather[0].description}}.png" alt="icono">
+                        <p>{{weather5.list[4].dt_txt | date:'shortTime'}}</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna esconder">
+                        <hr>
+                        <p>{{weather5.list[4].weather.description}}</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>{{weather5.list[4].main.temp_max}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>{{weather5.list[4].main.temp_min}}</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>{{weather5.list[4].visibility}}</p>
+                    </div>
+                </div>
 
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather5.list[1].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p>{{ weather5.list[1].dt_txt | date: "shortTime" }}</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather5.list[1].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather5.list[1].main.temp_max }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather5.list[1].main.temp_min }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather5.list[1].visibility }}</p>
-          </div>
-        </div>
-
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather5.list[2].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p>{{ weather5.list[2].dt_txt | date: "shortTime" }}</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather5.list[2].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather5.list[2].main.temp_max }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather5.list[2].main.temp_min }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather5.list[2].visibility }}</p>
-          </div>
-        </div>
-
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather5.list[3].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p>{{ weather5.list[3].dt_txt | date: "shortTime" }}</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather5.list[3].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather5.list[3].main.temp_max }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather5.list[3].main.temp_min }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather5.list[3].visibility }}</p>
-          </div>
-        </div>
-
-        <div class="columna">
-          <div class="icono-columna">
-            <img
-              src="../assets/icons/{{
-                weather5.list[4].weather[0].description
-              }}.png"
-              alt="icono"
-            />
-            <p>{{ weather5.list[4].dt_txt | date: "shortTime" }}</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna esconder">
-            <hr />
-            <p>{{ weather5.list[4].weather.description }}</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>{{ weather5.list[4].main.temp_max }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>{{ weather5.list[4].main.temp_min }}</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>{{ weather5.list[4].visibility }}</p>
-          </div>
-        </div>
-      </div>
 
       <button class="ampliar" id="botonHoras" (click)="toggle(2)">
         <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar" />
       </button>
-      <!-- <div class="ampliar">
+    
+        <!-- clima por días | contenedor-small
+        <div class="contenedor-info-clima clima-dias shadow" id="proxDias">
+            <h3>En los próximos días</h3>
+            <div class="por-columna" id="diasSmall">
+                <!-- dia 1 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Hoy</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 2 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Sábado</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 3 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Domingo</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="por-columna esconder" id="diasFull">
+                <!-- dia 1 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Hoy</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 2 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Sábado</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 3 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Domingo</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 4 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Lunes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 5 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Martes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 6 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Miércoles</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 7 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Jueves</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 8 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Viernes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 9 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Sábado</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 10 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Domingo</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 11 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Viernes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 12 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Lunes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 13 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Martes</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 14 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Miércoles</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+                <!-- dia 15 
+                <div class="columna">
+                    <div class="icono-columna">
+                        <img src="../assets/img/soleado-icon.png" alt="icono">
+                        <p>Jueves</p>
+                    </div>
+                    <!-- condicion adicional 
+                    <div class="info-columna dias esconder">
+                        <hr>
+                        <p>Soleado</p>
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_min.png" alt="temp_min">
+                        </div>
+                        <p>Temperatura mínima</p>
+                        <p>18°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/temp_max.png" alt="temp_max">
+                        </div>
+                        <p >Temperatura máxima</p>
+                        <p>30°</p>
+                        <!-- condicion adicional 
+                        <div class="icono-cond-ad">
+                            <img src="../assets/icons/visibility.png" alt="visibility">
+                        </div>
+                        <p>Visibilidad</p>
+                        <p>100%</p>
+                    </div>
+                </div>
+    
+            </div>
+            <button class="ampliar" id="botonDias" (click)="toggle(3)">
                 <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
-            </div> -->
-    </div>
-
-    <!-- clima por días | contenedor-small-->
-    <div class="contenedor-info-clima clima-dias shadow" id="proxDias">
-      <h3>En los próximos días</h3>
-      <div class="por-columna" id="diasSmall">
-        <!-- dia 1 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Hoy</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 2 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Sábado</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 3 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Domingo</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-      </div>
-      <div class="por-columna esconder" id="diasFull">
-        <!-- dia 1 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Hoy</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 2 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Sábado</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 3 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Domingo</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 4 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Lunes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 5 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Martes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 6 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Miércoles</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 7 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Jueves</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 8 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Viernes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 9 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Sábado</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 10 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Domingo</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 11 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Viernes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 12 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Lunes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 13 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Martes</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 14 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Miércoles</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-        <!-- dia 15 -->
-        <div class="columna">
-          <div class="icono-columna">
-            <img src="../assets/img/soleado-icon.png" alt="icono" />
-            <p>Jueves</p>
-          </div>
-          <!-- condicion adicional -->
-          <div class="info-columna dias esconder">
-            <hr />
-            <p>Soleado</p>
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_min.png" alt="temp_min" />
-            </div>
-            <p>Temperatura mínima</p>
-            <p>18°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/temp_max.png" alt="temp_max" />
-            </div>
-            <p>Temperatura máxima</p>
-            <p>30°</p>
-            <!-- condicion adicional -->
-            <div class="icono-cond-ad">
-              <img src="../assets/icons/visibility.png" alt="visibility" />
-            </div>
-            <p>Visibilidad</p>
-            <p>100%</p>
-          </div>
-        </div>
-      </div>
-      <button class="ampliar" id="botonDias" (click)="toggle(3)">
-        <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar" />
-      </button>
-      <!-- <div class="ampliar">
+            </button>
+            <!-- <div class="ampliar">
                 <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
-            </div> -->
+            </div> 
+        </div>
+    
+        <!-- condiciones adicionales condicion-adicional-small
+        <div class="contenedor-info-clima condiciones-adicionales " id="condAd">
+            <h3>Condiciones adicionales</h3>
+            <!-- contenedor de condiciones adicionales | contenedor-cond-ad-small
+            <div class="contenedor-cond-ad-small esconder" id="condAdSmall">
+                <!-- condicion adicional | cond-ad-small
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/temp_min.png" alt="temp_min">
+                    </div>
+                    <p>{{weather.main.temp_min}}°</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/temp_max.png" alt="temp_max">
+                    </div>
+                    <p>{{weather.main.temp_max}}°</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/pressure.png" alt="pressure">
+                    </div>
+                    <p>{{weather.main.pressure}} Pa</p>
+                </div>
+                <button class="ampliar" id="botonCondAd" (click)="toggle(1)">
+                    <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
+                </button>
+            </div>
+            <div class="contenedor-cond-ad" id="condAd-cont">
+                <!-- condicion adicional | cond-ad-small
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/temp_min.png" alt="temp_min">
+                    </div>
+                    <p class="condicion">Temperatura mínima</p>
+                    <p>{{weather.main.temp_min | noData:'°'}}</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/temp_max.png" alt="temp_max">
+                    </div>
+                    <p class="condicion">Temperatura máxima</p>
+                    <p>{{weather.main.temp_max}}°</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/pressure.png" alt="pressure">
+                    </div>
+                    <p class="condicion">Presión</p>
+                    <p>{{weather.main.pressure}} Pa</p>
+                </div>
+    
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/humidity.png" alt="humidity">
+                    </div>
+                    <p>Humedad</p>
+                    <p>{{weather.main.humidity}}%</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/sea-level.png" alt="sea-level">
+                    </div>
+                    <p>Presión a nivel del mar</p>
+                    <p>mil Pa</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/pressure.png" alt="pressure">
+                    </div>
+                    <p>Presión a nivel del suelo</p>
+                    <p>mil Pa</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/visibility.png" alt="visibility">
+                    </div>
+                    <p>Visibilidad</p>
+                    <p>{{weather.visibility}}m</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/speed.png" alt="speed">
+                    </div>
+                    <p>Velocidad del viento</p>
+                    <p>{{weather.wind.speed}}km/hr</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/deg.png" alt="deg">
+                    </div>
+                    <p>Dirección del viento</p>
+                    <p>{{weather.wind.deg}}°</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/gust.png" alt="gust">
+                    </div>
+                    <p>Ráfaga de viento</p>
+                    <p>mil m/seg</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/all.png" alt="all">
+                    </div>
+                    <p>Nubosidad</p>
+                    <p>{{weather.clouds.all}}%</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
+                    </div>
+                    <p>Volumen de lluvia (Últ. hr)</p>
+                    <p>0mm</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
+                    </div>
+                    <p>Volumen de lluvia (Últ. 3 hr)</p>
+                    <p>0mm</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
+                    </div>
+                    <p>Volumen de nieve (Últ. hr)</p>
+                    <p>0mm</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
+                    </div>
+                    <p>Volumen de nieve (Últ. 3 hr)</p>
+                    <p>0mm</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/sunrise.png" alt="sunrise">
+                    </div>
+                    <p>Amanecer</p>
+                    <p>{{weather.sys.sunrise | date:'shortTime'}}</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/sunset.png" alt="sunset">
+                    </div>
+                    <p>Anochecer</p>
+                    <p>{{weather.sys.sunset | date:'shortTime'}}</p>
+                </div>
+                <!-- condicion adicional 
+                <div class="cond-ad">
+                    <div class="icono-cond-ad">
+                        <img src="../assets/icons/timezone.png" alt="timezone">
+                    </div>
+                    <p>Zona horaria</p>
+                    <p>Hora de México</p>
+                </div>
+            </div>
+    
+            
+            
+        </div>
+        
     </div>
-
-    <!-- condiciones adicionales condicion-adicional-small-->
-    <div class="contenedor-info-clima condiciones-adicionales" id="condAd">
-      <h3>Condiciones adicionales</h3>
-      <!-- contenedor de condiciones adicionales | contenedor-cond-ad-small-->
-      <div class="contenedor-cond-ad-small esconder" id="condAdSmall">
-        <!-- condicion adicional | cond-ad-small-->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/temp_min.png" alt="temp_min" />
-          </div>
-          <p>{{ weather.main.temp_min }}°</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/temp_max.png" alt="temp_max" />
-          </div>
-          <p>{{ weather.main.temp_max }}°</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/pressure.png" alt="pressure" />
-          </div>
-          <p>{{ weather.main.pressure }} Pa</p>
-        </div>
-        <button class="ampliar" id="botonCondAd" (click)="toggle(1)">
-          <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar" />
-        </button>
-      </div>
-      <div class="contenedor-cond-ad" id="condAd-cont">
-        <!-- condicion adicional | cond-ad-small-->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/temp_min.png" alt="temp_min" />
-          </div>
-          <p class="condicion">Temperatura mínima</p>
-          <p>{{ weather.main.temp_min | noData: "°" }}</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/temp_max.png" alt="temp_max" />
-          </div>
-          <p class="condicion">Temperatura máxima</p>
-          <p>{{ weather.main.temp_max }}°</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/pressure.png" alt="pressure" />
-          </div>
-          <p class="condicion">Presión</p>
-          <p>{{ weather.main.pressure }} Pa</p>
-        </div>
-
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/humidity.png" alt="humidity" />
-          </div>
-          <p>Humedad</p>
-          <p>{{ weather.main.humidity }}%</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/sea-level.png" alt="sea-level" />
-          </div>
-          <p>Presión a nivel del mar</p>
-          <p>mil Pa</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/pressure.png" alt="pressure" />
-          </div>
-          <p>Presión a nivel del suelo</p>
-          <p>mil Pa</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/visibility.png" alt="visibility" />
-          </div>
-          <p>Visibilidad</p>
-          <p>{{ weather.visibility }}m</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/speed.png" alt="speed" />
-          </div>
-          <p>Velocidad del viento</p>
-          <p>{{ weather.wind.speed }}km/hr</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/deg.png" alt="deg" />
-          </div>
-          <p>Dirección del viento</p>
-          <p>{{ weather.wind.deg }}°</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/gust.png" alt="gust" />
-          </div>
-          <p>Ráfaga de viento</p>
-          <p>mil m/seg</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/all.png" alt="all" />
-          </div>
-          <p>Nubosidad</p>
-          <p>{{ weather.clouds.all }}%</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/rain1h3h.png" alt="rain1h3h" />
-          </div>
-          <p>Volumen de lluvia (Últ. hr)</p>
-          <p>0mm</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/rain1h3h.png" alt="rain1h3h" />
-          </div>
-          <p>Volumen de lluvia (Últ. 3 hr)</p>
-          <p>0mm</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/snow1h3h.png" alt="snow1h3h" />
-          </div>
-          <p>Volumen de nieve (Últ. hr)</p>
-          <p>0mm</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/snow1h3h.png" alt="snow1h3h" />
-          </div>
-          <p>Volumen de nieve (Últ. 3 hr)</p>
-          <p>0mm</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/sunrise.png" alt="sunrise" />
-          </div>
-          <p>Amanecer</p>
-          <p>{{ weather.sys.sunrise | date: "shortTime" }}</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/sunset.png" alt="sunset" />
-          </div>
-          <p>Anochecer</p>
-          <p>{{ weather.sys.sunset | date: "shortTime" }}</p>
-        </div>
-        <!-- condicion adicional -->
-        <div class="cond-ad">
-          <div class="icono-cond-ad">
-            <img src="../assets/icons/timezone.png" alt="timezone" />
-          </div>
-          <p>Zona horaria</p>
-          <p>Hora de México</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 
-        temp_min
-        temp_max
-        presión
-        humedad
-        Presión a nivel del mar
-        Presión a nivel del suelo
-        visibilidad
-        velocidad del viento
-        dirección del viento
-        ráfaga de viento
-        nubodidad
-        volumen de lluvia (Últ. hr)
-        volumen de lluvia (Últ. 3 hr)
-        volumen de nieve (Últ. hr)
-        volumen de nieve (Últ. 3 hr)
-        Amanecer
-        Anochecer
-        Zona horaria (?)
-        -->
+</div>-->
