@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { CovidService } from 'src/app/core/services/covid/covid.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
+import { WeatherService } from 'src/app/core/services/weather/weather.service';
+import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-salud',
@@ -8,6 +10,9 @@ import { SharedService } from 'src/app/core/Shared/shared.service';
   styleUrls: ['./salud.component.css']
 })
 export class SaludComponent implements OnInit {
+
+  weather: any;
+  country: string = "";
 
   cases: any;
   todayCases: any;
@@ -21,80 +26,80 @@ export class SaludComponent implements OnInit {
   lati: number;
   long: number;
 
-  constructor(private covidService: CovidService, private sharedService: SharedService) { }
+  chart: any;
 
-  getCountry(lat: number, lon: number): string{
-    const KEY = "AIzaSyC2Xi12hT6sq8i2VZ7QJwuhxk_600N9YE4";
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${KEY}`;
-    let country = "";
-/*
-let paises = [
-  'MX' = 'México',
-  'US' = 'Estados Unidos',
-  'FR' = 'Francia',
-  'DE' = 'Alemania',
-  'IT' = 'Italia',
-  'GB' = 'Reino Unido',
-  'BE' = 'Bélgica',
-  'NL' = 'Paises Bajos',
-  'SE' = 'Suecia',
-  'CH' = 'Suiza',
-  'AT' = 'Austria',
-  'FI' = 'Finlandia',
-  'PT' = 'Portugal',
-  'TR' = 'Turquía',
-  'RU' = 'Rusia',
-  'DK' = 'Dinamarca',
-  'CA' = 'Cánada',
-  'IN' = 'India',
-  'GR' = 'Grecia',
-  'ES' = 'España',
-  'EG' = 'Egipto',
-  'AR' = 'Argentina',
-  'HU' = 'Hungría',
-  'PL' = 'Polonia',
-  'RO' = 'Rumania',
-  'KR' = 'República de Corea del Norte',
-  'CN' = 'China',
-  'BR' = 'Brasil',
-  'CZ' = 'República Checa',
-  'NO' = 'Noruega',
-  'ZA' = 'Sudáfrica',
-  'AU' = 'Australia',
-  'UA' = 'Ucrania',
-  'ID' = 'Indonesia',
-  'JP' = 'Japon',
-  'MA' = 'Marruecos',
-  'BG' = 'Bulgaria',
-  'CL' = 'Chile',
-  'HR' = 'Croacia',
-  'RS' = 'Serbia',
-  'NG' = 'Nigeria',
-  'MY' = 'Malasia',
-  'PK' = 'Pakistán',
-  'SK' = 'Eslovaquia',
-  'PE' = 'Perú',
-  'TN' = 'Túnez',
-  'SN' = 'Senegal',
-  'SI' = 'Eslovenia',
-  'PH' = 'Filipinas',
-  'GH' = 'Ghana']
-*/
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        let parts = data.results[0].address_components;
+  constructor(private covidService: CovidService, 
+              private sharedService: SharedService, 
+              private weatherService: WeatherService,
+              private elementRef: ElementRef) { }
 
-        parts.forEach(part => {
-          if (part.types.includes("country")) {
-            //we found "country" inside the data.results[0].address_components[x].types array
-            country = part.long_name;
-          }
-        });
+  getCountry(lat: number, lon: number){
+    this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
+      this.weather = resp.data;
+      console.log('Este es el weather de salud', this.weather);
     });
-      return country;
-    }
+    setTimeout(() => {     
+      let shortcut: string = this.weather.sys.country;
+      console.log('este es el shortcut',shortcut);
+
+      let paises = new Map([
+        ['MX','México'],
+        ['US', 'Estados Unidos'],
+        ['FR', 'Francia'],
+        ['DE', 'Alemania'],
+        ['IT', 'Italia'],
+        ['GB', 'Reino Unido'],
+        ['BE', 'Bélgica'],
+        ['NL', 'Paises Bajos'],
+        ['SE', 'Suecia'],
+        ['CH', 'Suiza'],
+        ['AT', 'Austria'],
+        ['FI', 'Finlandia'],
+        ['PT', 'Portugal'],
+        ['TR', 'Turquía'],
+        ['RU', 'Rusia'],
+        ['DK', 'Dinamarca'],
+        ['CA', 'Cánada'],
+        ['IN', 'India'],
+        ['GR', 'Grecia'],
+        ['ES', 'España'],
+        ['EG', 'Egipto'],
+        ['AR', 'Argentina'],
+        ['HU', 'Hungría'],
+        ['PL', 'Polonia'],
+        ['RO', 'Rumania'],
+        ['KR', 'República de Corea del Norte'],
+        ['CN', 'China'],
+        ['BR', 'Brasil'],
+        ['CZ', 'República Checa'],
+        ['NO', 'Noruega'],
+        ['ZA', 'Sudáfrica'],
+        ['AU', 'Australia'],
+        ['UA', 'Ucrania'],
+        ['ID', 'Indonesia'],
+        ['JP', 'Japon'],
+        ['MA', 'Marruecos'],
+        ['BG', 'Bulgaria'],
+        ['CL', 'Chile'],
+        ['HR', 'Croacia'],
+        ['RS', 'Serbia'],
+        ['NG', 'Nigeria'],
+        ['MY', 'Malasia'],
+        ['PK', 'Pakistán'],
+        ['SK', 'Eslovaquia'],
+        ['PE', 'Perú'],
+        ['TN', 'Túnez'],
+        ['SN', 'Senegal'],
+        ['SI', 'Eslovenia'],
+        ['PH', 'Filipinas'],
+        ['GH', 'Ghana']
+      ]);
+      
+      if(paises.has(shortcut)){
+        this.country = paises.get(shortcut);
+      }
+    }, 2000);
+  }
 
   ngOnInit(): void {
     this.init();
@@ -104,33 +109,66 @@ let paises = [
     const {lat, lon } = this.sharedService.getlocation();
     this.lati = lat;
     this.long = lon;
-    // let country = this.getCountry(lat, lon);
-    let country = "Mexico";
+    this.getCountry(lat, lon);
+    //let country = "Mexico";
     // this.covidData.country = country;
-    this.covidService.getCases(country).subscribe( (resp) => {
+    /*this.covidService.getCases(this.country).subscribe( (resp) => {
       this.cases = resp.data;
     });
-    this.covidService.getTodayCases(country).subscribe( (resp) => {
+    this.covidService.getTodayCases(this.country).subscribe( (resp) => {
       this.todayCases = resp.data;
     });
-    this.covidService.getActiveCases(country).subscribe( (resp) => {
+    this.covidService.getActiveCases(this.country).subscribe( (resp) => {
       this.activeCases = resp.data;
     });
-    this.covidService.getTotalDeaths(country).subscribe( (resp) => {
+    this.covidService.getTotalDeaths(this.country).subscribe( (resp) => {
       this.totalDeaths = resp.data;
     });
-    this.covidService.getTodayDeaths(country).subscribe( (resp) => {
+    this.covidService.getTodayDeaths(this.country).subscribe( (resp) => {
       this.todayDeaths = resp.data;
     });
-    this.covidService.getRecoveredCases(country).subscribe( (resp) => {
+    this.covidService.getRecoveredCases(this.country).subscribe( (resp) => {
       this.recoveredCases = resp.data;
     });
-    this.covidService.getTestTotals(country).subscribe( (resp) => {
+    this.covidService.getTestTotals(this.country).subscribe( (resp) => {
       this.testTotals = resp.data;
-    });
+    });*/
 
-    this.loading = false;
+    
+
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
+  ngAfterContentInit(): void{
+    const dias = ['Lunes', 'Martes', 'Miércoles'];
+    const datos = ['Morado', 'Rojo', 'Amarillo'];
 
+    const data = {
+      labels: dias,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: ['Morado', 'Rojo', 'Amarillo'],
+      }]
+    };
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+    //const canvas = this.elementRef.nativeElement.querySelector('#myChart');
+    let canvas = document.getElementById('divchart')
+    console.log('Este es el canvas',canvas);
+    // this.chart = new Chart(
+    //   canvas,
+    //   {
+    //     type: 'line',
+    //     data: data,
+    //     options: {}
+    //   }
+    // );
+  }
 }

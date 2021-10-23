@@ -1,52 +1,83 @@
+<div *ngIf="loading" class="load">
+  <div class="row justify-content-center">
+    <div class="col-1 align-self-center">
+      <app-radar-spinner
+        [animationDuration]="1000"
+        [size]="150"
+        [color]="'#51D5EA'"
+      ></app-radar-spinner>
+    </div>
+  </div>
+</div>
+
 <!-- tiempo actual -->
 <div *ngIf="!loading">
-    <div class="tiempo-actual shadow" style="
-          background-image: url('../assets/img/day-sky.jpg');
-        ">
-            <div class=" icono-temp">
-                <img src="../assets/icons/{{weather.weather[0].description}}.png" alt="icono">
-            </div>
-            <p class="temp-actual">{{ weather.main.temp }}°</p>
-            <p class="ciudad-actual">{{ weather.name}}, {{weather.sys.country}}</p>
+  <div
+    class="tiempo-actual shadow"
+    style="background-image: url('../assets/img/day-sky.jpg')"
+  >
+    <div class="icono-temp">
+      <img
+        src="../assets/icons/{{ weather.weather[0].description }}.png"
+        alt="icono"
+      />
     </div>
-    
-    <div class="container pronosticos-dash">
-        <!-- clima por horas -->
-        <div class="contenedor-medio shadow">
-            <h3>En las próximas horas</h3>
-            <div class="por-columna">
-                <div class="columna">
-                    <img src="../assets/icons/{{weather3.list[0].weather[0].description}}.png" alt="icono">
-                    <p>{{ weather3.list[0].dt_txt | date:'shortTime'}}</p>
-                </div>
-                <div class="columna">
-                    <img src="../assets/icons/{{weather3.list[1].weather[0].description}}.png" alt="icono">
-                    <p>{{ weather3.list[1].dt_txt | date:'shortTime'}}</p>
-                </div>
-                <div class="columna">
-                    <img src="../assets/icons/{{weather3.list[2].weather[0].description}}.png" alt="icono">
-                    <p>{{ weather3.list[2].dt_txt | date:'shortTime'}}</p>
-                </div>
-            </div>
+    <p class="temp-actual">{{ weather.main.temp }}°</p>
+    <p class="ciudad-actual">{{ weather.name }}, {{ weather.sys.country }}</p>
+  </div>
+
+  <div class="container pronosticos-dash">
+    <!-- clima por horas -->
+    <div class="contenedor-medio shadow">
+      <h3>En las próximas horas</h3>
+      <div class="por-columna">
+        <div class="columna">
+          <img
+            src="../assets/icons/{{
+              weather3.list[0].weather[0].description
+            }}.png"
+            alt="icono"
+          />
+          <p>{{ weather3.list[0].dt_txt | date: "shortTime" }}</p>
         </div>
-    
-        <!-- clima por días -->
-        <div class="contenedor-medio shadow">
-            <h3>En los próximos días</h3>
-            <div class="por-columna">
-                <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p class="dia">Martes</p>
-                </div>
-                <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p class="dia">Miércoles</p>
-                </div>
-                <div class="columna">
-                    <img src="../assets/img/soleado-icon.png" alt="icono">
-                    <p class="dia">Jueves</p>
-                </div>
-            </div>
+        <div class="columna">
+          <img
+            src="../assets/icons/{{
+              weather3.list[1].weather[0].description
+            }}.png"
+            alt="icono"
+          />
+          <p>{{ weather3.list[1].dt_txt | date: "shortTime" }}</p>
         </div>
+        <div class="columna">
+          <img
+            src="../assets/icons/{{
+              weather3.list[2].weather[0].description
+            }}.png"
+            alt="icono"
+          />
+          <p>{{ weather3.list[2].dt_txt | date: "shortTime" }}</p>
+        </div>
+      </div>
     </div>
+
+    <!-- clima por días -->
+    <div class="contenedor-medio shadow">
+      <h3>En los próximos días</h3>
+      <div class="por-columna">
+        <div class="columna">
+          <img src="../assets/img/soleado-icon.png" alt="icono" />
+          <p class="dia">Martes</p>
+        </div>
+        <div class="columna">
+          <img src="../assets/img/soleado-icon.png" alt="icono" />
+          <p class="dia">Miércoles</p>
+        </div>
+        <div class="columna">
+          <img src="../assets/img/soleado-icon.png" alt="icono" />
+          <p class="dia">Jueves</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -52,6 +52,17 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="loading" class="load">
+          <div class="row justify-content-center">
+            <div class="col-1 align-self-center">
+              <app-radar-spinner
+                [animationDuration]="1000"
+                [size]="150"
+                [color]="'#51D5EA'"
+              ></app-radar-spinner>
+            </div>
+          </div>
+        </div>
         <!-- proximos dias -->
         <div id="proximosDias" class="container arriba" (click)="bajar('proximosDias','proximasHoras','condicionesAd')">
             <div class="container">
@@ -93,7 +104,11 @@
             </div>
         </div>
         <!-- condiciones adicionales -->
-        <div id="condicionesAd" class="container abajo" (click)="bajar('condicionesAd','proximasHoras','proximosDias')"></div>
+        <div id="condicionesAd" class="container abajo" (click)="bajar('condicionesAd','proximasHoras','proximosDias')">
+          <div>
+            
+          </div>
+        </div>
     </div>
 </div>
     <!-- <div class="contenedor-clima">
@@ -191,10 +206,28 @@
                 </div>
 
 
-                
-            </div>
-
-            <div class="por-columna esconder" id="horas5">
+<div *ngIf="!loading">
+  <div class="contenedor-clima">
+    <!-- temperarura actual -
+    <div
+      class="temp-actual-small shadow row"
+      style="background-image: url('../assets/img/day-sky.jpg')"
+    >
+      <div class="col-sm-4 icono-temp">
+        <img
+          src="../assets/icons/{{ weather.weather[0].description }}.png"
+          alt="icono"
+        />
+      </div>
+      <div class="col">
+        <p class="row justify-content-md-center temp-actual">
+          {{ weather.main.temp }}°
+        </p>
+        <p class="row ciudad-actual">
+          {{ weather.name }}, {{ weather.sys.country }}
+        </p>
+      </div>
+    </div>
 
                 <div class="columna">
                     <div class="icono-columna">
@@ -341,15 +374,10 @@
                     </div>
                 </div>
 
-            </div>
 
-            <button class="ampliar" id="botonHoras" (click)="toggle(2)">
-                <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
-            </button>
-            <!-- <div class="ampliar">
-                <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
-            </div> 
-        </div>
+      <button class="ampliar" id="botonHoras" (click)="toggle(2)">
+        <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar" />
+      </button>
     
         <!-- clima por días | contenedor-small
         <div class="contenedor-info-clima clima-dias shadow" id="proxDias">

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import {AtomSpinnerModule, RadarSpinnerModule, SpringSpinnerModule} from 'angular-epic-spinners'
+
 //Rutas
 import { APP_ROUTING } from './app.routes';
 
@@ -35,9 +37,17 @@ import { NoDataPipe } from './Pipes/no-data.pipe';
   imports: [
     BrowserModule,
     APP_ROUTING,
-    HttpClientModule
+    HttpClientModule,
+    AtomSpinnerModule,
+    SpringSpinnerModule,
+    RadarSpinnerModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    AtomSpinnerModule,
+    SpringSpinnerModule,
+    RadarSpinnerModule
+  ]
 })
 export class AppModule { }
