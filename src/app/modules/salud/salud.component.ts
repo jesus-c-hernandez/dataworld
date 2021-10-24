@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CovidService } from 'src/app/core/services/covid/covid.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
@@ -21,17 +21,20 @@ export class SaludComponent implements OnInit {
   todayDeaths: any;
   recoveredCases: any;
   testTotals: any;
-  loading: boolean;
+  //pantalla de carga
+  loading: boolean = true;
 
   lati: number;
   long: number;
 
-  chart: any;
+  chart : any;
+  @ViewChild("myChart") myChart: ElementRef;
 
   constructor(private covidService: CovidService, 
               private sharedService: SharedService, 
               private weatherService: WeatherService,
-              private elementRef: ElementRef) { }
+              private elementRef: ElementRef,
+              private renderer: Renderer2) { }
 
   getCountry(lat: number, lon: number){
     this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
@@ -141,7 +144,7 @@ export class SaludComponent implements OnInit {
      }, 2000);
   }
 
-  ngAfterContentInit(): void{
+  ngAfterViewInit(): void{
     const dias = ['Lunes', 'Martes', 'Miércoles'];
     const datos = ['Morado', 'Rojo', 'Amarillo'];
 
@@ -159,16 +162,17 @@ export class SaludComponent implements OnInit {
       data: data,
       options: {}
     };
-    //const canvas = this.elementRef.nativeElement.querySelector('#myChart');
-    let canvas = document.getElementById('divchart')
+    //const canvas = this.elementRef.nativeElement.querySelector('#divchart');
+    const canvas = this.myChart.nativeElement().getContext();
     console.log('Este es el canvas',canvas);
-    // this.chart = new Chart(
-    //   canvas,
-    //   {
-    //     type: 'line',
-    //     data: data,
-    //     options: {}
-    //   }
-    // );
+    
+      this.chart = new Chart(
+        canvas,
+        {
+          type: 'line',
+          data: data,
+          options: {}
+        }
+      );
   }
 }
