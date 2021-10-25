@@ -26,16 +26,22 @@ export class DashboardComponent implements OnInit {
 
   async currentWeather () {
     const {lat, lon} = await this.geolocationService.getPosition();
+    localStorage.setItem('lat', String(lat))
+    localStorage.setItem('lon', String(lon))
+
     console.log('POS', lat ,lon);
 
-    this.sharedService.setLocation( lat, lon );
+    // this.sharedService.setLocation( lat, lon );
     
-    this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
-      console.log('RESP', resp);
-      this.weather = resp.data;      
+    // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
+    //   console.log('RESP', resp);
+    //   this.weather = resp.data;      
 
-      console.log('Wea', this.weather); 
-    });
+    //   console.log('Wea', this.weather); 
+    // });
+
+    this.weather = await this.weatherService.getCurrentWeather(lat, lon);
+    console.log('RESP', this.weather);
 
     this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
       this.weather3 = resp.data;      

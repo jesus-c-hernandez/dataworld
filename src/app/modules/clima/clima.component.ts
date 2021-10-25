@@ -136,13 +136,19 @@ export class ClimaComponent implements OnInit {
     
   }
 
-  init() {
+  async init() {
 
-    const {lat, lon } = this.sharedService.getlocation();
+    const lat = Number(localStorage.getItem('lat'));
+    const lon = Number(localStorage.getItem('lon'));
 
-    this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
-      this.weather = resp.data;
-    });
+
+    this.weather = await this.weatherService.getCurrentWeather(lat, lon);
+    console.log('RESP', this.weather);
+
+    // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
+      
+    //   this.weather = resp.data;
+    // });
 
     // this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
     //   this.weather3 = resp.data;

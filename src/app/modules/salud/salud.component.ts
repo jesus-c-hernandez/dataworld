@@ -28,6 +28,7 @@ export class SaludComponent implements OnInit {
   long: number;
 
   chart : any;
+
   @ViewChild("myChart") myChart: ElementRef;
 
   constructor(private covidService: CovidService, 
@@ -37,10 +38,10 @@ export class SaludComponent implements OnInit {
               private renderer: Renderer2) { }
 
   getCountry(lat: number, lon: number){
-    this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
-      this.weather = resp.data;
-      console.log('Este es el weather de salud', this.weather);
-    });
+    // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
+    //   this.weather = resp.data;
+    //   console.log('Este es el weather de salud', this.weather);
+    // });
     setTimeout(() => {     
       let shortcut: string = this.weather.sys.country;
       console.log('este es el shortcut',shortcut);
@@ -113,6 +114,40 @@ export class SaludComponent implements OnInit {
     this.lati = lat;
     this.long = lon;
     this.getCountry(lat, lon);
+
+    const labels = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+    ];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+
+    const myChart = new Chart(
+      'myChart',
+      {
+        type: 'line',
+        data: data,
+        options: {}
+      }
+    );
+
     //let country = "Mexico";
     // this.covidData.country = country;
     /*this.covidService.getCases(this.country).subscribe( (resp) => {
@@ -144,35 +179,35 @@ export class SaludComponent implements OnInit {
      }, 2000);
   }
 
-  ngAfterViewInit(): void{
-    const dias = ['Lunes', 'Martes', 'Miércoles'];
-    const datos = ['Morado', 'Rojo', 'Amarillo'];
+  // ngAfterViewInit(): void{
+  //   const dias = ['Lunes', 'Martes', 'Miércoles'];
+  //   const datos = ['Morado', 'Rojo', 'Amarillo'];
 
-    const data = {
-      labels: dias,
-      datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: ['Morado', 'Rojo', 'Amarillo'],
-      }]
-    };
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
-    //const canvas = this.elementRef.nativeElement.querySelector('#divchart');
-    const canvas = this.myChart.nativeElement().getContext();
-    console.log('Este es el canvas',canvas);
+  //   const data = {
+  //     labels: dias,
+  //     datasets: [{
+  //       label: 'My First dataset',
+  //       backgroundColor: 'rgb(255, 99, 132)',
+  //       borderColor: 'rgb(255, 99, 132)',
+  //       data: ['Morado', 'Rojo', 'Amarillo'],
+  //     }]
+  //   };
+  //   const config = {
+  //     type: 'line',
+  //     data: data,
+  //     options: {}
+  //   };
+  //   //const canvas = this.elementRef.nativeElement.querySelector('#divchart');
+  //   const canvas = this.myChart.nativeElement().getContext();
+  //   console.log('Este es el canvas',canvas);
     
-      this.chart = new Chart(
-        canvas,
-        {
-          type: 'line',
-          data: data,
-          options: {}
-        }
-      );
-  }
+  //     this.chart = new Chart(
+  //       canvas,
+  //       {
+  //         type: 'line',
+  //         data: data,
+  //         options: {}
+  //       }
+  //     );
+  // }
 }
