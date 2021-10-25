@@ -13,18 +13,15 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
-
-  getCurrentWeather( lat: number, lon: number) {
-    const url = `${base_url}/current-weather?lat=${lat}&lon=${lon}`;
-    
-    return this.http.get(url).pipe(
-      map((resp) => {
-        return {
-          result: resp['result'],
-          data: resp['data']
-        }
-      })
-    )
+  async getCurrentWeather( lat: number, lon: number) {
+    try {
+      const url = `${base_url}/current-weather?lat=${lat}&lon=${lon}`;
+      const result : any = await this.http.get(url).toPromise();
+      console.log('RES', result);
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
   getCurrentWeatherByHours( lat: number, lon: number, hours:number) {
