@@ -12,7 +12,12 @@ export class ClimaComponent implements OnInit {
   weather : any;
   weather3 : any;
   weather5 : any; 
-  loading = true;
+  cantHoras: number = 3;
+  cantDias: number = 3;
+  //para almacenar las condiciones adicionales
+
+  //pantalla de carga
+  loading: boolean = true;;
 
   constructor(
     private weatherService: WeatherService,
@@ -75,8 +80,42 @@ export class ClimaComponent implements OnInit {
     const arriba1 = document.getElementById(idArriba1);
     const arriba2 = document.getElementById(idArriba2);
 
+    //preguntar cuál es el que está abajo
+    switch(idAbajo){
+      case "proximasHoras":
+        //mostrar info adicional de las horas
+        this.mostrarInfoHoras = true;
+        this.mostrarInfoDias = false;
+        this.mostrarInfoCondAd = false;
+        this.cantHoras = 5;
+        this.cantDias = 3;
+        break;
+      case "proximosDias":
+        //mostrar info adicional de los dias
+        this.mostrarInfoHoras = false;
+        this.mostrarInfoDias = true;
+        this.mostrarInfoCondAd = false;
+        this.cantHoras = 3;
+        this.cantDias = 5;
+        break;
+      case "condicionesAd":
+        //mostrar info adicional de las condiciones adicionales
+        this.mostrarInfoHoras = false;
+        this.mostrarInfoDias = false;
+        this.mostrarInfoCondAd = true;
+        this.cantHoras = 3;
+        this.cantDias = 3;
+        break;
+      default:
+        //mejor no hacer nada
+        break;
+    }
+
     //agregar la clase abajo al que se quiera bajar
     abajo.classList.add("abajo");
+    if(abajo.classList.contains("arriba")){
+      abajo.classList.remove("arriba");
+    }
         
     //validar que los que se quieran subir no tengan la clase abajo
     if(arriba1.classList.contains("abajo")){
@@ -93,31 +132,8 @@ export class ClimaComponent implements OnInit {
     if(!arriba2.classList.contains("arriba")){
       arriba2.classList.add("arriba");
     }
-
-    //preguntar cuál es el que está abajo
-    switch(idAbajo){
-      case "proximasHoras":
-        //mostrar info adicional de las horas
-        this.mostrarInfoHoras = true;
-        this.mostrarInfoDias = false;
-        this.mostrarInfoCondAd = false;
-        break;
-      case "proximosDias":
-        //mostrar info adicional de los dias
-        this.mostrarInfoHoras = false;
-        this.mostrarInfoDias = true;
-        this.mostrarInfoCondAd = false;
-        break;
-      case "condicionesAd":
-        //mostrar info adicional de las condiciones adicionales
-        this.mostrarInfoHoras = false;
-        this.mostrarInfoDias = false;
-        this.mostrarInfoCondAd = true;
-        break;
-      default:
-        //mejor no hacer nada
-        break;
-    }
+    // console.log(idAbajo, 'se bajó');
+    
   }
 
   init() {
@@ -125,23 +141,15 @@ export class ClimaComponent implements OnInit {
     const {lat, lon } = this.sharedService.getlocation();
 
     this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
-      // console.log('RESP', resp);
-      this.weather = resp.data;      
-
-      // console.log('Wea', this.weather); 
+      this.weather = resp.data;
     });
 
-    this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
-      this.weather3 = resp.data;      
-
-      // console.log('weather3', this.weather3); 
-    });
+    // this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
+    //   this.weather3 = resp.data;
+    // });
 
     this.weatherService.getCurrentWeatherByHours( lat, lon, 5).subscribe( (resp) => {
-      // console.log('RESP', resp);
-      this.weather5 = resp.data;      
-
-      // console.log('Wea', this.weather5); 
+      this.weather5 = resp.data;
     });
 
     setTimeout(() => {
