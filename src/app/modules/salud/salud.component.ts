@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/co
 import { CovidService, CovidData } from 'src/app/core/services/covid/covid.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-salud',
@@ -10,6 +9,12 @@ import {Chart} from 'chart.js';
   styleUrls: ['./salud.component.css']
 })
 export class SaludComponent implements OnInit {
+
+  public title1 : string = 'Ventas';
+  public labels1: string[] = ['Ventas descargadas', 'Ventas en tienda', 'Reporte de ventas'];
+  public data1 = [
+    [350, 450, 100]
+  ];
 
   weather: any;
   country: string = "";

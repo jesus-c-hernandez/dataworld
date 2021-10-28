@@ -18,8 +18,12 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
 import { ContactoComponent } from './modules/contacto/contacto.component';
-import { NoDataPipe } from './Pipes/no-data.pipe';
 import { NoticiasComponent } from './modules/noticias/noticias.component';
+
+//Pipes
+import { NoDataPipe } from './Pipes/no-data/no-data.pipe';
+import { RoundPipe } from './Pipes/round/round.pipe';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -28,9 +32,13 @@ import { NoticiasComponent } from './modules/noticias/noticias.component';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    SaludComponent,
     NosotrosComponent,
     ContactoComponent,
+    SaludComponent,
+    NoDataPipe,
+    RoundPipe,
+    SaludComponent,
+    NosotrosComponent,
     NoDataPipe,
     NoticiasComponent
   ],
@@ -40,14 +48,15 @@ import { NoticiasComponent } from './modules/noticias/noticias.component';
     HttpClientModule,
     AtomSpinnerModule,
     SpringSpinnerModule,
-    RadarSpinnerModule
+    RadarSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [
     AtomSpinnerModule,
     SpringSpinnerModule,
-    RadarSpinnerModule
+    RadarSpinnerModule,
+    AuthModule
   ]
 })
 export class AppModule { }
