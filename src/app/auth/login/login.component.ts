@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(  private router: Router,
                 private fb: FormBuilder,
                 private userService: UserService,
-                private ngZone: NgZone ) { }
+                private ngZone: NgZone, ) { }
 
   ngOnInit () :void {
     this.renderButton();
@@ -78,6 +78,10 @@ export class LoginComponent implements OnInit {
         }, (error) => {
           alert(JSON.stringify(error, undefined, 2));
         });
+  }
+
+  register() {
+    this.router.navigateByUrl('/register');
   }
 
 }

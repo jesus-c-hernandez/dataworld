@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
-// import { RegisterForm } from '../interfaces/register-form.interface';
+import { RegisterForm } from '../../../interfaces/register-form.interface';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment.prod';
 
-// import { LoginForm } from '../interfaces/login-form.interface';
+import { LoginForm } from '../../../interfaces/login-form.interface';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
-// import { LoadUser } from '../interfaces/load-users.interface';
-// import { User } from '../models/usuario.model';
+import { User } from '../../../models/user.model';
 
-// const base_url = environment.base_url;
+const base_url = environment.base_url;
 declare const gapi: any;
 
 @Injectable({
@@ -21,7 +20,7 @@ declare const gapi: any;
 export class UserService {
 
   public auth2: any;
-  // public user: User;
+  public user: User;
 
   constructor(
     private http: HttpClient,
@@ -33,10 +32,6 @@ export class UserService {
 
   get token(): string {
     return localStorage.getItem('token') || '';
-  }
-
-  get role() : 'ADMIN_ROLE' | 'USER_ROLE' {
-    return this.user.role;
   }
 
   get uid(): string {
@@ -67,12 +62,10 @@ export class UserService {
 
   saveLocalStorage(token: string, menu: any) {
     localStorage.setItem('token', token);
-    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('menu');
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
@@ -89,8 +82,8 @@ export class UserService {
       })
       .pipe(
         map((resp: any) => {
-          const { name, email, google, role, uid, img = '' } = resp.user;
-          this.user = new User(name, email, '', img, google, role, uid);
+          const { name, email, google, role, uid } = resp.data;
+          this.user = new User(name, email, '', google, role, uid);
           this.saveLocalStorage(resp.token, resp.menu);
           return true;
         }),
@@ -109,7 +102,6 @@ export class UserService {
   updateUser(data: { email: string; name: string; role: string }) {
     data = {
       ...data,
-      role: this.user.role,
     };
     return this.http.put(`${base_url}/users/${this.uid}`, data, this.headers);
   }
@@ -130,39 +122,5 @@ export class UserService {
         this.saveLocalStorage(resp.token, resp.menu);
       })
     );
-  }
-
-  loadUsers(from: number = 0) {
-    const url = `${base_url}/users?from=${from}`;
-    return this.http.get<LoadUser>(url, this.headers).pipe(
-      map((resp) => {
-        const users = resp.user.map(
-          (user) =>
-            new User(
-              user.name,
-              user.email,
-              '',
-              user.img,
-              user.google,
-              user.role,
-              user.uid
-            )
-        );
-        return {
-          total: resp.total,
-          users,
-        };
-      })
-    );
-  }
-
-  deleteUser(user: User) {
-    // users/608b8542b6e84c3dbc512525
-    const url = `${base_url}/users/${user.uid}`;
-    return this.http.delete(url, this.headers);
-  }
-
-  saveUser(user: User) {
-    return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers);
   }
 }

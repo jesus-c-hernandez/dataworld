@@ -23,6 +23,7 @@ import { NoticiasComponent } from './modules/noticias/noticias.component';
 //Pipes
 import { NoDataPipe } from './Pipes/no-data/no-data.pipe';
 import { RoundPipe } from './Pipes/round/round.pipe';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { RoundPipe } from './Pipes/round/round.pipe';
   exports: [
     AtomSpinnerModule,
     SpringSpinnerModule,
-    RadarSpinnerModule
+    RadarSpinnerModule,
+    AuthModule
   ]
 })
 export class AppModule { }
