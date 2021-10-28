@@ -15,18 +15,14 @@ import { ClimaComponent } from './modules/clima/clima.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { CrimenComponent } from './modules/crimen/crimen.component';
+import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
 import { ContactoComponent } from './modules/contacto/contacto.component';
+import { NoticiasComponent } from './modules/noticias/noticias.component';
 
 //Pipes
 import { NoDataPipe } from './Pipes/no-data/no-data.pipe';
 import { RoundPipe } from './Pipes/round/round.pipe';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ChartsModule } from 'ng2-charts';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GraphicComponent } from './components/graphic/graphic.component';
-import { SaludComponent } from './modules/salud/salud.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +31,15 @@ import { SaludComponent } from './modules/salud/salud.component';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    CrimenComponent,
     NosotrosComponent,
     ContactoComponent,
-    GraphicComponent,
     SaludComponent,
     NoDataPipe,
     RoundPipe,
+    SaludComponent,
+    NosotrosComponent,
+    NoDataPipe,
+    NoticiasComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +48,6 @@ import { SaludComponent } from './modules/salud/salud.component';
     AtomSpinnerModule,
     SpringSpinnerModule,
     RadarSpinnerModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    NgxChartsModule,
-    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

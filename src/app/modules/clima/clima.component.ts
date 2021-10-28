@@ -154,9 +154,7 @@ export class ClimaComponent implements OnInit {
     //   this.weather3 = resp.data;
     // });
 
-    this.weatherService.getCurrentWeatherByHours( lat, lon, 5).subscribe( (resp) => {
-      this.weather5 = resp.data;
-    });
+    this.weather5 = await this.weatherService.getCurrentWeatherByHours( lat, lon, 5);
 
     setTimeout(() => {
       this.loading = false;
