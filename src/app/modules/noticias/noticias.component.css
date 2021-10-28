@@ -1,0 +1,64 @@
+#contenedorTodo{
+    padding: 1rem 0;
+}
+.contenedor-noticias{
+
+}
+.noticia{
+    display: flex;
+    background-color: #e3e3e3;
+    margin: 2rem 1rem;
+    border-right: 5px solid #55E94A;
+}
+@media only screen and (max-width: 768px){
+    .noticia{
+      flex: none;
+      display: block;
+      border: none;
+      border-bottom: 5px solid #55E94A;
+    }
+}
+.imagen-noticia{
+    flex-basis: 30%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.texto-noticia{
+    flex-basis: 70%;
+    margin: 1rem;
+}
+@media only screen and (max-width: 768px){
+    .imagen-noticia{
+        height: 15rem;
+    }
+    .texto-noticia{
+        margin: 1rem;
+    }
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.titulo-noticia{
+    font-size: 24px;
+}
+#titulo-salud:hover{
+    color: #55E94A;
+}
+#titulo-tech:hover{
+    color: #2A93D5;
+}
+#titulo-sc:hover{
+    color: #7BD5F5;
+}
+#fuente{
+    text-align: right;
+}
+#top{
+    display: flex;
+}
+.top{
+    text-align: center;
+    color: white;
+}

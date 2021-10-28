@@ -10,6 +10,9 @@ import { SharedService } from 'src/app/core/Shared/shared.service';
 })
 export class DashboardComponent implements OnInit {
 
+  //para banner
+  dayImage: string;
+
   weather: any;
   weather3 : any;
   loading = true;
@@ -43,12 +46,26 @@ export class DashboardComponent implements OnInit {
     this.weather = await this.weatherService.getCurrentWeather(lat, lon);
     console.log('RESP', this.weather);
 
-    this.weatherService.getCurrentWeatherByHours( lat, lon, 3).subscribe( (resp) => {
-      this.weather3 = resp.data;      
+    this.weather3 = await this.weatherService.getCurrentWeatherByHours( lat, lon, 3);
 
-      console.log('weather3', this.weather3); 
+    //banner
+    const today = new Date();
+    const time = today.getHours();
 
-    });
+    if(time >= 0 && time <= 6){
+      this.dayImage = 'night-sky';
+    } else if(time > 6 && time <= 8){
+      this.dayImage = 'morning-sky';
+    } else if(time > 8 && time <= 18){
+      this.dayImage = 'day-sky';
+    } else if(time > 18 && time <= 20){
+      this.dayImage = 'evening-sky';
+    } else if(time > 20 && time <= 23){
+      this.dayImage = 'night-sky';
+    } else {
+      this.dayImage = 'day-sky';
+    }
+    
 
     setTimeout(() => {
       this.loading = false;

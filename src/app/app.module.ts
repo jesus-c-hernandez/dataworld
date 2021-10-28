@@ -15,11 +15,11 @@ import { ClimaComponent } from './modules/clima/clima.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { CrimenComponent } from './modules/crimen/crimen.component';
 import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
 import { ContactoComponent } from './modules/contacto/contacto.component';
 import { NoDataPipe } from './Pipes/no-data.pipe';
+import { NoticiasComponent } from './modules/noticias/noticias.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +28,11 @@ import { NoDataPipe } from './Pipes/no-data.pipe';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    CrimenComponent,
     SaludComponent,
     NosotrosComponent,
     ContactoComponent,
-    NoDataPipe
+    NoDataPipe,
+    NoticiasComponent
   ],
   imports: [
     BrowserModule,

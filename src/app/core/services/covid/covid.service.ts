@@ -12,89 +12,86 @@ const base_url = environment.base_url
 export class CovidService {
 
   constructor(private http: HttpClient) { }
-
-  getCases(country: string) {
-        const url = `${base_url}/cases?country=${country}`;
-        return this.http.get(url).pipe(
-            map((resp) => {
-                return {
-                result: resp['result'],
-                data: resp['data']
-                }
-            })
-        );
+/*
+async getCurrentWeather( lat: number, lon: number) {
+    try {
+      const url = `${base_url}/current-weather?lat=${lat}&lon=${lon}`;
+      const result : any = await this.http.get(url).toPromise();
+      console.log('RES', result);
+      return result.data;
+    } catch (error) {
+      return error;
+    }
+  }
+*/
+  async getCases(country: string) {
+    try {
+      const url = `${base_url}/cases?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getTodayCases(country: string) {
-    const url = `${base_url}/today-cases?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getTodayCases(country: string) {
+    try {
+      const url = `${base_url}/today-cases?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getActiveCases(country: string) {
-    const url = `${base_url}/active-cases?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getActiveCases(country: string) {
+    try {
+      const url = `${base_url}/active-cases?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getTotalDeaths(country: string) {
-    const url = `${base_url}/total-deaths?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getTotalDeaths(country: string) {
+    try {
+      const url = `${base_url}/total-deaths?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getTodayDeaths(country: string) {
-    const url = `${base_url}/today-deaths?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getTodayDeaths(country: string) {
+    try {
+      const url = `${base_url}/today-deaths?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getRecoveredCases(country: string) {
-    const url = `${base_url}/recovered-cases?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getRecoveredCases(country: string) {
+    try {
+      const url = `${base_url}/recovered-cases?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getTestTotals(country: string) {
-    const url = `${base_url}/test-totals?country=${country}`;
-    return this.http.get(url).pipe(
-        map((resp) => {
-            return {
-            result: resp['result'],
-            data: resp['data']
-            }
-        })
-    );
+  async getTestTotals(country: string) {
+    try {
+      const url = `${base_url}/test-totals?country=${country}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;
+    }
   }
 
 }
@@ -103,9 +100,9 @@ export interface CovidData{
     country: string,
     cases: number,
     todayCases: number,
-    activeCases: number,
+    activeCases?: number,
     totalDeaths: number,
-    todayDeaths: number,
-    recoveredCases: number,
-    testTotals: number;
+    todayDeaths?: number,
+    recoveredCases?: number,
+    testTotals?: number;
 }
