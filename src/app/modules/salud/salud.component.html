@@ -77,7 +77,11 @@
     <div class="container"><!-- inicio gráficas -->
         <h1>Gráficas</h1>
         <div>
-          <canvas id="myChart"></canvas>
+          <app-graphic
+            [title]='title1'
+            [labels]="labels1"
+            [data]="data1">
+          </app-graphic>
         </div>
     </div><!-- fin gráficas -->
     

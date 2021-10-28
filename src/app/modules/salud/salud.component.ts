@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/co
 import { CovidService } from 'src/app/core/services/covid/covid.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-salud',
@@ -10,6 +9,12 @@ import {Chart} from 'chart.js';
   styleUrls: ['./salud.component.css']
 })
 export class SaludComponent implements OnInit {
+
+  public title1 : string = 'Ventas';
+  public labels1: string[] = ['Ventas descargadas', 'Ventas en tienda', 'Reporte de ventas'];
+  public data1 = [
+    [350, 450, 100]
+  ];
 
   weather: any;
   country: string = "";
@@ -123,30 +128,30 @@ export class SaludComponent implements OnInit {
       'May',
       'June',
     ];
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
-    };
+    // const data = {
+    //   labels: labels,
+    //   datasets: [{
+    //     label: 'My First dataset',
+    //     backgroundColor: 'rgb(255, 99, 132)',
+    //     borderColor: 'rgb(255, 99, 132)',
+    //     data: [0, 10, 5, 2, 20, 30, 45],
+    //   }]
+    // };
 
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
+    // const config = {
+    //   type: 'line',
+    //   data: data,
+    //   options: {}
+    // };
 
-    const myChart = new Chart(
-      'myChart',
-      {
-        type: 'line',
-        data: data,
-        options: {}
-      }
-    );
+    // const myChart = new Chart(
+    //   'myChart',
+    //   {
+    //     type: 'line',
+    //     data: data,
+    //     options: {}
+    //   }
+    // );
 
     //let country = "Mexico";
     // this.covidData.country = country;

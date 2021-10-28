@@ -22,7 +22,7 @@
                     <img src="../assets/icons/{{ weather.weather[0].description}}.png" alt="icono">
                 </div>
                 <div class="col">
-                    <p class="row justify-content-md-center temp-actual">{{ weather.main.temp | noData:'°'}}</p>
+                    <p class="row justify-content-md-center temp-actual">{{ weather.main.temp | round}}°</p>
                     <p class="row ciudad-actual">{{ weather.name | noData}}, {{weather.sys.country | noData}}</p>
                 </div>
             </div>

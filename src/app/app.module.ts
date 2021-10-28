@@ -16,10 +16,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { CrimenComponent } from './modules/crimen/crimen.component';
-import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
 import { ContactoComponent } from './modules/contacto/contacto.component';
-import { NoDataPipe } from './Pipes/no-data.pipe';
+
+//Pipes
+import { NoDataPipe } from './Pipes/no-data/no-data.pipe';
+import { RoundPipe } from './Pipes/round/round.pipe';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartsModule } from 'ng2-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GraphicComponent } from './components/graphic/graphic.component';
+import { SaludComponent } from './modules/salud/salud.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +36,12 @@ import { NoDataPipe } from './Pipes/no-data.pipe';
     FooterComponent,
     DashboardComponent,
     CrimenComponent,
-    SaludComponent,
     NosotrosComponent,
     ContactoComponent,
-    NoDataPipe
+    GraphicComponent,
+    SaludComponent,
+    NoDataPipe,
+    RoundPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +49,11 @@ import { NoDataPipe } from './Pipes/no-data.pipe';
     HttpClientModule,
     AtomSpinnerModule,
     SpringSpinnerModule,
-    RadarSpinnerModule
+    RadarSpinnerModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
