@@ -3,6 +3,10 @@ import { GeolocationService } from 'src/app/core/services/geolocation/geolocatio
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 
+// import moment from 'moment';
+// const moment = require('moment'); // require
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -34,19 +38,19 @@ export class DashboardComponent implements OnInit {
 
     console.log('POS', lat ,lon);
 
-    // this.sharedService.setLocation( lat, lon );
-    
-    // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
-    //   console.log('RESP', resp);
-    //   this.weather = resp.data;      
-
-    //   console.log('Wea', this.weather); 
-    // });
-
     this.weather = await this.weatherService.getCurrentWeather(lat, lon);
     console.log('RESP', this.weather);
 
     this.weather3 = await this.weatherService.getCurrentWeatherByHours( lat, lon, 3);
+    console.log('RESP3', this.weather3);
+
+    const dateTime = new Date();
+    
+    // Cambiar de zona horaria las proximas horas
+    this.weather3.list.forEach( date  => {
+      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('DD MM YYYY hh:mm:ss');
+      date.dt_txt = weatAux;
+    });    
 
     //banner
     const today = new Date();
@@ -67,9 +71,11 @@ export class DashboardComponent implements OnInit {
     }
     
 
-    setTimeout(() => {
       this.loading = false;
-     }, 1800);
+
+    // setTimeout(() => {
+    //   this.loading = false;
+    //  }, 1000);
 
   }
 
