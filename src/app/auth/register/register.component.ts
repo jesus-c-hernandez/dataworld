@@ -15,10 +15,12 @@ export class RegisterComponent implements OnInit {
 
   public registerForm = this.fb.group({
     name: ['Jesus', [ Validators.required, Validators.minLength(3) ]],
-    email: ['test001@gmail.com', [ Validators.required , Validators.email]],
+    email: ['test1@gmail.com', [ Validators.required , Validators.email]],
     password: ['123456', [ Validators.required ]],
     password2: ['123456', [ Validators.required ]],
-    termino: [ true, [ Validators.required ]],
+    country: ['Mexico', [ Validators.required ]],
+    timeZone: ['GMT-6', [ Validators.required ]],
+    language: ['Español', [ Validators.required ]],
   }, {
     validators: this.samePasswords( 'password', 'password2' )
   });
@@ -33,6 +35,8 @@ export class RegisterComponent implements OnInit {
 
   createUser () {
     this.formSubmit = true;
+    console.log(this.registerForm.value);
+    
 
     if ( this.registerForm.invalid ) {
       return;
@@ -49,16 +53,11 @@ export class RegisterComponent implements OnInit {
   }
 
   notValidField ( field: string ):boolean {
-    
     if ( this.registerForm.get(field).invalid && this.formSubmit) {
       return true;
     } else {
       return false;
     }
-  }
-
-  aceptTermino () {
-    return !this.registerForm.get('termino').value && this.formSubmit;
   }
 
   notValidPass() {
