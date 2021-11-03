@@ -122,26 +122,26 @@
         <div id="condicionesAd" class="container abajo shadow" (click)="bajar('condicionesAd','proximasHoras','proximosDias')">
             
             <h3>Condiciones adicionales</h3>
-            <div class="fluid-container row" >
+            <div class="fluid-container contenedorCondAd" >
 
                 <!-- condicion adicional -->
-                <div class="col condAd">
+                <div class="condAd">
                     <div class="icono">
                         <img src="../assets/icons/temp_min.png" alt="temp_min">
                     </div>
                     <p class="condicion">Temperatura mínima</p>
-                    <p>{{weather.main.temp_min | noData : '°'}}</p>
+                    <p>{{weather.main.temp_min | round | noData : '°' }}</p>
                 </div>
                 <!-- condicion adicional -->
-                <div class="col condAd">
+                <div class="condAd">
                     <div class="icono">
                         <img src="../assets/icons/temp_max.png" alt="temp_max">
                     </div>
                     <p class="condicion">Temperatura máxima</p>
-                    <p>{{weather.main.temp_max | noData : '°'}}</p>
+                    <p>{{weather.main.temp_max | round | noData : '°'}}</p>
                 </div>
                 <!-- condicion adicional -->
-                <div class="col condAd">
+                <div class="condAd">
                     <div class="icono">
                         <img src="../assets/icons/speed.png" alt="speed">
                     </div>
@@ -149,9 +149,9 @@
                     <p>{{weather.wind.speed | noData: 'km/hr'}}</p>
                 </div>
                 <!-- para que muestre sólo 3 cuando esté arriba -->
-                <div *ngIf="mostrarInfoCondAd" class="row">
+                <div *ngIf="mostrarInfoCondAd" class="contenedorCondAd">
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/pressure.png" alt="pressure">
                         </div>
@@ -160,7 +160,7 @@
                     </div> 
 
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/humidity.png" alt="humidity">
                         </div>
@@ -168,7 +168,7 @@
                         <p>{{weather.main.humidity | noData : '%'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/sea-level.png" alt="sea-level">
                         </div>
@@ -176,7 +176,7 @@
                         <p>{{weather.main.sea_level| noData : 'hPa'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/pressure.png" alt="pressure">
                         </div>
@@ -184,7 +184,7 @@
                         <p>{{weather.main.grnd_level | noData: 'hPa'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/visibility.png" alt="visibility">
                         </div>
@@ -192,7 +192,7 @@
                         <p>{{weather.visibility | noData: 'm'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/deg.png" alt="deg">
                         </div>
@@ -200,7 +200,7 @@
                         <p>{{weather.wind.deg | noData: '°'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/gust.png" alt="gust">
                         </div>
@@ -208,7 +208,7 @@
                         <p>{{weather.wind.gust | noData: 'm/seg'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/all.png" alt="all">
                         </div>
@@ -216,7 +216,7 @@
                         <p>{{weather.clouds.all | noData: '%'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
                         </div>
@@ -224,7 +224,7 @@
                         <p>{{weather.rain | noData: 'mm'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
                         </div>
@@ -232,7 +232,7 @@
                         <p>{{weather.rain | noData: 'mm'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
                         </div>
@@ -240,7 +240,7 @@
                         <p>{{weather.snow | noData: 'mm'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
                         </div>
@@ -248,7 +248,7 @@
                         <p>{{weather.snow | noData: 'mm'}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/sunrise.png" alt="sunrise">
                         </div>
@@ -256,7 +256,7 @@
                         <p>{{weather.sys.sunrise | date:'shortTime' | noData}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/sunset.png" alt="sunset">
                         </div>
@@ -264,7 +264,7 @@
                         <p>{{weather.sys.sunset | date:'shortTime' | noData}}</p>
                     </div>
                     <!-- condicion adicional -->
-                    <div class="col condAd">
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/timezone.png" alt="timezone">
                         </div>

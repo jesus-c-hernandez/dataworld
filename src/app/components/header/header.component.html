@@ -8,6 +8,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
+
+        <select  id="select_pais" class="form-select" (change)="cambiarUbicacion($event)">
+          <option value="0">Selecciona una opción</option>
+          <option *ngFor="let pais of countries" >{{pais}}</option>
+        </select>
+        <!-- <form [formGroup]="cambiarUbicacionForm"
+              (ngSubmit)="cambiarUbicacion()">
+          
+          <button type="button" class="btn btn-primary" id="buscar" >Buscar</button>
+        </form> -->
+        
         <ul class="navbar-nav">
           <!-- active -->
           <li class="nav-item" routerLinkActive="active">

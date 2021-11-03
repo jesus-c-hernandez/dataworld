@@ -11,6 +11,7 @@
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
+
           <!-- noticias salud -->
         <div  class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="contenedor-noticias">
@@ -18,17 +19,18 @@
                 <div  *ngFor="let noticia of healthNews.data; let i = index"  >
                     <div *ngIf="i < 11" class="noticia shadow" style="border-color: #55E94A;">
                         <div class="imagen-noticia" 
-                        style="background-image: url({{noticia.image}});">
+                        [style]="noticia.image | noImg">
                         </div>
                         <div class="texto-noticia">
                             <a href="{{noticia.url}}" target="_blank" class="titulo-noticia" id="titulo-salud">{{noticia.title}}</a>
                             <p>{{noticia.description}}</p>
-                            <p id="fuente">Fuente: {{noticia.source}}</p>
+                            <p class="fuente"><span>Fuente:</span> {{noticia.source}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- noticias tecnología -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <!-- contenedor noticias -->
@@ -37,17 +39,18 @@
                 <div  *ngFor="let noticia of techNews.data; let i = index"  >
                     <div *ngIf="i < 11" class="noticia shadow" style="border-color: #2A93D5;">
                         <div class="imagen-noticia" 
-                        style="background-image: url({{noticia.image}});">
+                        [style]="noticia.image | noImg">
                         </div>
                         <div class="texto-noticia">
                             <a href="{{noticia.url}}" target="_blank" class="titulo-noticia" id="titulo-tech">{{noticia.title}}</a>
                             <p>{{noticia.description}}</p>
-                            <p id="fuente">Fuente: {{noticia.source}}</p>
+                            <p class="fuente"><span>Fuente:</span> {{noticia.source}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <!-- noticias ciencia -->
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
             <!-- contenedor noticias -->
@@ -56,12 +59,12 @@
                 <div  *ngFor="let noticia of scienceNews.data; let i = index"  >
                     <div *ngIf="i < 11" class="noticia shadow" style="border-color: #7BD5F5;">
                         <div class="imagen-noticia" 
-                        style="background-image: url({{noticia.image}});">
+                        [style]="noticia.image | noImg">
                         </div>
                         <div class="texto-noticia">
                             <a href="{{noticia.url}}" target="_blank" class="titulo-noticia" id="titulo-sc">{{noticia.title | noData}}</a>
                             <p>{{noticia.description | noData}}</p>
-                            <p id="fuente">Fuente: {{noticia.source | noData}}</p>
+                            <p class="fuente"><span>Fuente:</span> {{noticia.source | noData}}</p>
                         </div>
                     </div>
                 </div>
