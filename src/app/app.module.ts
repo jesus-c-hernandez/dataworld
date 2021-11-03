@@ -24,6 +24,7 @@ import { NoticiasComponent } from './modules/noticias/noticias.component';
 import { NoDataPipe } from './Pipes/no-data/no-data.pipe';
 import { RoundPipe } from './Pipes/round/round.pipe';
 import { AuthModule } from './auth/auth.module';
+import { NoImgPipe } from './Pipes/no-img/no-img.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AuthModule } from './auth/auth.module';
     SaludComponent,
     NosotrosComponent,
     NoDataPipe,
-    NoticiasComponent
+    NoticiasComponent,
+    NoImgPipe
   ],
   imports: [
     BrowserModule,

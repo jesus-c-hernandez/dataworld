@@ -52,8 +52,11 @@ a{
 #titulo-sc:hover{
     color: #7BD5F5;
 }
-#fuente{
+.fuente{
     text-align: right;
+}
+.fuente span{
+    font-weight: bold;
 }
 #top{
     display: flex;

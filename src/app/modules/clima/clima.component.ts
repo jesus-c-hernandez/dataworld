@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import { SharedService } from 'src/app/core/Shared/shared.service';
 
 @Component({
   selector: 'app-clima',
@@ -20,8 +19,7 @@ export class ClimaComponent implements OnInit {
   loading: boolean = true;;
 
   constructor(
-    private weatherService: WeatherService,
-    private sharedService: SharedService
+    private weatherService: WeatherService
   ) { }
 
   ngOnInit(): void {

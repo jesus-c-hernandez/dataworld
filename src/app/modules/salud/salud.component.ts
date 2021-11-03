@@ -41,11 +41,8 @@ export class SaludComponent implements OnInit {
               private elementRef: ElementRef,
               private renderer: Renderer2) { }
 
-  async getCountry(lat: number, lon: number){
-    this.weather = await this.weatherService.getCurrentWeather(lat, lon);
-    console.log('RESP', this.weather);
-    let shortcut: string = this.weather.sys.country;
-    console.log('este es el shortcut',shortcut);
+  getCountry(){
+    let shortcut: string = localStorage.getItem('countryShort');
             
     let paises = new Map([
                     ['MX','Mexico'],
@@ -111,10 +108,7 @@ export class SaludComponent implements OnInit {
   }
 
   async init() {
-    const lat = Number(localStorage.getItem('lat'));
-    const lon = Number(localStorage.getItem('lon'));
-
-    this.getCountry(lat, lon);
+    this.getCountry();
 
     /*const labels = [
       'January',

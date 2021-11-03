@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import { SharedService } from 'src/app/core/Shared/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,21 +15,18 @@ export class DashboardComponent implements OnInit {
   weather3 : any;
   loading = true;
 
-  constructor(
-    private geolocationService: GeolocationService,
-    private weatherService: WeatherService,
-    private sharedService: SharedService
-    ) { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.currentWeather();
   }
 
   async currentWeather () {
-    const {lat, lon} = await this.geolocationService.getPosition();
-    localStorage.setItem('lat', String(lat))
-    localStorage.setItem('lon', String(lon))
-
+    // const {lat, lon} = await this.geolocationService.getPosition();
+    // localStorage.setItem('lat', String(lat))
+    // localStorage.setItem('lon', String(lon))
+    const lat = Number(localStorage.getItem('lat'));
+    const lon = Number(localStorage.getItem('lon'));
     console.log('POS', lat ,lon);
 
     // this.sharedService.setLocation( lat, lon );
