@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
+import { CovidService, CovidData } from 'src/app/core/services/covid/covid.service';
 
 // import moment from 'moment';
 // const moment = require('moment'); // require
@@ -14,15 +15,26 @@ export class DashboardComponent implements OnInit {
 
   //para banner
   dayImage: string;
+  //para saber qué hora es
+  today = new Date();
+  time = this.today.getHours();
+  //para el color del texto
+  text_color = "black";
 
   weather: any;
   weather3 : any;
   loading = true;
 
-  constructor(private weatherService: WeatherService) { }
+  //info covid
+  covidData: CovidData = null;
+  datos = [];
+
+  constructor(private weatherService: WeatherService,
+              private covidService: CovidService) { }
 
   ngOnInit(): void {
     this.currentWeather();
+    this.infoCovid();
   }
 
   async currentWeather () {
@@ -45,33 +57,66 @@ export class DashboardComponent implements OnInit {
     this.weather3.list.forEach( date  => {
       const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('DD MM YYYY hh:mm:ss');
       date.dt_txt = weatAux;
-    });    
+    });
 
-    //banner
-    const today = new Date();
-    const time = today.getHours();
+    this.horaDelDia();
 
-    if(time >= 0 && time <= 6){
-      this.dayImage = 'night-sky';
-    } else if(time > 6 && time <= 8){
-      this.dayImage = 'morning-sky';
-    } else if(time > 8 && time <= 18){
-      this.dayImage = 'day-sky';
-    } else if(time > 18 && time <= 20){
-      this.dayImage = 'evening-sky';
-    } else if(time > 20 && time <= 23){
-      this.dayImage = 'night-sky';
-    } else {
-      this.dayImage = 'day-sky';
-    }
-    
-
-      this.loading = false;
+    this.loading = false;
 
     // setTimeout(() => {
     //   this.loading = false;
     //  }, 1000);
+  }
 
+  inicializarCovidData(): void{
+    this.covidData = {
+      country : "",
+      todayCases: 0,
+      activeCases : 0,
+      todayDeaths : 0,
+    };
+  }
+
+  async infoCovid() {
+    this.inicializarCovidData();
+    //const lat = Number(localStorage.getItem('lat'));
+    //const lon = Number(localStorage.getItem('lon'));
+    // let country = this.getCountry(lat, lon);
+    let country = "Mexico";
+    // this.covidData.country = country;
+    // let datos = [];
+    this.covidData.country = country;
+    //casos totales
+    //this.covidData.todayCases = await this.covidService.getTodayCases(country);
+    //casos activos
+    //this.covidData.activeCases = await this.covidService.getActiveCases(country);
+    //muertes de hoy
+    //this.covidData.todayDeaths = await this.covidService.getTodayDeaths(country);
+
+    console.log('covidData', this.covidData);
+  }
+
+  horaDelDia(){
+    //banner
+    if(this.time >= 0 && this.time <= 6){
+      this.text_color = "white";
+      this.dayImage = 'night-sky';
+    } else if(this.time > 6 && this.time <= 8){
+      this.text_color = "black";
+      this.dayImage = 'morning-sky';
+    } else if(this.time > 8 && this.time <= 18){
+      this.text_color = "black";
+      this.dayImage = 'day-sky';
+    } else if(this.time > 18 && this.time <= 20){
+      this.text_color = "black";
+      this.dayImage = 'evening-sky';
+    } else if(this.time > 20 && this.time <= 23){
+      this.text_color = "white";
+      this.dayImage = 'night-sky';
+    } else {
+      this.text_color = "black";
+      this.dayImage = 'day-sky';
+    }
   }
 
 

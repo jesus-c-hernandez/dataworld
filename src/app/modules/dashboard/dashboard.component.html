@@ -22,8 +22,12 @@
         alt="icono"
       />
     </div>
-    <p class="temp-actual fc-w">{{ weather.main.temp | round }}°</p>
-    <p class="ciudad-actual fc-w">{{ weather.name }}, {{ weather.sys.country }}</p>
+    <p class="temp-actual">
+       <!-- style="color: {{text_color}};"> -->
+       {{ weather.main.temp | round }}°</p>
+    <p class="ciudad-actual">
+      <!-- style="color: {{text_color}};"> -->
+      {{ weather.name }}, {{ weather.sys.country }}</p>
   </div>
 
   <div class="container pronosticos-dash">
@@ -80,4 +84,38 @@
       </div>
     </div>
   </div>
+  
+    <!-- info covid -->
+    <div class="container">
+      <h2>Información de Covid en México</h2>
+
+      <div class="col-lg">
+          <!-- inicio info-covid -->
+
+          <div class="row">
+              <!-- inicio contenedor cuadros info -->
+              <div class="info-covid">
+
+                  <div class="col cuadro-info" id="casos-hoy">
+                      <h5>Casos de hoy</h5>
+                      <p class="cifra">{{covidData.todayCases | number | noData}}</p>
+                  </div>
+                  <div class="col cuadro-info" id="casos-activos">
+                      <h5>Casos activos</h5>
+                      <p class="cifra">{{covidData.activeCases | number | noData}}</p>
+                  </div>
+                  <div class="col cuadro-info" id="def-hoy">
+                      <h5>Defunciones de hoy</h5>
+                      <p class="cifra">{{covidData.todayDeaths | number | noData}}</p>
+                  </div>
+
+              </div>
+
+          </div><!-- fin contenedor cuadros info -->
+
+      </div><!-- fin info-covid -->
+
+  </div>
+
+  
 </div>

@@ -33,7 +33,6 @@
 .ciudad-actual{
     font-size: 1.3rem;
     font-weight: 600;
-    /* text-shadow: ; */
 }
 .temp-actual{
     font-size: 45px;
@@ -70,4 +69,45 @@
     .pronosticos-dash{
       flex-direction: column;
     }
+}
+/* ESTILOS INFO. COVID */
+
+.info-covid{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cuadro-info{
+    flex-basis: calc(100% / 4);
+    background-color: #e3e3e3;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 5px solid green;
+    margin: 10px;
+    padding: 5px;
+    
+}
+
+.cuadro-info p {
+    text-align: end;
+}
+
+@media only screen and (max-width: 1200px){
+    .cuadro-info{
+        flex-basis: calc(100% / 3);
+    }
+}
+@media only screen and (max-width: 576px){
+    .cuadro-info{
+        flex-basis: 100%;
+    }
+}
+
+#casos-hoy{
+    border-color: #E94A4A;
+}
+#casos-activos{
+    border-color: #7BD5F5;
+}
+#def-hoy{
+    border-color: #5B605B;
 }

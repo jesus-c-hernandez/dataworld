@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         } else {
           localStorage.removeItem('email');
         }
+        localStorage.setItem('uid', res.user.uid);
         this.router.navigateByUrl('/dashboard');
       }, ( err ) => {
         Swal.fire( 'Error', err.error.msg, 'error' );        
