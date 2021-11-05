@@ -8,6 +8,7 @@ import { NosotrosComponent } from "./modules/nosotros/nosotros.component";
 import { ContactoComponent } from "./modules/contacto/contacto.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
+import { ProfileComponent } from "./auth/profile/profile.component";
 
 
 const APP_ROUTES: Routes = [
@@ -18,7 +19,8 @@ const APP_ROUTES: Routes = [
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
     { path: 'login', component: LoginComponent }, 
-    { path: 'register', component: RegisterComponent },    
+    { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent },  
     // { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
 ];
 

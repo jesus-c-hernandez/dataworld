@@ -97,11 +97,11 @@ async getCurrentWeather( lat: number, lon: number) {
 }
 
 export interface CovidData{
-    country: string,
-    cases: number,
+    country?: string,
+    cases?: number,
     todayCases: number,
     activeCases?: number,
-    totalDeaths: number,
+    totalDeaths?: number,
     todayDeaths?: number,
     recoveredCases?: number,
     testTotals?: number;

@@ -1,0 +1,135 @@
+<div class="container">
+    <h1>Perfil</h1>
+    <p>Edita la información de tu perfil.</p>
+
+    <form
+        class="form-horizontal form-material"
+        id="loginform"
+        autocomplete="off"
+        [formGroup]="registerForm"
+        (ngSubmit)="guardarCambios()"
+      >
+        <div class="form-group m-t-20">
+          <div class="col-xs-12 mt-3">
+              <label for="name">Nombre:</label>
+            <input
+            id="name"
+            value="{{user.data.name}}"
+              class="form-control"
+              type="text"
+              placeholder="Nombre"
+              formControlName="name"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <div class="col-xs-12">
+            <label for="email">Correo electrónico:</label>
+            <input
+            id="email"
+            value="{{user.data.email}}"
+              class="form-control"
+              type="text"
+              placeholder="Email"
+              formControlName="email"
+            />
+          </div>
+        </div>
+        <!--<div class="form-group mt-3">
+          <div class="col-xs-12">
+            <label for="pass1">Contraseña:</label>
+            <input
+            id="pass1"
+            value="{{user.data.password}}"
+              class="form-control"
+              type="password"
+              placeholder="Contraseña"
+              formControlName="password"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <div class="col-xs-12">
+            <label for="pass2">Repite la contraseña:</label>
+            <input
+            id="pass2"
+            value="{{user.data.password}}"
+              class="form-control"
+              type="password"
+              placeholder="Confirmar contraseña"
+              formControlName="password2"
+            />
+          </div>
+        </div>-->
+        <div class="form-group mt-3">
+            <div class="col-xs-12">
+                <label for="country">País:</label>
+              <input
+              id="country"
+              value="{{user.data.country}}"
+                class="form-control"
+                type="text"
+                placeholder="Pais"
+                formControlName="country"
+              />
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <div class="col-xs-12">
+                <label for="timezone">Zona horaria:</label>
+              <input
+              id="timezone"
+              value="{{user.data.timeZone}}"
+                class="form-control"
+                type="text"
+                placeholder="Zona horaria"
+                formControlName="timeZone"
+              />
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <div class="col-xs-12">
+                <label for="language">Idioma:</label>
+              <input
+              id="language"
+              value="{{user.data.language}}"
+                class="form-control"
+                type="text"
+                placeholder="Idioma"
+                formControlName="language"
+              />
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="col text-danger">
+            
+            <p *ngIf="notValidField('name')">El nombre es obligatorio</p>
+            <p *ngIf="notValidField('email')">
+              El email es obligatorio y tiene que ser valido
+            </p>
+            <!-- <p *ngIf="notValidPass()">Las contraseñas deben de ser iguales</p> -->
+          </div>
+        </div>
+
+        <!-- Botón para editar info -->
+        <div class="text-center m-t-20 mb-5">
+          <div class="col-xs-12 mt-3 ">
+                        
+            <!-- guardar cambios -->
+            <button
+            type="submit"
+              class="
+                btn btn-primary btn-block
+                waves-effect waves-light 
+              "
+            >
+              Guardar cambios
+            </button>
+
+            
+          </div>
+        </div>
+        
+      </form>
+</div>

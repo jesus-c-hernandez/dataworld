@@ -16,15 +16,21 @@
 
         <!-- temperatura actual -->
         <div id="temperaturaActual" class="container arriba contenedor-info-clima shadow"style="
-        background-image: url('../assets/img/day-sky.jpg');">
-            <div class="row contenedorTempAct">
+        background-image: url('../assets/img/{{dayImage}}.jpg');">
+            <div class="tempActIcon">
                 <div class="icono">
                     <img src="../assets/icons/{{ weather.weather[0].description}}.png" alt="icono">
                 </div>
-                <div class="col">
-                    <p class="row justify-content-md-center temp-actual fc-w">{{ weather.main.temp | round}}°</p>
-                    <p class="row ciudad-actual fc-w">{{ weather.name | noData}}, {{weather.sys.country | noData}}</p>
-                </div>
+            </div>
+            <div class="tempActText">
+                <p class=" justify-content-md-center temp-actual"
+                    style="color: {{text_color}};">
+                    {{ weather.main.temp | round | noData: '°'}}
+                </p>
+                <p class=" ciudad-actual"
+                    style="color: {{text_color}};">
+                    {{ weather.name | noData}}, {{weather.sys.country | noData}}
+                </p>
             </div>
         </div>
 
@@ -122,160 +128,35 @@
         <div id="condicionesAd" class="container abajo shadow" (click)="bajar('condicionesAd','proximasHoras','proximosDias')">
             
             <h3>Condiciones adicionales</h3>
-            <div class="fluid-container contenedorCondAd" >
+            <div  class="fluid-container contenedorCondAd" >
 
-                <!-- condicion adicional -->
-                <div class="condAd">
-                    <div class="icono">
-                        <img src="../assets/icons/temp_min.png" alt="temp_min">
-                    </div>
-                    <p class="condicion">Temperatura mínima</p>
-                    <p>{{weather.main.temp_min | round | noData : '°' }}</p>
-                </div>
-                <!-- condicion adicional -->
-                <div class="condAd">
-                    <div class="icono">
-                        <img src="../assets/icons/temp_max.png" alt="temp_max">
-                    </div>
-                    <p class="condicion">Temperatura máxima</p>
-                    <p>{{weather.main.temp_max | round | noData : '°'}}</p>
-                </div>
-                <!-- condicion adicional -->
-                <div class="condAd">
-                    <div class="icono">
-                        <img src="../assets/icons/speed.png" alt="speed">
-                    </div>
-                    <p class="condicion">Velocidad del viento</p>
-                    <p>{{weather.wind.speed | noData: 'km/hr'}}</p>
-                </div>
-                <!-- para que muestre sólo 3 cuando esté arriba -->
-                <div *ngIf="mostrarInfoCondAd" class="contenedorCondAd">
-                    <!-- condicion adicional -->
-                    <div class="condAd">
+                <!-- condicion adicional automatizado-->
+                <div *ngFor="let clima of datosClimaHoy; let i = index" class="cond-ad" >
+                    <!-- solo mostrar 3 condad si está arriba -->
+                    <div *ngIf="i <= 2 && !mostrarInfoCondAd" class="condAd">
                         <div class="icono">
-                            <img src="../assets/icons/pressure.png" alt="pressure">
+                            <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
-                        <p class="condicion">Presión</p>
-                        <p>{{weather.main.pressure| noData : 'hPa'}}</p>
-                    </div> 
-
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/humidity.png" alt="humidity">
-                        </div>
-                        <p class="condicion">Humedad</p>
-                        <p>{{weather.main.humidity | noData : '%'}}</p>
+                        <p class="condicion">{{clima.title}}</p>
+                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value}}</p>
+                        <p *ngIf="clima.property == 'sunset' || clima.property == 'sunrise' " class="valor">{{clima.value | date : 'shortTime'}}</p>
+                        <p *ngIf="clima.property == 'timezone' " class="valor">{{clima.value | date: 'z'}}</p>
                     </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
+                    <!-- si está abajo, mostrar todas -->
+                    <div *ngIf="mostrarInfoCondAd" class="condAd">
                         <div class="icono">
-                            <img src="../assets/icons/sea-level.png" alt="sea-level">
+                            <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
-                        <p class="condicion">Presión a nivel del mar</p>
-                        <p>{{weather.main.sea_level| noData : 'hPa'}}</p>
+                        <p class="condicion">{{clima.title}}</p>
+                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value}}</p>
+                        <p *ngIf="clima.property == 'sunset' || clima.property == 'sunrise' " class="valor">{{clima.value | date : 'shortTime'}}</p>
+                        <p *ngIf="clima.property == 'timezone' " class="valor">{{clima.value | date: 'z'}}</p>
                     </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/pressure.png" alt="pressure">
-                        </div>
-                        <p class="condicion">Presión a nivel del suelo</p>
-                        <p>{{weather.main.grnd_level | noData: 'hPa'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/visibility.png" alt="visibility">
-                        </div>
-                        <p class="condicion">Visibilidad</p>
-                        <p>{{weather.visibility | noData: 'm'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/deg.png" alt="deg">
-                        </div>
-                        <p class="condicion">Dirección del viento</p>
-                        <p>{{weather.wind.deg | noData: '°'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/gust.png" alt="gust">
-                        </div>
-                        <p class="condicion">Ráfaga de viento</p>
-                        <p>{{weather.wind.gust | noData: 'm/seg'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/all.png" alt="all">
-                        </div>
-                        <p class="condicion">Nubosidad</p>
-                        <p>{{weather.clouds.all | noData: '%'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
-                        </div>
-                        <p class="condicion">Volumen de lluvia (Últ. hr)</p>
-                        <p>{{weather.rain | noData: 'mm'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/rain1h3h.png" alt="rain1h3h">
-                        </div>
-                        <p class="condicion">Volumen de lluvia (Últ. 3 hr)</p>
-                        <p>{{weather.rain | noData: 'mm'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
-                        </div>
-                        <p class="condicion">Volumen de nieve (Últ. hr)</p>
-                        <p>{{weather.snow | noData: 'mm'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/snow1h3h.png" alt="snow1h3h">
-                        </div>
-                        <p class="condicion">Volumen de nieve (Últ. 3 hr)</p>
-                        <p>{{weather.snow | noData: 'mm'}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/sunrise.png" alt="sunrise">
-                        </div>
-                        <p class="condicion">Amanecer</p>
-                        <p>{{weather.sys.sunrise | date:'shortTime' | noData}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/sunset.png" alt="sunset">
-                        </div>
-                        <p class="condicion">Anochecer</p>
-                        <p>{{weather.sys.sunset | date:'shortTime' | noData}}</p>
-                    </div>
-                    <!-- condicion adicional -->
-                    <div class="condAd">
-                        <div class="icono">
-                            <img src="../assets/icons/timezone.png" alt="timezone">
-                        </div>
-                        <p class="condicion">Zona horaria</p>
-                        <p>{{ weather.timezone | noData}}</p>
-                    </div>
-                </div>
+                    
+            </div>
                 <div *ngIf="!mostrarInfoCondAd"class="icono flecha">
                     <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
                 </div> 
-            </div>
         </div>
     </div>
 </div>
