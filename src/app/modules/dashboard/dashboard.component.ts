@@ -13,6 +13,9 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
+  //pantalla de carga
+  loading = true;
+  
   //para banner
   dayImage: string;
   //para saber qué hora es
@@ -23,7 +26,7 @@ export class DashboardComponent implements OnInit {
 
   weather: any;
   weather3 : any;
-  loading = true;
+  
 
   //info covid
   covidData: CovidData = null;

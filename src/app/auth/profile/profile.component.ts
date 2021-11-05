@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -8,6 +9,9 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  //pantalla de carga
+  loading = true;
 
   public formSubmit = false;
   public user: any;
@@ -32,20 +36,40 @@ export class ProfileComponent implements OnInit {
   async getUser(){
     this.user = await this.userService.getUser(localStorage.getItem('uid'));
     console.log('Usuarioo', this.user);
+
+    this.registerForm = this.fb.group({
+      name: [this.user.data.name, [ Validators.required, Validators.minLength(3)]],
+      email: [this.user.data.email, [ Validators.required , Validators.email]],
+      // password: [this.user.data.password, [ Validators.required ]],
+      // password2: [this.user.data.password, [ Validators.required ]],
+      country: [this.user.data.country, [ Validators.required ]],
+      timeZone: [this.user.data.timeZone, [ Validators.required ]],
+      language: [this.user.data.language, [ Validators.required ]],
+    });
+
+    this.loading = false;
   }
 
   ngOnInit(): void {
   }
 
-  guardarCambios(){
+  async guardarCambios(){
     //guardar los cambios
-    this.userService.updateUser(this.registerForm.value, localStorage.getItem('uid'));
+    if(!this.notValidField('name') || !this.notValidField('email')){
+      Swal.fire('Error', '¡Ocurrió algún error!', 'error');
+    } else {
+      let variable : any = await this.userService.updateUser(this.registerForm.value, localStorage.getItem('uid'));
+      if(variable.result){
+        Swal.fire('Éxito', 'Información actualizada correctamente', 'success');
+      } else {
+        Swal.fire('Error', '¡Ocurrió algún error!', 'error');
+      }
+    }
+    
   }
 
   notValidField ( field: string ):boolean {
-    console.log('Llegó a notValidField');
     if ( this.registerForm.get(field).invalid && this.formSubmit) {
-      console.log('cosa', this.registerForm.get(field));
       return true;
     } else {
       return false;

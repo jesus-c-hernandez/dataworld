@@ -23,12 +23,12 @@
                 </div>
             </div>
             <div class="tempActText">
-                <p class=" justify-content-md-center temp-actual">
-                    <!-- style="color: {{text_color}};"> -->
+                <p class=" justify-content-md-center temp-actual"
+                    style="color: {{text_color}};">
                     {{ weather.main.temp | round | noData: '°'}}
                 </p>
-                <p class=" ciudad-actual">
-                    <!-- style="color: {{text_color}};"> -->
+                <p class=" ciudad-actual"
+                    style="color: {{text_color}};">
                     {{ weather.name | noData}}, {{weather.sys.country | noData}}
                 </p>
             </div>
