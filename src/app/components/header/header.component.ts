@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   sesionIniciada : boolean = false;
   //formulario
-
   countries : string[] = [
     'México', 'Estados Unidos', 'Francia', 'Alemania', 'Italia', 'Reino Unido', 'Bélgica', 'Paises Bajos', 'Suecia', 'Suiza', 'Austria', 'Finlandia', 'Portugal', 'Turquía', 'Rusia', 'Dinamarca', 'Cánada', 'India', 'Grecia', 'España', 'Egipto', 'Argentina', 'Hungría', 'Polonia', 'Rumania', 'República de Corea del Norte', 'China', 'Brasil', 'República Checa', 'Noruega', 'Sudáfrica', 'Australia', 'Ucrania', 'Indonesia', 'Japon', 'Marruecos', 'Bulgaria', 'Chile', 'Croacia', 'Serbia', 'Nigeria', 'Malasia', 'Pakistán', 'Eslovaquia', 'Perú', 'Túnez', 'Senegal', 'Eslovenia', 'Filipinas', 'Ghana'
   ];
@@ -58,7 +57,6 @@ export class HeaderComponent implements OnInit {
 
   cambiarUbicacion(event){
     console.log('Este es el país', event.target.data);
-    
     // Pasamos el valor seleccionado a la variable verSeleccion
     //this.verSeleccion = this.opcionSeleccionado;
     //console.log(this.verSeleccion);

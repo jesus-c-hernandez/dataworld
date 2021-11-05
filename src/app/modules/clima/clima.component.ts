@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-
 import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-clima',

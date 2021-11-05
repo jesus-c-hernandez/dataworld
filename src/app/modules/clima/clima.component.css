@@ -210,6 +210,7 @@
 }
 .condAd .icono{
     width: 3rem;
+
 }
 .condicion{
     font-weight: bold;
@@ -217,6 +218,7 @@
 .valor{
     font-size: 20px;
 }
+
 @media only screen and (max-width: 430px){
     .condAd{
         flex-basis: calc(100%/2);

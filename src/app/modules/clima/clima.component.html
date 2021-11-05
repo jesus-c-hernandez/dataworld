@@ -134,6 +134,7 @@
                 <div *ngFor="let clima of datosClimaHoy; let i = index" class="cond-ad" >
                     <!-- solo mostrar 3 condad si está arriba -->
                     <div *ngIf="i <= 2 && !mostrarInfoCondAd" class="condAd">
+
                         <div class="icono">
                             <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
@@ -142,8 +143,12 @@
                         <p *ngIf="clima.property == 'sunset' || clima.property == 'sunrise' " class="valor">{{clima.value | date : 'shortTime'}}</p>
                         <p *ngIf="clima.property == 'timezone' " class="valor">{{clima.value | date: 'z'}}</p>
                     </div>
+
                     <!-- si está abajo, mostrar todas -->
                     <div *ngIf="mostrarInfoCondAd" class="condAd">
+
+                    <!-- condicion adicional -->
+                    <div class="condAd">
                         <div class="icono">
                             <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
@@ -154,6 +159,7 @@
                     </div>
                     
             </div>
+
                 <div *ngIf="!mostrarInfoCondAd"class="icono flecha">
                     <img src="../assets/img/swipe-down-lightmode.gif" alt="Ampliar">
                 </div> 
