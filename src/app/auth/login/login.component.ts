@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   public formSubmit = false;
   public auth2: any;
 
+  public loginImage = 1;
+
   public loginForm = this.fb.group({
     email: [ localStorage.getItem('email') || '', [ Validators.required , Validators.email]],
     password: ['', [ Validators.required ]],
@@ -27,9 +29,13 @@ export class LoginComponent implements OnInit {
                 private userService: UserService,
                 private ngZone: NgZone, ) { }
 
+
   ngOnInit () :void {
+    this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    console.log('img',this.loginImage);
     this.renderButton();
   }
+
 
   login() {
     // console.log( this.loginForm.value  );
@@ -49,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   renderButton() {
+
     gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
       'width': 240,
