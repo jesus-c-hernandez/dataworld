@@ -9,11 +9,17 @@
       </button>
       <div class="collapse navbar-collapse dropstart" id="navbarNav">
 
-        <!--<select  id="select_pais" class="form-select" (change)="cambiarUbicacion($event)">
+        <!-- <select  id="select_pais" class="form-select" (change)="cambiarUbicacion($event)">
+          <option value="0">Selecciona una opción</option>
+          <option *ngFor="let pais of countries" >{{pais}}</option>
+        </select> -->
+
+        <select  id="select_pais" class="form-select" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
           <option value="0">Selecciona una opción</option>
           <option *ngFor="let pais of countries" >{{pais}}</option>
         </select>
-         <form [formGroup]="cambiarUbicacionForm"
+
+        <!-- <form [formGroup]="cambiarUbicacionForm"
               (ngSubmit)="cambiarUbicacion()">
           
           <button type="button" class="btn btn-primary" id="buscar" >Buscar</button>
