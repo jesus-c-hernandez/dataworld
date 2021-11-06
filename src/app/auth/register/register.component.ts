@@ -14,8 +14,8 @@ export class RegisterComponent implements OnInit {
   public formSubmit = false;
 
   public registerForm = this.fb.group({
-    name: ['Jesus', [ Validators.required, Validators.minLength(3) ]],
-    email: ['test1@gmail.com', [ Validators.required , Validators.email]],
+    name: ['', [ Validators.required, Validators.minLength(3) ]],
+    email: ['', [ Validators.required , Validators.email]],
     password: ['123456', [ Validators.required ]],
     password2: ['123456', [ Validators.required ]],
     country: ['Mexico', [ Validators.required ]],
@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.userService.createUser( this.registerForm.value )
         .subscribe( resp => {
+
           this.router.navigateByUrl('/dashboard');
         }, ( err ) => {
           // Si sucede un error

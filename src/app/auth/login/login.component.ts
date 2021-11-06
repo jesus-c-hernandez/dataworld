@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     // console.log( this.loginForm.value  );
     this.userService.login( this.loginForm.value )
       .subscribe( res => {
+        
         if ( this.loginForm.get('remember').value ) {
           localStorage.setItem('email', this.loginForm.get('email').value );
         } else {

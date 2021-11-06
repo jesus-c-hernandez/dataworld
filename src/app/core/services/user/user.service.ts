@@ -60,7 +60,7 @@ export class UserService {
     });
   }
 
-  saveLocalStorage(token: string, menu: any) {
+  saveLocalStorage(token: string) {
     localStorage.setItem('token', token);
   }
 
@@ -84,7 +84,7 @@ export class UserService {
         map((resp: any) => {
           const { name, email, google, role, uid } = resp.data;
           this.user = new User(name, email, '', google, role, uid);
-          this.saveLocalStorage(resp.token, resp.menu);
+          this.saveLocalStorage(resp.token);
           return true;
         }),
         catchError((err) => of(false))
@@ -94,7 +94,7 @@ export class UserService {
   createUser(formData: RegisterForm) {
     return this.http.post(`${base_url}/users`, formData).pipe(
       tap((resp: any) => {
-        // this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
         console.log('Create User', resp);
         
       })
@@ -113,7 +113,7 @@ export class UserService {
     
     return this.http.post(`${base_url}/login`, formData).pipe(
       tap((resp: any) => {
-        this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
       })
     );
   }
@@ -121,8 +121,12 @@ export class UserService {
   loginGoogle(token) {
     return this.http.post(`${base_url}/login/google`, { token }).pipe(
       tap((resp: any) => {
-        this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
       })
     );
+  }
+
+  getUser(id: string) {
+    return this.http.get(`${base_url}/users?id=${id}`).toPromise()
   }
 }
