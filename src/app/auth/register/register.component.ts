@@ -12,49 +12,52 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
 
   public formSubmit = false;
+  public loginImage = 1;
 
   public registerForm = this.fb.group({
-    name: ['', [ Validators.required, Validators.minLength(3) ]],
-    email: ['', [ Validators.required , Validators.email]],
-    password: ['123456', [ Validators.required ]],
-    password2: ['123456', [ Validators.required ]],
-    country: ['Mexico', [ Validators.required ]],
-    timeZone: ['GMT-6', [ Validators.required ]],
-    language: ['Español', [ Validators.required ]],
+    name: ['Jesus', [Validators.required, Validators.minLength(3)]],
+    email: ['test1@gmail.com', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required]],
+    password2: ['123456', [Validators.required]],
+    country: ['Mexico', [Validators.required]],
+    timeZone: ['GMT-6', [Validators.required]],
+    language: ['Español', [Validators.required]],
   }, {
-    validators: this.samePasswords( 'password', 'password2' )
+    validators: this.samePasswords('password', 'password2')
   });
 
-  constructor(  private fb : FormBuilder,
-                private  userService: UserService,
-                private router: Router ) { }
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router) { }
 
-  ngOnInit(){
 
+  ngOnInit() {
+    this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    console.log('img', this.loginImage);
   }
 
-  createUser () {
+
+  createUser() {
     this.formSubmit = true;
     console.log(this.registerForm.value);
-    
 
-    if ( this.registerForm.invalid ) {
+
+    if (this.registerForm.invalid) {
       return;
     } else {
-      this.userService.createUser( this.registerForm.value )
-        .subscribe( resp => {
-
+      this.userService.createUser(this.registerForm.value)
+        .subscribe(resp => {
           this.router.navigateByUrl('/dashboard');
-        }, ( err ) => {
+        }, (err) => {
           // Si sucede un error
-          Swal.fire( 'Error', err.error.msg, 'error' );          
+          Swal.fire('Error', err.error.msg, 'error');
         });
     }
-    
+
   }
 
-  notValidField ( field: string ):boolean {
-    if ( this.registerForm.get(field).invalid && this.formSubmit) {
+  notValidField(field: string): boolean {
+    if (this.registerForm.get(field).invalid && this.formSubmit) {
       return true;
     } else {
       return false;
@@ -65,7 +68,7 @@ export class RegisterComponent implements OnInit {
     const pass1 = this.registerForm.get('password').value;
     const pass2 = this.registerForm.get('password2').value;
 
-    if ( (pass1 !== pass2) && this.formSubmit ){
+    if ((pass1 !== pass2) && this.formSubmit) {
       return true;
     } else {
       return false;
@@ -73,13 +76,13 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  samePasswords ( pass1: string, pass2: string ) {
-    return ( formGroup: FormGroup ) => {
+  samePasswords(pass1: string, pass2: string) {
+    return (formGroup: FormGroup) => {
 
       const pass1Control = formGroup.get(pass1);
       const pass2Control = formGroup.get(pass2);
 
-      if ( pass1Control.value === pass2Control.value ) {
+      if (pass1Control.value === pass2Control.value) {
         pass2Control.setErrors(null);
       } else {
         pass2Control.setErrors({ noEsIgual: true })

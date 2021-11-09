@@ -101,11 +101,10 @@ export class UserService {
     );
   }
 
-  updateUser(data: { email: string; name: string; role: string }) {
-    data = {
-      ...data,
-    };
-    return this.http.put(`${base_url}/users/${this.uid}`, data, this.headers);
+  updateUser(data: any, uid: string) {
+    console.log('data', data);
+    console.log('uid', uid);
+    return this.http.put(`${base_url}/users/${uid}`, data).toPromise();
   }
 
   login(formData: LoginForm) {
@@ -127,6 +126,6 @@ export class UserService {
   }
 
   getUser(id: string) {
-    return this.http.get(`${base_url}/users?id=${id}`).toPromise()
+    return this.http.get(`${base_url}/users?id=${id}`).toPromise();
   }
 }

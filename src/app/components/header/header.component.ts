@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 import { Constants } from '../../Constants';
 
@@ -12,14 +13,16 @@ import { Constants } from '../../Constants';
 })
 export class HeaderComponent implements OnInit {
 
+  sesionIniciada : boolean = false;
   //formulario
 
-  default: string = 'Mexico';
+  countrySelect: string = '';
 
   countries: any[] = Constants.countries;
 
   constructor(private geolocationService : GeolocationService,
               private weatherService : WeatherService,
+              private userService: UserService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -35,12 +38,27 @@ export class HeaderComponent implements OnInit {
     const countryShort: string = weather.sys.country;
     localStorage.setItem('countryShort', String(countryShort));
     console.log('countryShort', countryShort);
-
-    
   }
 
-  cambiarUbicacion(event){
-    console.log('Este es el país', event.target.data);
+  comprobarSesionIniciada(): boolean{
+    if(!localStorage.getItem('token')){
+      this.sesionIniciada = false;
+    } else {
+      this.sesionIniciada = true;
+    }
+    return this.sesionIniciada;
+  }
+
+  cerrarSesion(){
+    this.userService.logout();
+  }
+
+  cambiarUbicacion(){
+
+    console.log('Ubicacion', this.countrySelect);
+    
+
+    // console.log('Este es el país', $event.target);
     // Pasamos el valor seleccionado a la variable verSeleccion
     //this.verSeleccion = this.opcionSeleccionado;
     //console.log(this.verSeleccion);

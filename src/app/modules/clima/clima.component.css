@@ -11,15 +11,7 @@
     flex-basis: 100%;
     order: 1;
 }
-#temperaturaActual{
-    border-radius: 20px;
-    padding: 1rem 2rem;
-    background-repeat: no-repeat;
-    background-position:  top center;
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 5px;
-}
+
 @media only screen and (max-width: 992px){
     .arriba{
         flex-basis: calc((100% / 2) - 30px);
@@ -74,25 +66,110 @@
     width: auto;
 }
 /* TEMP ACTUAL */
+#temperaturaActual{
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    background-repeat: no-repeat;
+    background-position:  top center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tempActIcon{
+    flex-basis: calc(100% / 2);
+}
+.tempActText{
+    flex-basis: calc(100% / 2);
+}
 .temp-actual{
+    text-align: right;
     font-size: 45px;
     font-weight: 900;
 }
 .ciudad-actual{
     font-size: 1.3rem;
     font-weight: 600;
+    text-align: right;
 }
-@media only screen and (max-width: 768px){
-    .contenedorTempAct{
-        display: flex;
+@media only screen and (max-width: 1330px){
+    #temperaturaActual{
         flex-direction: column;
-        align-items: center;
+    }
+    .tempActIcon{
+        padding-top: 3rem;
     }
     .temp-actual{
-        justify-content: center;
+        text-align: center;
     }
     .ciudad-actual{
-        justify-content: center;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 992px){
+    #temperaturaActual{
+        flex-direction:row;
+    }
+    .tempActIcon{
+        padding-top: 0;
+    }
+    .temp-actual{
+        text-align: right;
+    }
+    .ciudad-actual{
+        text-align: right;
+    }
+}
+@media only screen and (max-width: 768px){
+    #temperaturaActual{
+        flex-direction: column;
+    }
+    .tempActIcon{
+        padding-top: 3rem;
+    }
+    .temp-actual{
+        text-align: center;
+    }
+    .ciudad-actual{
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 700px){
+    #temperaturaActual{
+        flex-direction: row;
+    }
+    .tempActIcon{
+        padding-top: 0;
+    }
+    .temp-actual{
+        text-align: right;
+    }
+    .ciudad-actual{
+        text-align: right;
+    }
+}
+@media only screen and (max-width: 445px){
+    #temperaturaActual{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .tempActIcon{
+        padding-top: 0;
+    }
+    .temp-actual{
+        text-align: center;
+    }
+    .ciudad-actual{
+        text-align: center;
+    }
+    .tempActIcon{
+        /* flex-basis: 100%; */
+    }
+    .tempActText{
+        /* flex-basis: 100%; */
     }
 }
 
@@ -118,22 +195,30 @@
 /* CONDICIONES ADICIONALES */
 .contenedorCondAd{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 .condAd{
-    flex-basis: calc(100% / 3);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: center;
 }
-.condAd.icono{
-    width: 100%;
+.cond-ad{
+    flex-basis: calc(100% / 3);
+}
+.condAd .icono{
+    width: 3rem;
+
 }
 .condicion{
     font-weight: bold;
 }
+.valor{
+    font-size: 20px;
+}
+
 @media only screen and (max-width: 430px){
     .condAd{
         flex-basis: calc(100%/2);
