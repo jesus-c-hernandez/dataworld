@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit () :void {
-    this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    console.log('img',this.loginImage);
+    this.loadImage();
     this.renderButton();
   }
 
@@ -91,6 +90,11 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.router.navigateByUrl('/register');
+  }
+
+  async loadImage() {
+    this.loginImage = await Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    console.log('img',this.loginImage);
   }
 
 }
