@@ -3,27 +3,15 @@
         <a class="navbar-brand" href="#">
             <img src="./assets/img/logo-header.png" alt="DATAWORLD" width="100%" height="70rem">
         </a>
-      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse dropstart" id="navbarNav">
 
-        <!-- <select  id="select_pais" class="form-select" (change)="cambiarUbicacion($event)">
-          <option value="0">Selecciona una opción</option>
-          <option *ngFor="let pais of countries" >{{pais}}</option>
-        </select> -->
-
         <select  id="select_pais" class="form-select" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
           <option value="0">Selecciona una opción</option>
           <option *ngFor="let pais of countries" >{{pais}}</option>
         </select>
-
-        <!-- <form [formGroup]="cambiarUbicacionForm"
-              (ngSubmit)="cambiarUbicacion()">
-          
-          <button type="button" class="btn btn-primary" id="buscar" >Buscar</button>
-        </form> -->
         
         <ul class="navbar-nav">
           <!-- active -->
@@ -58,18 +46,8 @@
               <li><a class="dropdown-item" (click)="cerrarSesion()" [routerLink]="['login']">Cerrar Sesión</a></li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li> -->
+
         </ul>
       </div>
     </div>
   </nav>
-
-  <!-- <nav class="navbar navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="./assets/img/logo-header.png" alt="no era así :(" width="30" height="24">
-      </a>
-    </div>
-  </nav> -->
