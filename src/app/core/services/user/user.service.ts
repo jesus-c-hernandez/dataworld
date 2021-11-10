@@ -60,12 +60,13 @@ export class UserService {
     });
   }
 
-  saveLocalStorage(token: string, menu: any) {
+  saveLocalStorage(token: string) {
     localStorage.setItem('token', token);
   }
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('uid');
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
@@ -84,7 +85,7 @@ export class UserService {
         map((resp: any) => {
           const { name, email, google, role, uid } = resp.data;
           this.user = new User(name, email, '', google, role, uid);
-          this.saveLocalStorage(resp.token, resp.menu);
+          this.saveLocalStorage(resp.token);
           return true;
         }),
         catchError((err) => of(false))
@@ -94,7 +95,7 @@ export class UserService {
   createUser(formData: RegisterForm) {
     return this.http.post(`${base_url}/users`, formData).pipe(
       tap((resp: any) => {
-        // this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
         console.log('Create User', resp);
         
       })
@@ -112,7 +113,7 @@ export class UserService {
     
     return this.http.post(`${base_url}/login`, formData).pipe(
       tap((resp: any) => {
-        this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
       })
     );
   }
@@ -120,7 +121,7 @@ export class UserService {
   loginGoogle(token) {
     return this.http.post(`${base_url}/login/google`, { token }).pipe(
       tap((resp: any) => {
-        this.saveLocalStorage(resp.token, resp.menu);
+        this.saveLocalStorage(resp.token);
       })
     );
   }

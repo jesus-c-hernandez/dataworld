@@ -4,6 +4,8 @@ import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
 
+import { Constants } from '../../Constants';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,14 +18,7 @@ export class HeaderComponent implements OnInit {
 
   countrySelect: string = '';
 
-  countries : string[] = [
-    'México', 'Estados Unidos', 'Francia', 'Alemania', 'Italia', 'Reino Unido', 'Bélgica', 'Paises Bajos', 'Suecia', 'Suiza', 'Austria', 'Finlandia', 'Portugal', 'Turquía', 'Rusia', 'Dinamarca', 'Cánada', 'India', 'Grecia', 'España', 'Egipto', 'Argentina', 'Hungría', 'Polonia', 'Rumania', 'República de Corea del Norte', 'China', 'Brasil', 'República Checa', 'Noruega', 'Sudáfrica', 'Australia', 'Ucrania', 'Indonesia', 'Japon', 'Marruecos', 'Bulgaria', 'Chile', 'Croacia', 'Serbia', 'Nigeria', 'Malasia', 'Pakistán', 'Eslovaquia', 'Perú', 'Túnez', 'Senegal', 'Eslovenia', 'Filipinas', 'Ghana'
-  ];
-  countriesValues : string[] = [
-    'Mexico', 'USA', 'France', 'Germany','Italy','UK','Belgium','Netherlands','Sweden','Switzerland','Austria','Finland','Portugal','Turkey','Russia','Denmark','Canada','India','Greece','Spain','Egypt','Argentina','Hungary','Polonia','Poland',
-      //'North Korea','China','Brazil',
-    'Czech Republic','Norway','South Africa','Australia','Ukraine','Indonesia','Japan','Morocco','Bulgaria','Chile','Croatia','Serbia','Nigeria','Malasia','Pakistan','Slovakia','Peru','Tunisia','Senegal','Slovenia','Philippines','Ghana'
-  ];
+  countries: any[] = Constants.countries;
 
   constructor(private geolocationService : GeolocationService,
               private weatherService : WeatherService,
