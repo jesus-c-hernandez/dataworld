@@ -107,13 +107,13 @@ export class DashboardComponent implements OnInit {
     } else if(this.time > 6 && this.time <= 8){
       this.text_color = "black";
       this.dayImage = 'morning-sky';
-    } else if(this.time > 8 && this.time <= 18){
+    } else if(this.time > 8 && this.time <= 17){
       this.text_color = "black";
       this.dayImage = 'day-sky';
-    } else if(this.time > 18 && this.time <= 20){
+    } else if(this.time > 17 && this.time <= 19){
       this.text_color = "black";
       this.dayImage = 'evening-sky';
-    } else if(this.time > 20 && this.time <= 23){
+    } else if(this.time > 19 && this.time <= 23){
       this.text_color = "white";
       this.dayImage = 'night-sky';
     } else {
