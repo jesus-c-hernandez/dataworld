@@ -17,7 +17,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SaludComponent } from './modules/salud/salud.component';
 import { NosotrosComponent } from './modules/nosotros/nosotros.component';
-import { ContactoComponent } from './modules/contacto/contacto.component';
 import { NoticiasComponent } from './modules/noticias/noticias.component';
 
 //Pipes
@@ -35,7 +34,6 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     DashboardComponent,
     NosotrosComponent,
-    ContactoComponent,
     SaludComponent,
     NoDataPipe,
     RoundPipe,

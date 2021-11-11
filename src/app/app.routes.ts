@@ -5,7 +5,6 @@ import { ClimaComponent } from "./modules/clima/clima.component";
 import { NoticiasComponent } from "./modules/noticias/noticias.component";
 import { SaludComponent } from "./modules/salud/salud.component";
 import { NosotrosComponent } from "./modules/nosotros/nosotros.component";
-import { ContactoComponent } from "./modules/contacto/contacto.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
@@ -17,11 +16,10 @@ const APP_ROUTES: Routes = [
     { path: 'noticias', component: NoticiasComponent },
     { path: 'salud', component: SaludComponent },
     { path: 'nosotros', component: NosotrosComponent },
-    { path: 'contacto', component: ContactoComponent },
     { path: 'login', component: LoginComponent }, 
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },  
-    // { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
+    { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
