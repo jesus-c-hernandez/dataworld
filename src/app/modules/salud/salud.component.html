@@ -1,11 +1,7 @@
 <div *ngIf="loading" class="load">
   <div class="row justify-content-center">
     <div class="col-1 align-self-center">
-      <app-radar-spinner
-        [animationDuration]="1000"
-        [size]="150"
-        [color]="'#51D5EA'"
-      ></app-radar-spinner>
+      <app-radar-spinner [animationDuration]="1000" [size]="150" [color]="'#51D5EA'"></app-radar-spinner>
     </div>
   </div>
 </div>
@@ -13,82 +9,50 @@
 <div *ngIf="!loading" class="row gap-3 fluid-container">
   <!-- inicia contenedor de todo -->
 
-  <div class="container"><!-- inicio columna derecha -->
+  <div class="container">
+    <!-- inicio columna derecha -->
 
     <div class="col-lg container">
 
       <!-- inicio info-covid -->
       <div class="row fluid-container">
 
-      <div class="container"><!-- inicio contenedor cuadros info -->
-        <h1>Información general</h1>
-        <div class="info-covid">
-          <div class="col cuadro-info" id="casos-hoy">
-            <h5>Casos de hoy</h5>
-            <p class="cifra">{{todayCases | number | noData}}</p>
+        <div class="container">
+          <!-- inicio contenedor cuadros info -->
+          <h1>Información general</h1>
+          <div class="info-covid">
+            <div class="col cuadro-info" id="casos-hoy">
+              <h5>Casos de hoy</h5>
+              <p class="cifra">{{todayCases | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="casos-activos">
+              <h5>Casos activos</h5>
+              <p class="cifra">{{activeCases | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="def-hoy">
+              <h5>Defunciones de hoy</h5>
+              <p class="cifra">{{todayDeaths | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="casos-totales">
+              <h5>Casos totales</h5>
+              <p class="cifra">{{cases | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="recuperados">
+              <h5>Recuperados</h5>
+              <p class="cifra">{{recoveredCases | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="def-totales">
+              <h5>Defunciones totales</h5>
+              <p class="cifra">{{totalDeaths | number | noData}}</p>
+            </div>
+            <div class="col cuadro-info" id="pruebas-totales">
+              <h5>Pruebas totales</h5>
+              <p class="cifra">{{testTotals | number | noData}}</p>
+            </div>
           </div>
-          <div class="col cuadro-info" id="casos-activos">
-            <h5>Casos activos</h5>
-            <p class="cifra">{{activeCases | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="def-hoy">
-            <h5>Defunciones de hoy</h5>
-            <p class="cifra">{{todayDeaths | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="casos-totales">
-            <h5>Casos totales</h5>
-            <p class="cifra">{{cases | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="recuperados">
-            <h5>Recuperados</h5>
-            <p class="cifra">{{recoveredCases | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="def-totales">
-            <h5>Defunciones totales</h5>
-            <p class="cifra">{{totalDeaths | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="pruebas-totales">
-            <h5>Pruebas totales</h5>
-            <p class="cifra">{{testTotals | number | noData}}</p>
-          </div>
-        </div>
-                
-      </div><!-- fin contenedor cuadros info -->
-    </div><!-- fin info-covid -->
+
+        </div><!-- fin contenedor cuadros info -->
+      </div><!-- fin info-covid -->
     </div><!-- fin columna derecha -->
-    
-    <div class="container"><!-- inicio gráficas -->
-        <h1>Gráficas</h1>
-        <div>
-          <app-graphic
-            [title]='title1'
-            [labels]="labels1"
-            [data]="data1">
-          </app-graphic>
-        </div>
-    </div><!-- fin gráficas -->
-    
-    <div class="container"><!-- inicio estadísticas -->
-        <h1>Estadísticas</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                  <!-- <th scope="col">#</th> -->
-                  <th scope="col">Ubicación</th>
-                  <th scope="col">Total de casos</th>
-                  <th scope="col">Casos diarios</th>
-                  <th scope="col">Muertes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let pais of paisesPrincipales; let i = index">
-                  <!-- <th scope="row">{{i}}</th> -->
-                  <td>{{pais.country | noData}}</td>
-                  <td>{{pais.cases | number | noData}}</td>
-                  <td>{{pais.todayCases | number | noData}}</td>
-                  <td>{{pais.totalDeaths | number | noData}}</td>
-                </tr>
-              </tbody>
-        </table>
-    </div><!-- fin estadísticas -->
-</div><!-- fin contenedor de todo -->
+  </div><!-- fin contenedor de todo -->
+</div>

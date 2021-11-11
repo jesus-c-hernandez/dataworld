@@ -7,3 +7,9 @@
 .icono img{
     width: 2rem;
 }
+.main-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
