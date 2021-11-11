@@ -41,7 +41,8 @@ a{
     color: black;
 }
 .titulo-noticia{
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 28px;
 }
 #titulo-salud:hover{
     color: #55E94A;
