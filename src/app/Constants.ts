@@ -150,15 +150,60 @@ export const Constants = {
         { name: 'Hora de Srednekolymsk', utc: 11, code: 'SRET' },
         { name: 'Hora de Vladivostok', utc: 10, code: 'VLAT' },
         { name: 'Hora de Yakutsk', utc: 9, code: 'YAKT' },
-        { name: 'Hora de Ekaterimburgo', utc: 5, code: 'YEKT' },        
+        { name: 'Hora de Ekaterimburgo', utc: 5, code: 'YEKT' },
       ],
     },
     {
       value: 'dk',
       timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
     },
-    
-
+    {
+      value: 'ca',
+      timeZones: [
+        { name: 'Hora estándar de Alaska', utc: -9, code: 'AKST' },
+        { name: 'Hora estándar del Atlántico', utc: -4, code: 'AST' },
+        { name: 'Hora estándar Central', utc: -6, code: 'CST' },
+        { name: 'Hora estándar del Este', utc: -5, code: 'EST' },
+        { name: 'Hora estándar de la montaña', utc: -7, code: 'MST' },
+        { name: 'Hora estándar de Terranova', utc: -3.3, code: 'NST' },
+        { name: 'Hora estándar de Pitcairn', utc: -8, code: 'PST' },
+      ],
+    },
+    {
+      value: 'in',
+      timeZones: [{ name: 'Hora estándar de India', utc: 5.3, code: 'IST' }],
+    },
+    {
+      value: 'gr',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
+    {
+      value: 'es',
+      timeZones: [
+        { name: 'Hora Central Europea', utc: 1, code: 'CET' },
+        { name: 'Hora de Europa Occidental', utc: 0, code: 'WET' },
+      ],
+    },
+    {
+      value: 'eg',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
+    {
+      value: 'ar',
+      timeZones: [{ name: 'Hora de Argentina', utc: -3, code: 'ART' }],
+    },
+    {
+      value: 'hu',
+      timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
+    },
+    {
+      value: 'pl',
+      timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
+    },
+    {
+      value: 'ro',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
     {
       value: 'kr',
       timeZones: [{ name: 'Hora estándar de Corea', utc: 9, code: 'KST' }],
@@ -172,10 +217,6 @@ export const Constants = {
     },
     {
       value: 'br',
-      timeZones: [{ name: '', utc: 6, code: '' }],
-    },
-    {
-      value: '',
       timeZones: [
         { name: 'Hora de Acre', utc: -5, code: 'ACT' },
         { name: 'Hora del Amazonas', utc: -4, code: 'AMT' },

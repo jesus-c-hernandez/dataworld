@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user/user.service';
 import Swal from 'sweetalert2';
 
+import { Constants } from '../../Constants';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,14 +16,22 @@ export class RegisterComponent implements OnInit {
   public formSubmit = false;
   public loginImage = 1;
 
+  countries : any = [];
+  timeZones : any = []
+  country = null;
+  timeZone = null;
+
+  timeZoneDisable = true;
+
+
   public registerForm = this.fb.group({
-    name: ['Jesus', [Validators.required, Validators.minLength(3)]],
-    email: ['test1@gmail.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required]],
-    password2: ['123456', [Validators.required]],
-    country: ['Mexico', [Validators.required]],
-    timeZone: ['GMT-6', [Validators.required]],
-    language: ['Español', [Validators.required]],
+    name: [ , [Validators.required, Validators.minLength(3)]],
+    email: [ , [Validators.required, Validators.email]],
+    password: [ , [Validators.required]],
+    password2: [ , [Validators.required]],
+    country: [ , [Validators.required]],
+    timeZone: [ , [Validators.required]],
+    language: [ , [Validators.required]],
   }, {
     validators: this.samePasswords('password', 'password2')
   });
@@ -32,15 +42,23 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
     console.log('img', this.loginImage);
+    this.countries = Constants.countries;
+    this.country = this.countries[0];
+    console.log('COUNTRIES', this.countries);
+    console.log('COUNTRY', this.country);
+
   }
 
 
   createUser() {
     this.formSubmit = true;
     console.log(this.registerForm.value);
-
 
     if (this.registerForm.invalid) {
       return;
@@ -93,6 +111,26 @@ export class RegisterComponent implements OnInit {
 
   login() {
     this.router.navigateByUrl('/login')
+  }
+
+  chooseCountry() {
+
+    this.timeZones = [];
+    
+    const country = this.registerForm.value.country
+    console.log('COD', country);
+
+    if(!country){
+      this.timeZoneDisable = true;
+      return;
+    }
+
+    
+    this.timeZones = Constants.timeZones.find( e => e.value === country).timeZones;
+    
+    console.log('TZ', this.timeZones);
+
+    this.timeZoneDisable = false;
   }
 
 }
