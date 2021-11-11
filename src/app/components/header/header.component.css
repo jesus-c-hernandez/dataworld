@@ -7,3 +7,20 @@
 .icono img{
     width: 2rem;
 }
+
+.seleccionar-pais{
+    background-color: red;
+    display: flex;
+}
+#select_pais{
+    width: 3rem;
+}
+.seleccionar-pais .icono img{
+    width: 100%;
+}
+.seleccionar-pais .icono{
+    width: 3rem;
+}
+.active .form-select{
+    width: 100%;
+}

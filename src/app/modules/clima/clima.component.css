@@ -213,8 +213,14 @@
     font-size: 20px;
 }
 
-@media only screen and (max-width: 430px){
-    .condAd{
+@media only screen and (max-width: 445px){
+    .cond-ad{
         flex-basis: calc(100%/2);
+    }
+}
+@media only screen and (max-width: 332px){
+    .condAd{
+        width: 100%;
+        padding: 10%;
     }
 }

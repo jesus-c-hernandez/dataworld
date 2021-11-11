@@ -6,13 +6,19 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse dropstart" id="navbarNav">
 
+      <div class="seleccionar-pais">
+        <div class="icono">
+          <img src="./assets/icons/search-globe-icon.png" alt="">
+        </div>
         <select  id="select_pais" class="form-select" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
           <option value="0">Selecciona una opción</option>
           <option *ngFor="let pais of countries" >{{pais}}</option>
         </select>
-        
+      </div>
+
+      <div class="collapse navbar-collapse dropstart " id="navbarNav">
+
         <ul class="navbar-nav">
           <!-- active -->
           <li class="nav-item" routerLinkActive="active">
