@@ -1,3 +1,6 @@
+.navbar-brand img{
+    min-width: 210px;
+}
 #navbarNav{
     justify-content: right;
 }
@@ -9,21 +12,37 @@
 }
 
 .seleccionar-pais{
-    background-color: red;
     display: flex;
 }
-#select_pais{
-    width: 3rem;
-}
+
 .seleccionar-pais .icono img{
     width: 100%;
 }
 .seleccionar-pais .icono{
-    width: 3rem;
+    width: 2.8rem;
 }
-.active .form-select{
-    width: 100%;
+select{
+    margin: .5rem 0px;
+    width: 0;
+    transition: 1s;
+    border: none;
 }
+.activar-select{
+    width: 10rem;
+    border: 1px solid #5B605B;
+    border-radius: 3px;
+}
+@media only screen and (max-width: 991px){
+    .seleccionar-pais .icono{
+        display: none;
+    }
+    select{
+        margin: 0;
+        width: 100%;
+        border: 1px solid #5B605B;
+        border-radius: 3px;
+    }
+  }
 .main-header {
     position: fixed;
     left: 0;

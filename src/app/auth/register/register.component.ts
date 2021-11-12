@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
 
+  //pantalla de carga
+  loading: boolean = true;
+
   public formSubmit = false;
   public loginImage = 1;
 
@@ -34,6 +37,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
     console.log('img', this.loginImage);
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
 

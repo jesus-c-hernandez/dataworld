@@ -7,20 +7,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="seleccionar-pais">
-        <div class="icono">
-          <img src="./assets/icons/search-globe-icon.png" alt="">
-        </div>
-        <select  id="select_pais" class="form-select" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
-          <option value="0">Selecciona una opción</option>
-          <option *ngFor="let pais of countries" >{{pais.name}}</option>
-        </select>
-      </div>
-
       <div class="collapse navbar-collapse dropstart " id="navbarNav">
 
         <ul class="navbar-nav">
           <!-- active -->
+          <li>
+            <div class="seleccionar-pais">
+              <div class="icono" (click)="toggleSelect()">
+                <img src="./assets/icons/search-globe-icon.png" alt="">
+              </div>
+              <select  id="select_pais" class="" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
+                <option value="0">Selecciona una opción</option>
+                <option *ngFor="let pais of countries" >{{pais.name}}</option>
+              </select>
+            </div>
+          </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" aria-current="page" [routerLink]="['dashboard']">Inicio</a>
           </li>
