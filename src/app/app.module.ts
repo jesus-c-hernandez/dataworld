@@ -25,6 +25,7 @@ import { RoundPipe } from './Pipes/round/round.pipe';
 import { AuthModule } from './auth/auth.module';
 import { NoImgPipe } from './Pipes/no-img/no-img.pipe';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FormsModule } from '@angular/forms';
     SpringSpinnerModule,
     RadarSpinnerModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
