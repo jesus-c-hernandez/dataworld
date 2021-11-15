@@ -26,50 +26,63 @@ export const Constants = {
     { value: 21, name: 'Indonesia', namea2: 'id' },
     { value: 22, name: 'Italy', namea2: 'it' },
     { value: 23, name: 'Japan', namea2: 'jp' },
-    { value: 24, name: 'Mexico', namea2: 'mx' },
-    { value: 25, name: 'Morocco', namea2: 'ma' },
-    { value: 26, name: 'Netherlands', namea2: 'nl' },
-    { value: 27, name: 'Nigeria', namea2: 'ng' },
-    { value: 28, name: 'North Korea', namea2: 'kp' },
-    { value: 29, name: 'Norway', namea2: 'no' },
-    { value: 30, name: 'Pakistan', namea2: 'pk' },
-    { value: 31, name: 'Peru', namea2: 'pe' },
-    { value: 32, name: 'Philippines', namea2: 'ph' },
-    { value: 33, name: 'Poland', namea2: 'pl' },
-    { value: 34, name: 'Portugal', namea2: 'pt' },
-    { value: 35, name: 'Romania', namea2: 'ro' },
-    { value: 36, name: 'Russia', namea2: 'ru' },
-    { value: 37, name: 'Senegal', namea2: 'sn' },
-    { value: 38, name: 'Serbia', namea2: 'rs' },
-    { value: 39, name: 'Slovakia', namea2: 'sk' },
-    { value: 40, name: 'Slovenia', namea2: 'si' },
-    { value: 41, name: 'South Africa', namea2: 'za' },
-    { value: 42, name: 'Spain', namea2: 'es' },
-    { value: 43, name: 'Sweden', namea2: 'se' },
-    { value: 44, name: 'Switzerland', namea2: 'ch' },
-    { value: 45, name: 'Tunisia', namea2: 'tn' },
-    { value: 46, name: 'Turkey', namea2: 'tr' },
-    { value: 47, name: 'UK', namea2: 'gb' },
-    { value: 48, name: 'Ukraine', namea2: 'ua' },
-    { value: 49, name: 'USA', namea2: 'us' }
+    { value: 24, name: 'Malaysia', namea2: 'my' },
+    { value: 25, name: 'Mexico', namea2: 'mx' },
+    { value: 26, name: 'Morocco', namea2: 'ma' },
+    { value: 27, name: 'Netherlands', namea2: 'nl' },
+    { value: 28, name: 'Nigeria', namea2: 'ng' },
+    { value: 29, name: 'North Korea', namea2: 'kp' },
+    { value: 30, name: 'Norway', namea2: 'no' },
+    { value: 31, name: 'Pakistan', namea2: 'pk' },
+    { value: 32, name: 'Peru', namea2: 'pe' },
+    { value: 33, name: 'Philippines', namea2: 'ph' },
+    { value: 34, name: 'Poland', namea2: 'pl' },
+    { value: 35, name: 'Portugal', namea2: 'pt' },
+    { value: 36, name: 'Romania', namea2: 'ro' },
+    { value: 37, name: 'Russia', namea2: 'ru' },
+    { value: 38, name: 'Senegal', namea2: 'sn' },
+    { value: 39, name: 'Serbia', namea2: 'rs' },
+    { value: 40, name: 'Slovakia', namea2: 'sk' },
+    { value: 41, name: 'Slovenia', namea2: 'si' },
+    { value: 42, name: 'South Africa', namea2: 'za' },
+    { value: 43, name: 'Spain', namea2: 'es' },
+    { value: 44, name: 'Sweden', namea2: 'se' },
+    { value: 45, name: 'Switzerland', namea2: 'ch' },
+    { value: 46, name: 'Tunisia', namea2: 'tn' },
+    { value: 47, name: 'Turkey', namea2: 'tr' },
+    { value: 48, name: 'UK', namea2: 'gb' },
+    { value: 49, name: 'Ukraine', namea2: 'ua' },
+    { value: 50, name: 'USA', namea2: 'us' }
 
-    //     'México', 'Estados Unidos', 'Francia', 'Alemania', 'Italia', 'Reino Unido', 'Bélgica', 'Paises Bajos', 'Suecia', 'Suiza', 'Austria', 'Finlandia', 'Portugal',
-    //     'Turquía', 'Rusia', 'Dinamarca', 'Cánada', 'India', 'Grecia', 'España', 'Egipto', 'Argentina', 'Hungría', 'Polonia', 'Rumania', 'República de Corea del Norte',
-    //     'China', 'Brasil', 'República Checa', 'Noruega', 'Sudáfrica', 'Australia', 'Ucrania', 'Indonesia', 'Japon', 'Marruecos', 'Bulgaria', 'Chile', 'Croacia',
-    //      'Serbia', 'Nigeria', 'Malasia', 'Pakistán', 'Eslovaquia', 'Perú', 'Túnez', 'Senegal', 'Eslovenia', 'Filipinas', 'Ghana'
+        // 'México', 'Estados Unidos', 'Francia', 'Alemania', 'Italia', 
+        // 'Reino Unido', 'Bélgica', 'Paises Bajos', 'Suecia', 'Suiza', 
+        // 'Austria', 'Finlandia', 'Portugal', 'Turquía', 'Rusia', 
+        // 'Dinamarca', 'Cánada', 'India', 'Grecia', 'España', 
+        // 'Egipto', 'Argentina', 'Hungría', 'Polonia', 'Rumania', 
+        // 'República de Corea del Norte','China', 'Brasil', 'República Checa', 'Noruega', 
+        // 'Sudáfrica', 'Australia', 'Ucrania', 'Indonesia', 'Japon', 
+        // 'Marruecos', 'Bulgaria', 'Chile', 'Croacia','Serbia', 
+        // 'Nigeria', 'Malasia', 'Pakistán', 'Eslovaquia', 'Perú', 
+        // 'Túnez', 'Senegal', 'Eslovenia', 'Filipinas', 'Ghana'
 
-    //     'Mexico', 'USA', 'France', 'Germany','Italy','UK','Belgium','Netherlands','Sweden','Switzerland','Austria','Finland','Portugal','Turkey','Russia','Denmark','Canada',
-    //     'India','Greece','Spain','Egypt','Argentina','Hungary','Polonia','Poland',
-    //   //'North Korea','China','Brazil',
-    // 'Czech Republic','Norway','South Africa','Australia','Ukraine','Indonesia','Japan','Morocco','Bulgaria','Chile','Croatia','Serbia','Nigeria','Malasia',
-    // 'Pakistan','Slovakia','Peru','Tunisia','Senegal','Slovenia','Philippines','Ghana'
+        
+        // 'Mexico', 'USA', 'France', 'Germany','Italy',
+        // 'UK','Belgium','Netherlands','Sweden','Switzerland',
+        // 'Austria','Finland','Portugal','Turkey','Russia',
+        // 'Denmark','Canada','India','Greece','Spain',
+        // 'Egypt','Argentina','Hungary','Poland', 'Romania',
+        // 'North Korea','China','Brazil', 'Czech Republic','Norway',
+        // 'South Africa','Australia','Ukraine','Indonesia','Japan',
+        // 'Morocco','Bulgaria','Chile','Croatia','Serbia',
+        // 'Nigeria','Malaysia', 'Pakistan','Slovakia','Peru',
+        // 'Tunisia','Senegal','Slovenia','Philippines','Ghana'
   ],
 
   timeZones: [
     {
       value: 'mx',
       timeZones: [
-        { name: 'Hora de verano de Central', utc: -5, code: 'CDT' },
+        { name: 'Hora estándar del Este', utc: -5, code: 'EST' },
         { name: 'Hora estándar Central', utc: -6, code: 'CST' },
         { name: 'Hora estándar de la montaña', utc: -7, code: 'MST' },
       ],
@@ -150,15 +163,60 @@ export const Constants = {
         { name: 'Hora de Srednekolymsk', utc: 11, code: 'SRET' },
         { name: 'Hora de Vladivostok', utc: 10, code: 'VLAT' },
         { name: 'Hora de Yakutsk', utc: 9, code: 'YAKT' },
-        { name: 'Hora de Ekaterimburgo', utc: 5, code: 'YEKT' },        
+        { name: 'Hora de Ekaterimburgo', utc: 5, code: 'YEKT' },
       ],
     },
     {
       value: 'dk',
       timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
     },
-    
-
+    {
+      value: 'ca',
+      timeZones: [
+        { name: 'Hora estándar de Alaska', utc: -9, code: 'AKST' },
+        { name: 'Hora estándar del Atlántico', utc: -4, code: 'AST' },
+        { name: 'Hora estándar Central', utc: -6, code: 'CST' },
+        { name: 'Hora estándar del Este', utc: -5, code: 'EST' },
+        { name: 'Hora estándar de la montaña', utc: -7, code: 'MST' },
+        { name: 'Hora estándar de Terranova', utc: -3.3, code: 'NST' },
+        { name: 'Hora estándar de Pitcairn', utc: -8, code: 'PST' },
+      ],
+    },
+    {
+      value: 'in',
+      timeZones: [{ name: 'Hora estándar de India', utc: 5.3, code: 'IST' }],
+    },
+    {
+      value: 'gr',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
+    {
+      value: 'es',
+      timeZones: [
+        { name: 'Hora Central Europea', utc: 1, code: 'CET' },
+        { name: 'Hora de Europa Occidental', utc: 0, code: 'WET' },
+      ],
+    },
+    {
+      value: 'eg',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
+    {
+      value: 'ar',
+      timeZones: [{ name: 'Hora de Argentina', utc: -3, code: 'ART' }],
+    },
+    {
+      value: 'hu',
+      timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
+    },
+    {
+      value: 'pl',
+      timeZones: [{ name: 'Hora Central Europea', utc: 1, code: 'CET' }],
+    },
+    {
+      value: 'ro',
+      timeZones: [{ name: 'Hora de Europa del Este', utc: 2, code: 'EET' }],
+    },
     {
       value: 'kr',
       timeZones: [{ name: 'Hora estándar de Corea', utc: 9, code: 'KST' }],
@@ -172,10 +230,6 @@ export const Constants = {
     },
     {
       value: 'br',
-      timeZones: [{ name: '', utc: 6, code: '' }],
-    },
-    {
-      value: '',
       timeZones: [
         { name: 'Hora de Acre', utc: -5, code: 'ACT' },
         { name: 'Hora del Amazonas', utc: -4, code: 'AMT' },
@@ -288,4 +342,8 @@ export const Constants = {
       timeZones: [{ name: 'Hora de Greenwich', utc: 0, code: 'GMT' }],
     },
   ],
+  languages: [
+    { value: 1, label: 'Español', code: 'es'},
+    { value: 2, label: 'Ingles', code: 'en'}
+  ]
 };
