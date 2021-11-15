@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
@@ -12,18 +11,7 @@ const base_url = environment.base_url
 export class CovidService {
 
   constructor(private http: HttpClient) { }
-/*
-async getCurrentWeather( lat: number, lon: number) {
-    try {
-      const url = `${base_url}/current-weather?lat=${lat}&lon=${lon}`;
-      const result : any = await this.http.get(url).toPromise();
-      console.log('RES', result);
-      return result.data;
-    } catch (error) {
-      return error;
-    }
-  }
-*/
+
   async getCases(country: string) {
     try {
       const url = `${base_url}/cases?country=${country}`;

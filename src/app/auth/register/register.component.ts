@@ -12,6 +12,10 @@ import { Constants } from '../../Constants';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
+  //pantalla de carga
+  loading: boolean = true;
+
   public formSubmit = false;
   public loginImage = 1;
 
@@ -59,6 +63,10 @@ export class RegisterComponent implements OnInit {
 
   init() {
     this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    console.log('img', this.loginImage);
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
     this.countries = Constants.countries;
     this.languages = Constants.languages;
   }

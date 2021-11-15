@@ -97,8 +97,8 @@ export class DashboardComponent implements OnInit {
     const dateTime = new Date();
 
     // Cambiar de zona horaria las proximas horas
-    this.weather3.list.forEach(date => {
-      const weatAux = moment(date.dt_txt).subtract(dateTime.getTimezoneOffset(), 'minutes').format('DD MM YYYY hh:mm:ss');
+    this.weather3.list.forEach( date  => {
+      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('DD MM YYYY hh:mm:ss');
       date.dt_txt = weatAux;
     });
 

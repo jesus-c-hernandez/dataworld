@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
 
 import { Constants } from '../../Constants';
@@ -20,10 +20,12 @@ export class HeaderComponent implements OnInit {
 
   countries: any[] = Constants.countries;
 
+  //para esconder el select
+  select_pais;
+
   constructor(private geolocationService : GeolocationService,
               private weatherService : WeatherService,
-              private userService: UserService,
-              private fb: FormBuilder) { }
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.init();
@@ -38,6 +40,8 @@ export class HeaderComponent implements OnInit {
     const countryShort: string = weather.sys.country;
     localStorage.setItem('countryShort', String(countryShort));
     console.log('countryShort', countryShort);
+
+    this.select_pais = document.getElementById("select_pais")
   }
 
   comprobarSesionIniciada(): boolean{
@@ -118,6 +122,12 @@ export class HeaderComponent implements OnInit {
       ['GH', 'Ghana']
   ]);*/
 
+  }
+
+  toggleSelect(){
+    console.log("hola desde toggleSelect!");
+    
+    this.select_pais.classList.toggle("activar-select");
   }
 
   normalizar(texto) {
