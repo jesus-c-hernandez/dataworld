@@ -13,6 +13,10 @@ declare const gapi:any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  //pantalla de carga
+  loading: boolean = true;
+
   public formSubmit = false;
   public auth2: any;
 
@@ -32,6 +36,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit () :void {
     this.loadImage();
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
     this.renderButton();
   }
 
@@ -55,7 +62,6 @@ export class LoginComponent implements OnInit {
   }
 
   renderButton() {
-
     gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
       'width': 240,

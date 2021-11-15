@@ -1,3 +1,53 @@
+.contenedor-register{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 1rem;
+  height: 100vh;
+}
+.register-form{
+  background-color: white;
+  border: 1px solid #5B605B;
+  border-radius: 5px;
+  width: 400px;
+  height: 100%;
+  margin-left: calc(100% - 400px);
+  overflow-y: scroll;
+}
+@media only screen and (max-width: 991px){
+  .register-form{
+      margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 430px){
+  .register-form{
+      width: 100%;
+      
+  }
+  .register-form h3{
+    text-align: center;
+  }
+}
+.btn-crear-cuenta{
+  width: 10rem;
+  height: 3rem;
+  font-size: 18px;
+  background-color: #d0f53d;
+  border-style: none;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 430px){
+  .btn-crear-cuenta{
+    width: 100%;
+  }
+}
+.btn-iniciar-sesion{
+  width: 6rem;
+  height: 3rem;
+  background-color: #55e94a;
+  border-style: none;
+  border-radius: 5px;
+}
 /*
 Template Name: Admin pro Admin
 Author: Wrappixel

@@ -18,14 +18,12 @@ footer{
     margin-top: 1rem;
 }
 .en-medio{
-    /* background-color: aqua; */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .redes-sociales{
-    /* background-color: blueviolet; */
     margin: 1rem 2rem 1rem 0;
     display: flex;
     flex-direction: column;

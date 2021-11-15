@@ -1,7 +1,10 @@
 .tiempo-actual{
-    /* display: flex; */
     width: 100%;
-    height: 30%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -21,14 +24,11 @@
 }
 @media only screen and (max-width: 768px){
     .tiempo-actual{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 40%;
+        height: 35vh;
     }
-    /* .ciudad-actual{
-        padding-top: 8rem;
-    } */
+    .icono-temp img{
+        width: 3.5rem;
+    }
   }
 .ciudad-actual{
     font-size: 1.3rem;
@@ -38,6 +38,14 @@
     font-size: 45px;
     font-weight: 900;
 }
+@media only screen and (max-width: 768px){
+    .cuidad-actual{
+        font-size: 1rem;
+    }
+    .temp-actual{
+        font-size: 38px;
+    }
+  }
 .pronosticos-dash{
     display: flex;
 }
@@ -71,7 +79,6 @@
     }
 }
 /* ESTILOS INFO. COVID */
-
 .info-covid{
     display: flex;
     flex-wrap: wrap;
