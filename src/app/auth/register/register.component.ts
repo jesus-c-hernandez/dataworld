@@ -9,37 +9,49 @@ import { Constants } from '../../Constants';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
   public formSubmit = false;
   public loginImage = 1;
 
-  countries : any = [];
-  timeZones : any = []
-  country = null;
+  countries: any = [];
+  timeZones: any = [];
+  languages: any = [];
+
   timeZone = null;
 
   timeZoneDisable = true;
 
+  public registerForm = this.fb.group(
+    {
+      name: [, [Validators.required, Validators.minLength(3)]],
+      email: [
+        ,
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+        ],
+      ],
+      password: [, [Validators.required]],
+      password2: [, [Validators.required]],
+      country: [, [Validators.required]],
+      timeZone: [, [Validators.required]],
+      language: [, [Validators.required]],
+    },
+    {
+      validators: this.samePasswords('password', 'password2'),
+    }
+  );
 
-  public registerForm = this.fb.group({
-    name: [ , [Validators.required, Validators.minLength(3)]],
-    email: [ , [Validators.required, Validators.email]],
-    password: [ , [Validators.required]],
-    password2: [ , [Validators.required]],
-    country: [ , [Validators.required]],
-    timeZone: [ , [Validators.required]],
-    language: [ , [Validators.required]],
-  }, {
-    validators: this.samePasswords('password', 'password2')
-  });
-
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
-
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.init();
@@ -47,17 +59,14 @@ export class RegisterComponent implements OnInit {
 
   init() {
     this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    console.log('img', this.loginImage);
     this.countries = Constants.countries;
-    this.country = this.countries[0];
-    console.log('COUNTRIES', this.countries);
-    console.log('COUNTRY', this.country);
-
+    this.languages = Constants.languages;
   }
-
 
   createUser() {
     this.formSubmit = true;
+    console.log('VALID', this.registerForm.valid);
+
     console.log(this.registerForm.value);
 
     if (this.registerForm.invalid) {
@@ -71,7 +80,6 @@ export class RegisterComponent implements OnInit {
           Swal.fire('Error', err.error.msg, 'error');
         });
     }
-
   }
 
   notValidField(field: string): boolean {
@@ -86,51 +94,41 @@ export class RegisterComponent implements OnInit {
     const pass1 = this.registerForm.get('password').value;
     const pass2 = this.registerForm.get('password2').value;
 
-    if ((pass1 !== pass2) && this.formSubmit) {
+    if (pass1 !== pass2 && this.formSubmit) {
       return true;
     } else {
       return false;
     }
-
   }
 
   samePasswords(pass1: string, pass2: string) {
     return (formGroup: FormGroup) => {
-
       const pass1Control = formGroup.get(pass1);
       const pass2Control = formGroup.get(pass2);
 
       if (pass1Control.value === pass2Control.value) {
         pass2Control.setErrors(null);
       } else {
-        pass2Control.setErrors({ noEsIgual: true })
+        pass2Control.setErrors({ noEsIgual: true });
       }
-
-    }
+    };
   }
 
   login() {
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/login');
   }
 
   chooseCountry() {
-
     this.timeZones = [];
-    
-    const country = this.registerForm.value.country
-    console.log('COD', country);
-
-    if(!country){
+    this.timeZone = null;
+    const country = this.registerForm.value.country;
+    if (!country) {
       this.timeZoneDisable = true;
       return;
     }
-
-    
-    this.timeZones = Constants.timeZones.find( e => e.value === country).timeZones;
-    
-    console.log('TZ', this.timeZones);
-
+    this.timeZones = Constants.timeZones.find(
+      (e) => e.value === country
+    ).timeZones;
     this.timeZoneDisable = false;
   }
-
 }
