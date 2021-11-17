@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
     this.loadImage();
     setTimeout(() => {
       this.loading = false;
-     }, 2000);
-    this.renderButton();
+     }, 1000);
+    // this.renderButton();
   }
 
   login() {
@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
           localStorage.removeItem('email');
         }
         localStorage.setItem('uid', res.user.uid);
+        localStorage.setItem('countryShort', res.user.country);
+        localStorage.setItem('case', String(1));
         this.router.navigateByUrl('/dashboard');
       },
       (err) => {
@@ -70,16 +72,16 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  renderButton() {
-    gapi.signin2.render('my-signin2', {
-      scope: 'profile email',
-      width: 240,
-      height: 50,
-      longtitle: true,
-      theme: 'dark',
-    });
-    this.startApp();
-  }
+  // renderButton() {
+  //   gapi.signin2.render('my-signin2', {
+  //     scope: 'profile email',
+  //     width: 240,
+  //     height: 50,
+  //     longtitle: true,
+  //     theme: 'dark',
+  //   });
+  //   this.startApp();
+  // }
 
   async startApp() {
     await this.userService.googleInit();

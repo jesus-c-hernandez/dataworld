@@ -16,10 +16,20 @@
               <div class="icono" (click)="toggleSelect()">
                 <img src="./assets/icons/search-globe-icon.png" alt="">
               </div>
-              <select  id="select_pais" class="" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
+              <ng-select
+                class="mt-1" 
+                [items]="countries"
+                bindLabel="name"
+                (change)="chooseCountry()"
+                [closeOnSelect]=true
+                [(ngModel)]="countrySelect"
+                placeholder="Seleccionar pais"
+                >
+              </ng-select>
+              <!-- <select   class="" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
                 <option value="0">Selecciona una opción</option>
                 <option *ngFor="let pais of countries" >{{pais.name}}</option>
-              </select>
+              </select> -->
             </div>
           </li>
           <li class="nav-item" routerLinkActive="active">

@@ -174,7 +174,7 @@ export class ClimaComponent implements OnInit {
     
     // Cambiar de zona horaria las proximas horas
     this.weather5.list.forEach( date  => {
-      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('DD MM YYYY hh:mm:ss');
+      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('YYYY MM DD hh:mm:ss');
       date.dt_txt = weatAux;
     });
 

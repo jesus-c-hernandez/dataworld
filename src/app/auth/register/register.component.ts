@@ -64,11 +64,11 @@ export class RegisterComponent implements OnInit {
   init() {
     this.loginImage = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
     console.log('img', this.loginImage);
-    setTimeout(() => {
-      this.loading = false;
-     }, 2000);
     this.countries = Constants.countries;
     this.languages = Constants.languages;
+    setTimeout(() => {
+      this.loading = false;
+     }, 1000);
   }
 
   createUser() {
@@ -82,6 +82,8 @@ export class RegisterComponent implements OnInit {
     } else {
       this.userService.createUser(this.registerForm.value)
         .subscribe(resp => {
+          localStorage.setItem('uid', resp.user.uid);
+          localStorage.setItem('case', String(1));
           this.router.navigateByUrl('/dashboard');
         }, (err) => {
           // Si sucede un error

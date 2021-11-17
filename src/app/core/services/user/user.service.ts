@@ -67,6 +67,7 @@ export class UserService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('uid');
+    localStorage.removeItem('countryShort');
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
