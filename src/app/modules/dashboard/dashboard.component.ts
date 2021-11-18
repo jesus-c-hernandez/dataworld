@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { CovidService, CovidData } from 'src/app/core/services/covid/covid.service';
 import { NewsService } from 'src/app/core/services/news/news.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 // import moment from 'moment';
 // const moment = require('moment'); // require
 import * as moment from 'moment';
 
+import { Constants } from '../../Constants';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -64,6 +66,13 @@ export class DashboardComponent implements OnInit {
   weather: any;
   weather3: any;
 
+  user: any = null;
+
+  lat : number;
+  lon: number;
+
+  timeZoneValue: number;
+
 
   //info covid
   covidData: CovidData = null;
@@ -71,7 +80,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private weatherService: WeatherService,
     private covidService: CovidService,
-    private newsService: NewsService) { }
+    private newsService: NewsService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
     this.currentWeather();
@@ -84,21 +95,45 @@ export class DashboardComponent implements OnInit {
     // const {lat, lon} = await this.geolocationService.getPosition();
     // localStorage.setItem('lat', String(lat))
     // localStorage.setItem('lon', String(lon))
-    const lat = Number(localStorage.getItem('lat'));
-    const lon = Number(localStorage.getItem('lon'));
-    console.log('POS', lat, lon);
 
-    this.weather = await this.weatherService.getCurrentWeather(lat, lon);
+    if ( localStorage.getItem('uid') ) {
+      this.user = await this.userService.getUser( localStorage.getItem('uid'));
+      console.log('USER', this.user);
+
+      if( localStorage.getItem('countryShort') != this.user.data.country ) {
+        console.log('DIFF');
+        const country = Constants.countries.find( c => c.namea2 === localStorage.getItem('countryShort')) 
+        console.log('C', country);
+        this.lat = country.lat;
+        this.lon = country.lon;
+      } else {
+        this.lat = Number(localStorage.getItem('lat'));
+        this.lon = Number(localStorage.getItem('lon'));
+      }
+      
+    }
+
+    console.log('POS', this.lat, this.lon);
+
+    this.weather = await this.weatherService.getCurrentWeather(this.lat, this.lon);
     console.log('RESP', this.weather);
 
-    this.weather3 = await this.weatherService.getCurrentWeatherByHours(lat, lon, 3);
+    this.weather3 = await this.weatherService.getCurrentWeatherByHours(this.lat, this.lon, 3);
     console.log('RESP3', this.weather3);
+
+    this.timeZoneValue = this.weather.timezone/60;
+
+    console.log('TZ', this.timeZoneValue);
+    
 
     const dateTime = new Date();
 
+    console.log('DT', dateTime.getTimezoneOffset());
+    
+
     // Cambiar de zona horaria las proximas horas
     this.weather3.list.forEach( date  => {
-      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('YYYY MM DD hh:mm:ss');
+      const weatAux = moment(date.dt_txt).add( this.timeZoneValue, 'minutes').format('YYYY MM DD HH:mm:ss');
       date.dt_txt = weatAux;
     });
 
