@@ -7,6 +7,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AtomSpinnerModule, RadarSpinnerModule, SpringSpinnerModule } from 'angular-epic-spinners';
 
 
 
@@ -25,7 +26,10 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgSelectModule
+    NgSelectModule,
+    AtomSpinnerModule,
+    SpringSpinnerModule,
+    RadarSpinnerModule,
   ]
 })
 export class AuthModule { }

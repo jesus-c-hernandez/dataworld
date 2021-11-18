@@ -1,23 +1,33 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { CovidService, CovidData } from 'src/app/core/services/covid/covid.service';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import {
+  CovidService,
+  CovidData,
+} from 'src/app/core/services/covid/covid.service';
 import { SharedService } from 'src/app/core/Shared/shared.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 
 @Component({
   selector: 'app-salud',
   templateUrl: './salud.component.html',
-  styleUrls: ['./salud.component.css']
+  styleUrls: ['./salud.component.css'],
 })
 export class SaludComponent implements OnInit {
-
-  public title1 : string = 'Ventas';
-  public labels1: string[] = ['Ventas descargadas', 'Ventas en tienda', 'Reporte de ventas'];
-  public data1 = [
-    [350, 450, 100]
+  public title1: string = 'Ventas';
+  public labels1: string[] = [
+    'Ventas descargadas',
+    'Ventas en tienda',
+    'Reporte de ventas',
   ];
+  public data1 = [[350, 450, 100]];
 
   weather: any;
-  country: string = "";
+  country: string = '';
 
   cases: any;
   todayCases: any;
@@ -29,82 +39,26 @@ export class SaludComponent implements OnInit {
   //pantalla de carga
   loading: boolean = true;
   //para las gráficas
-  chart : any;
+  chart: any;
   //para las estadísticas
   paisesPrincipales: CovidData[] = [];
 
-  @ViewChild("myChart") myChart: ElementRef;
+  @ViewChild('myChart') myChart: ElementRef;
 
-  constructor(private covidService: CovidService, 
-              private sharedService: SharedService, 
-              private weatherService: WeatherService,
-              private elementRef: ElementRef,
-              private renderer: Renderer2) { }
+  constructor(
+    private covidService: CovidService,
+    private sharedService: SharedService,
+    private weatherService: WeatherService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
-  getCountry(){
-    let shortcut: string = localStorage.getItem('countryShort');
-            
-    let paises = new Map([
-                    ['MX','Mexico'],
-                    ['US', 'USA'],
-                    ['FR', 'France'],
-                    ['DE', 'Germany'],
-                    ['IT', 'Italy'],
-                    ['GB', 'UK'],
-                    ['BE', 'Belgium'],
-                    ['NL', 'Netherlands'],
-                    ['SE', 'Sweden'],
-                    ['CH', 'Switzerland'],
-                    ['AT', 'Austria'],
-                    ['FI', 'Finland'],
-                    ['PT', 'Portugal'],
-                    ['TR', 'Turkey'],
-                    ['RU', 'Russia'],
-                    ['DK', 'Denmark'],
-                    ['CA', 'Canada'],
-                    ['IN', 'India'],
-                    ['GR', 'Greece'],
-                    ['ES', 'Spain'],
-                    ['EG', 'Egypt'],
-                    ['AR', 'Argentina'],
-                    ['HU', 'Hungary'],
-                    ['PL', 'Polonia'],
-                    ['RO', 'Poland'],
-                    //['KR', 'North Korea'],
-                    ['CN', 'China'],
-                    ['BR', 'Brazil'],
-                    // ['CZ', 'Czech Republic'],
-                    ['NO', 'Norway'],
-                    // ['ZA', 'South Africa'],
-                    ['AU', 'Australia'],
-                    ['UA', 'Ukraine'],
-                    ['ID', 'Indonesia'],
-                    ['JP', 'Japan'],
-                    ['MA', 'Morocco'],
-                    ['BG', 'Bulgaria'],
-                    ['CL', 'Chile'],
-                    ['HR', 'Croatia'],
-                    ['RS', 'Serbia'],
-                    ['NG', 'Nigeria'],
-                    ['MY', 'Malasia'],
-                    ['PK', 'Pakistan'],
-                    ['SK', 'Slovakia'],
-                    ['PE', 'Peru'],
-                    ['TN', 'Tunisia'],
-                    ['SN', 'Senegal'],
-                    ['SI', 'Slovenia'],
-                    ['PH', 'Philippines'],
-                    ['GH', 'Ghana']
-                ]);
-                  
-    if(paises.has(shortcut)){
-      this.country = paises.get(shortcut);
-      console.log('Este es el país', this.country);
-    }
-  }
-  
-  ngOnInit():void{
+  ngOnInit(): void {
     this.init();
+  }
+
+  getCountry() {
+    this.country = localStorage.getItem('countryShort');
   }
 
   async init() {
@@ -142,7 +96,7 @@ export class SaludComponent implements OnInit {
         options: {}
       }
     );*/
-    
+
     /*
     //casos totales
     this.cases = await this.covidService.getCases(this.country);
@@ -169,18 +123,18 @@ export class SaludComponent implements OnInit {
 
     setTimeout(() => {
       this.loading = false;
-     }, 2000);
+    }, 2000);
   }
 
-  async getPaisesPrincipales(){
-    let paises_p: string[] = ["USA", "Mexico", "Canada"];
-    
-    for(let i=0; i<paises_p.length; i++){
-      let datosPais : CovidData = {
-        country : paises_p[i],
-        cases : 5,
-        todayCases : 6,
-        totalDeaths : 7
+  async getPaisesPrincipales() {
+    let paises_p: string[] = ['USA', 'Mexico', 'Canada'];
+
+    for (let i = 0; i < paises_p.length; i++) {
+      let datosPais: CovidData = {
+        country: paises_p[i],
+        cases: 5,
+        todayCases: 6,
+        totalDeaths: 7,
       };
       /*
       //casos totales
@@ -192,7 +146,7 @@ export class SaludComponent implements OnInit {
       //muertes totales
       this.totalDeaths = await this.covidService.getTotalDeaths(paises_p[i]);
       */
-      
+
       this.paisesPrincipales[i] = datosPais;
     }
   }
