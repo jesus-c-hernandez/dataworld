@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
     // Case 3: El usuario no tiene iniciada la sesion.
     // Case 4: El usuario no ha iniciado sesion y cambia de pais.
 
-    if( !localStorage.getItem('case') ) { 
+    if( !localStorage.getItem('uid') && !localStorage.getItem('case')) { 
       this.case = 3
     } else {
       this.case = Number(localStorage.getItem('case'));
@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
         break;
       case 2:
         console.log('2');
-        localStorage.setItem('countryShort', this.countrySelect.nama2);
+        localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
       case 3:
         console.log('3');
@@ -83,6 +83,8 @@ export class HeaderComponent implements OnInit {
           'countryShort',
           String(countryShort).toLowerCase()
         );
+        console.log('COUNTRY', countryShort);
+        
         this.countrySelect = Constants.countries.find(
           (c) => c.namea2 === localStorage.getItem('countryShort')
         );
@@ -93,13 +95,13 @@ export class HeaderComponent implements OnInit {
         this.countrySelect = Constants.countries.find(
           (c) => c.namea2 === localStorage.getItem('countryShort')
         );
-        localStorage.setItem('countryShort', this.countrySelect.nama2);
+        localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
       default:
         this.countrySelect = Constants.countries.find(
           (c) => c.namea2 === localStorage.getItem('countryShort')
         );
-        localStorage.setItem('countryShort', this.countrySelect.nama2);
+        localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
     }
 
