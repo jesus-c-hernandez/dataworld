@@ -1,7 +1,11 @@
 <div *ngIf="loading" class="load">
   <div class="row justify-content-center">
     <div class="col-1 align-self-center">
-      <app-radar-spinner [animationDuration]="1000" [size]="150" [color]="'#51D5EA'"></app-radar-spinner>
+      <app-radar-spinner
+        [animationDuration]="1000"
+        [size]="150"
+        [color]="'#51D5EA'"
+      ></app-radar-spinner>
     </div>
   </div>
 </div>
@@ -13,23 +17,28 @@
   <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
 </p> comprobarSesionIniciada()-->
 
-<p *ngIf="comprobarSesionIniciada()">
+<!-- <p *ngIf="comprobarSesionIniciada()">
   <ngb-alert [type]="TYPES[typeN]" [dismissible]="true" [animation]="true">
     <strong>¡Bienvenido!</strong>
     <p>Sabías que... {{ ALERTS[alertsN] }}</p>
   </ngb-alert>
-</p>
+</p> -->
 
 <!-- tiempo actual -->
 <div *ngIf="!loading">
-  <div class="tiempo-actual shadow" style="background-image: url('../assets/img/{{dayImage}}.jpg')">
+  <div
+    class="tiempo-actual shadow"
+    style="background-image: url('../assets/img/{{ dayImage }}.jpg')"
+  >
     <div class="icono-temp">
       <img src="../assets/icons/{{ weather.weather[0].description | nightIcon}}.png" alt="icono" />
     </div>
-    <p class="temp-actual" style="color: {{text_color}};">
-      {{ weather.main.temp | round }}°</p>
-    <p class="ciudad-actual" style="color: {{text_color}};">
-      {{ weather.name }}, {{ weather.sys.country }}</p>
+    <p class="temp-actual" style="color: {{ text_color }};">
+      {{ weather.main.temp | round }}°
+    </p>
+    <p class="ciudad-actual" style="color: {{ text_color }};">
+      {{ weather.name }}, {{ weather.sys.country }}
+    </p>
   </div>
 
   <div class="container pronosticos-dash">
@@ -38,21 +47,30 @@
       <h3>En las próximas horas</h3>
       <div class="por-columna">
         <div class="columna">
-          <img src="../assets/icons/{{
+          <img
+            src="../assets/icons/{{
               weather3.list[0].weather[0].description
-            }}.png" alt="icono" />
+            }}.png"
+            alt="icono"
+          />
           <p>{{ weather3.list[0].dt_txt | date: "shortTime" }}</p>
         </div>
         <div class="columna">
-          <img src="../assets/icons/{{
+          <img
+            src="../assets/icons/{{
               weather3.list[1].weather[0].description
-            }}.png" alt="icono" />
+            }}.png"
+            alt="icono"
+          />
           <p>{{ weather3.list[1].dt_txt | date: "shortTime" }}</p>
         </div>
         <div class="columna">
-          <img src="../assets/icons/{{
+          <img
+            src="../assets/icons/{{
               weather3.list[2].weather[0].description
-            }}.png" alt="icono" />
+            }}.png"
+            alt="icono"
+          />
           <p>{{ weather3.list[2].dt_txt | date: "shortTime" }}</p>
         </div>
       </div>
@@ -77,85 +95,112 @@
       </div>
     </div>
   </div>
- 
-    <!-- info covid -->
-    <div class="container">
-      <h2>Información de Covid en México</h2>
 
   <!-- info covid -->
-  <div class="imagen-covid shadow" style="background-image: url('../assets/img/covid.png')">
-    <p class="titulo-covid" style="color: white">
-      Información de Covid en México</p>
-  </div>
-
   <div class="container">
+    <!-- info covid -->
+    <div
+      class="imagen-covid shadow"
+      style="background-image: url('../assets/img/covid.png')"
+    >
+      <p class="titulo-covid" style="color: white">
+        Información de Covid en México
+      </p>
+    </div>
 
-    <div class="col-lg">
-      <!-- inicio info-covid -->
+    <div class="container">
+      <div class="col-lg">
+        <!-- inicio info-covid -->
 
-      <div class="row">
-        <!-- inicio contenedor cuadros info -->
-        <div class="info-covid">
-
-          <div class="col cuadro-info" id="casos-hoy">
-            <h5>Casos de hoy</h5>
-            <p class="cifra">{{covidData.todayCases | number | noData}}</p>
+        <div class="row">
+          <!-- inicio contenedor cuadros info -->
+          <div class="info-covid">
+            <div class="col cuadro-info" id="casos-hoy">
+              <h5>Casos de hoy</h5>
+              <p class="cifra">{{ covidData.todayCases | number | noData }}</p>
+            </div>
+            <div class="col cuadro-info" id="casos-activos">
+              <h5>Casos activos</h5>
+              <p class="cifra">{{ covidData.activeCases | number | noData }}</p>
+            </div>
+            <div class="col cuadro-info" id="def-hoy">
+              <h5>Defunciones de hoy</h5>
+              <p class="cifra">{{ covidData.todayDeaths | number | noData }}</p>
+            </div>
           </div>
-          <div class="col cuadro-info" id="casos-activos">
-            <h5>Casos activos</h5>
-            <p class="cifra">{{covidData.activeCases | number | noData}}</p>
-          </div>
-          <div class="col cuadro-info" id="def-hoy">
-            <h5>Defunciones de hoy</h5>
-            <p class="cifra">{{covidData.todayDeaths | number | noData}}</p>
-          </div>
-
         </div>
+        <!-- fin contenedor cuadros info -->
+      </div>
+      <!-- fin info-covid -->
+    </div>
 
-      </div><!-- fin contenedor cuadros info -->
+    <!-- Sección de noticias -->
+    <div
+      class="imagen-covid shadow"
+      style="background-image: url('../assets/img/news.png')"
+    >
+      <p class="titulo-covid" style="color: white">Noticias del día de hoy</p>
+    </div>
 
-    </div><!-- fin info-covid -->
+    <!-- noticia1 -->
+    <div class="noticia shadow" style="border-color: #55e94a">
+      <div
+        class="imagen-noticia"
+        [style]="healthNews.data[0].image | noImg"
+      ></div>
+      <div class="texto-noticia">
+        <a
+          href="{{ healthNews.data[0].url }}"
+          target="_blank"
+          class="titulo-noticia"
+          id="titulo-salud"
+          >{{ healthNews.data[0].title }}</a
+        >
+        <p>{{ healthNews.data[0].description }}</p>
+        <p class="fuente">
+          <span>Fuente:</span> {{ healthNews.data[0].source }}
+        </p>
+      </div>
+    </div>
 
+    <!-- noticia2 -->
+    <div class="noticia shadow" style="border-color: #7bd5f5">
+      <div
+        class="imagen-noticia"
+        [style]="scienceNews.data[0].image | noImg"
+      ></div>
+      <div class="texto-noticia">
+        <a
+          href="{{ scienceNews.data[0].url }}"
+          target="_blank"
+          class="titulo-noticia"
+          id="titulo-sc"
+          >{{ scienceNews.data[0].title }}</a
+        >
+        <p>{{ scienceNews.data[0].description }}</p>
+        <p class="fuente">
+          <span>Fuente:</span> {{ scienceNews.data[0].source }}
+        </p>
+      </div>
+    </div>
+
+    <!-- noticia3 -->
+    <div class="noticia shadow" style="border-color: #2a93d5">
+      <div
+        class="imagen-noticia"
+        [style]="techNews.data[0].image | noImg"
+      ></div>
+      <div class="texto-noticia">
+        <a
+          href="{{ techNews.data[0].url }}"
+          target="_blank"
+          class="titulo-noticia"
+          id="titulo-tech"
+          >{{ techNews.data[0].title }}</a
+        >
+        <p>{{ techNews.data[0].description }}</p>
+        <p class="fuente"><span>Fuente:</span> {{ techNews.data[0].source }}</p>
+      </div>
+    </div>
   </div>
-
-  <!-- Sección de noticias -->
-  <div class="imagen-covid shadow" style="background-image: url('../assets/img/news.png')">
-    <p class="titulo-covid" style="color: white">
-      Noticias del día de hoy</p>
-  </div>
-
-  <!-- noticia1 -->
-  <div class="noticia shadow" style="border-color: #55E94A;">
-    <div class="imagen-noticia" [style]="healthNews.data[0].image | noImg">
-    </div>
-    <div class="texto-noticia">
-      <a href="{{healthNews.data[0].url}}" target="_blank" class="titulo-noticia" id="titulo-salud">{{healthNews.data[0].title}}</a>
-      <p>{{healthNews.data[0].description}}</p>
-      <p class="fuente"><span>Fuente:</span> {{healthNews.data[0].source}}</p>
-    </div>
-  </div>
-
-  <!-- noticia2 -->
-  <div class="noticia shadow" style="border-color: #7BD5F5;">
-    <div class="imagen-noticia" [style]="scienceNews.data[0].image | noImg">
-    </div>
-    <div class="texto-noticia">
-      <a href="{{scienceNews.data[0].url}}" target="_blank" class="titulo-noticia" id="titulo-sc">{{scienceNews.data[0].title}}</a>
-      <p>{{scienceNews.data[0].description}}</p>
-      <p class="fuente"><span>Fuente:</span> {{scienceNews.data[0].source}}</p>
-    </div>
-  </div>
-
-  <!-- noticia3 -->
-  <div class="noticia shadow" style="border-color: #2A93D5;">
-    <div class="imagen-noticia" [style]="techNews.data[0].image | noImg">
-    </div>
-    <div class="texto-noticia">
-      <a href="{{techNews.data[0].url}}" target="_blank" class="titulo-noticia" id="titulo-tech">{{techNews.data[0].title}}</a>
-      <p>{{techNews.data[0].description}}</p>
-      <p class="fuente"><span>Fuente:</span> {{techNews.data[0].source}}</p>
-    </div>
-  </div>
-
-
 </div>

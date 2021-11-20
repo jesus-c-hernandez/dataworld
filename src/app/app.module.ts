@@ -27,6 +27,7 @@ import { NoImgPipe } from './Pipes/no-img/no-img.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NightIconPipe } from './Pipes/night-icon/night-icon.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NightIconPipe } from './Pipes/night-icon/night-icon.pipe';
     RadarSpinnerModule,
     FormsModule,
     NgbModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

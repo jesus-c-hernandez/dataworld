@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
 import Swal from 'sweetalert2';
 
+import { Constants } from '../../Constants';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,8 +15,16 @@ export class ProfileComponent implements OnInit {
   //pantalla de carga
   loading = true;
 
+  timeZone = null;
+
+  timeZoneDisable = true;
+
   public formSubmit = false;
   public user: any;
+
+  countries: any = [];
+  timeZones: any = [];
+  languages: any = [];
 
   public registerForm = this.fb.group({
       name: ['', [ Validators.required, Validators.minLength(3)]],
@@ -40,14 +50,27 @@ export class ProfileComponent implements OnInit {
     this.registerForm = this.fb.group({
       name: [this.user.data.name, [ Validators.required, Validators.minLength(3)]],
       email: [this.user.data.email, [ Validators.required , Validators.email]],
-      // password: [this.user.data.password, [ Validators.required ]],
-      // password2: [this.user.data.password, [ Validators.required ]],
       country: [this.user.data.country, [ Validators.required ]],
-      timeZone: [this.user.data.timeZone, [ Validators.required ]],
+      timeZone: [ , [ Validators.required ]],
       language: [this.user.data.language, [ Validators.required ]],
     });
 
-    this.loading = false;
+    this.countries = Constants.countries;
+    this.languages = Constants.languages;
+    this.timeZones = Constants.timeZones.find(
+      (e) => e.value === this.user.data.country
+    ).timeZones;
+
+    console.log(this.timeZones);
+    
+    // TODO: Cambiar lo que se guarda en el campo timezone por el codigo de la zona horaria.
+    this.timeZone = this.timeZones.find( t => t.code === this.user.data.timeZone )
+
+    console.log(this.timeZone);
+
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
   ngOnInit(): void {
@@ -74,6 +97,20 @@ export class ProfileComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  chooseCountry() {
+    this.timeZones = [];
+    this.timeZone = null;
+    const country = this.registerForm.value.country;
+    if (!country) {
+      this.timeZoneDisable = true;
+      return;
+    }
+    this.timeZones = Constants.timeZones.find(
+      (e) => e.value === country
+    ).timeZones;
+    this.timeZoneDisable = false;
   }
 
 }
