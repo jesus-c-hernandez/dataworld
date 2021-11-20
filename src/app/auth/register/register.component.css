@@ -35,6 +35,11 @@
   background-color: #d0f53d;
   border-style: none;
   border-radius: 5px;
+  font-weight: bold;
+}
+.btn-crear-cuenta:hover{
+  background-color: white;
+  border: 3px solid #d0f53d;
 }
 @media only screen and (max-width: 430px){
   .btn-crear-cuenta{
@@ -42,7 +47,7 @@
   }
 }
 .btn-iniciar-sesion{
-  width: 6rem;
+  width: 8rem;
   height: 3rem;
   background-color: #55e94a;
   border-style: none;

@@ -55,6 +55,9 @@ export class DashboardComponent implements OnInit {
 
   //para banner
   dayImage: string;
+  //para iconos de noche
+  esDeNoche : boolean = false;
+  isNight : string = '';
   //para saber qué hora es
   today = new Date();
   time = this.today.getHours();
@@ -93,6 +96,14 @@ export class DashboardComponent implements OnInit {
 
     this.weather3 = await this.weatherService.getCurrentWeatherByHours(lat, lon, 3);
     console.log('RESP3', this.weather3);
+
+    /*console.log("Hola antes de la descripcion");
+    const descripcion = this.weather.weather.description;
+    console.log('Esta es la descripcion',descripcion);
+    if(this.esDeNoche && (descripcion == "cielo claro" || 
+        descripcion == "algo de nubes") ){
+      this.isNight = '-night';
+    }*/
 
     const dateTime = new Date();
 
@@ -144,7 +155,7 @@ export class DashboardComponent implements OnInit {
     let country = 'us';
 
 
-    this.healthNews = await this.newsService.getHealthNews(country);
+    /*this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
     if (this.healthNews.pagination.count == 0) {
       //no trae noticias del país, mostrar las de USA
@@ -156,7 +167,7 @@ export class DashboardComponent implements OnInit {
     this.techNews = await this.newsService.getTechnologyNews(country);
     // console.log('techNews', this.techNews);
 
-    this.scienceNews = await this.newsService.getScienceNews(country);
+    this.scienceNews = await this.newsService.getScienceNews(country);*/
     // console.log('scienceNews', this.scienceNews);
 
     this.loading = false;
@@ -169,21 +180,27 @@ export class DashboardComponent implements OnInit {
     if (this.time >= 0 && this.time <= 6) {
       this.text_color = "white";
       this.dayImage = 'night-sky';
+      this.esDeNoche = true;
     } else if (this.time > 6 && this.time <= 8) {
       this.text_color = "black";
       this.dayImage = 'morning-sky';
+      this.esDeNoche = false;
     } else if (this.time > 8 && this.time <= 17) {
       this.text_color = "black";
       this.dayImage = 'day-sky';
+      this.esDeNoche = false;
     } else if (this.time > 17 && this.time <= 19) {
       this.text_color = "black";
       this.dayImage = 'evening-sky';
+      this.esDeNoche = false;
     } else if (this.time > 19 && this.time <= 23) {
       this.text_color = "white";
       this.dayImage = 'night-sky';
+      this.esDeNoche = true;
     } else {
       this.text_color = "black";
       this.dayImage = 'day-sky';
+      this.esDeNoche = false;
     }
   }
 
