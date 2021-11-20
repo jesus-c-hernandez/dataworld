@@ -26,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
 import { NoImgPipe } from './Pipes/no-img/no-img.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NightIconPipe } from './Pipes/night-icon/night-icon.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NosotrosComponent,
     NoDataPipe,
     NoticiasComponent,
-    NoImgPipe
+    NoImgPipe,
+    NightIconPipe
   ],
   imports: [
     BrowserModule,
