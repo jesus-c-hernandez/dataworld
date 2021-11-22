@@ -74,6 +74,9 @@ export class HeaderComponent implements OnInit {
         break;
       case 2:
         console.log('2');
+        this.countrySelect = Constants.countries.find(
+          (c) => c.namea2 === localStorage.getItem('countryShort')
+        );
         localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
       case 3:
@@ -99,7 +102,7 @@ export class HeaderComponent implements OnInit {
         break;
       default:
         this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
+          (c) => c.namea2 === 'mx'
         );
         localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;

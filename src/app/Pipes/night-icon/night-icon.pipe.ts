@@ -5,9 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NightIconPipe implements PipeTransform {
 
-  transform(value: unknown): string {
+  transform(value: string): string {
     if(value == "cielo claro" || value == "algo de nubes"){
       return value+"-night";
+    } else {
+      return value;
     }
   }
 
