@@ -46,7 +46,13 @@ export class HeaderComponent implements OnInit {
 
     const weather = await this.weatherService.getCurrentWeather(lat, lon);
 
+    console.log('WEAT', weather);
+    
+
     this.countries = Constants.countries;
+
+    console.log('C', this.countries);
+    
 
     // Case 1: Si el usuario esta registrado se debe de seleccionar el pais por defecto.
     // Case 2: El usuario tiene iniciada la sesion y cambia de pais
@@ -74,6 +80,9 @@ export class HeaderComponent implements OnInit {
         break;
       case 2:
         console.log('2');
+        this.countrySelect = Constants.countries.find(
+          (c) => c.namea2 === localStorage.getItem('countryShort')
+        );
         localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
       case 3:
@@ -99,7 +108,7 @@ export class HeaderComponent implements OnInit {
         break;
       default:
         this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
+          (c) => c.namea2 === 'mx'
         );
         localStorage.setItem('countryShort', this.countrySelect.namea2);
         break;
