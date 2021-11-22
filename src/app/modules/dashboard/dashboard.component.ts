@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import { CovidService, CovidData } from 'src/app/core/services/covid/covid.service';
+import {
+  CovidService,
+  CovidData,
+} from 'src/app/core/services/covid/covid.service';
 import { NewsService } from 'src/app/core/services/news/news.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 
@@ -12,10 +15,9 @@ import { Constants } from '../../Constants';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
   public typeN = 1;
   public alertsN = 1;
 
@@ -35,17 +37,10 @@ export class DashboardComponent implements OnInit {
     'La ONU alerta que al día se extinguen 150 especies animales.',
     'Las ciudades sólo ocupan el 2% del territorio del planeta, pero son responsables del 70% de las emisiones de gases de efecto invernadero.',
     'La ONU espera que la actual población humana incremente 2.000 millones de personas llegando a ser para 2050 aproximadamente 9.700 millones de personas.',
-    'El planeta extrasolar Kepler ese el más similar a la Tierra en tamaño y temperatura de todos los encontrados hasta ahora. Se encuentra a 300 años luz de distancia.'
-  ]
+    'El planeta extrasolar Kepler ese el más similar a la Tierra en tamaño y temperatura de todos los encontrados hasta ahora. Se encuentra a 300 años luz de distancia.',
+  ];
 
-  public TYPES = [
-    'success',
-    'info',
-    'warning',
-    'primary',
-    'secondary',
-    'dark'
-  ]
+  public TYPES = ['success', 'info', 'warning', 'primary', 'secondary', 'dark'];
 
   healthNews: any;
   techNews: any;
@@ -58,40 +53,41 @@ export class DashboardComponent implements OnInit {
   //para banner
   dayImage: string;
   //para iconos de noche
-  esDeNoche : boolean = false;
-  isNight : string = '';
+  esDeNoche: boolean = false;
+  isNight: string = '';
   //para saber qué hora es
   today = new Date();
   time = this.today.getHours();
   //para el color del texto
-  text_color = "black";
+  text_color = 'black';
 
   weather: any;
   weather3: any;
 
   user: any = null;
 
-  lat : number;
+  lat: number;
   lon: number;
 
   timeZoneValue: number;
-
 
   //info covid
   covidData: CovidData = null;
   datos = [];
 
-  constructor(private weatherService: WeatherService,
+  constructor(
+    private weatherService: WeatherService,
     private covidService: CovidService,
     private newsService: NewsService,
     private userService: UserService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentWeather();
     this.infoCovid();
     this.loadMessage();
     this.infoNews();
+    
   }
 
   async currentWeather() {
@@ -99,49 +95,62 @@ export class DashboardComponent implements OnInit {
     // localStorage.setItem('lat', String(lat))
     // localStorage.setItem('lon', String(lon))
 
-    if ( localStorage.getItem('uid') ) {
-      this.user = await this.userService.getUser( localStorage.getItem('uid'));
+    if (localStorage.getItem('uid')) {
+      this.user = await this.userService.getUser(localStorage.getItem('uid'));
       console.log('USER', this.user);
 
-      if( localStorage.getItem('countryShort') != this.user.data.country ) {
+      if (localStorage.getItem('countryShort') != this.user.data.country) {
         console.log('DIFF');
-        const country = Constants.countries.find( c => c.namea2 === localStorage.getItem('countryShort')) 
+        const country = Constants.countries.find(
+          (c) => c.namea2 === localStorage.getItem('countryShort')
+        );
         console.log('C', country);
-        this.lat = country.lat;
-        this.lon = country.lon;
+        this.lat = Number(country.lat);
+        this.lon = Number(country.lon);
       } else {
         this.lat = Number(localStorage.getItem('lat'));
         this.lon = Number(localStorage.getItem('lon'));
       }
-      
+    } else {
+
+
+
+      this.lat = Number(localStorage.getItem('lat'));
+      this.lon = Number(localStorage.getItem('lon'));
     }
 
     console.log('POS', this.lat, this.lon);
 
-    this.weather = await this.weatherService.getCurrentWeather(this.lat, this.lon);
+    this.weather = await this.weatherService.getCurrentWeather(
+      this.lat,
+      this.lon
+    );
     console.log('RESP', this.weather);
 
-    this.weather3 = await this.weatherService.getCurrentWeatherByHours(this.lat, this.lon, 3);
+    this.weather3 = await this.weatherService.getCurrentWeatherByHours(
+      this.lat,
+      this.lon,
+      3
+    );
     console.log('RESP3', this.weather3);
 
-    this.timeZoneValue = this.weather.timezone/60;
+    this.timeZoneValue = this.weather.timezone / 60;
 
     console.log('TZ', this.timeZoneValue);
-    
 
     const dateTime = new Date();
 
     console.log('DT', dateTime.getTimezoneOffset());
-    
 
     // Cambiar de zona horaria las proximas horas
-    this.weather3.list.forEach( date  => {
-      const weatAux = moment(date.dt_txt).add( this.timeZoneValue, 'minutes').format('YYYY MM DD HH:mm:ss');
+    this.weather3.list.forEach((date) => {
+      const weatAux = moment(date.dt_txt)
+        .add(this.timeZoneValue, 'minutes')
+        .format('YYYY MM DD HH:mm:ss');
       date.dt_txt = weatAux;
     });
 
     console.log('WEA', this.weather3);
-    
 
     this.horaDelDia();
 
@@ -154,7 +163,7 @@ export class DashboardComponent implements OnInit {
 
   inicializarCovidData(): void {
     this.covidData = {
-      country: "",
+      country: '',
       todayCases: 0,
       activeCases: 0,
       todayDeaths: 0,
@@ -166,7 +175,7 @@ export class DashboardComponent implements OnInit {
     //const lat = Number(localStorage.getItem('lat'));
     //const lon = Number(localStorage.getItem('lon'));
     // let country = this.getCountry(lat, lon);
-    let country = "Mexico";
+    let country = 'Mexico';
     // this.covidData.country = country;
     // let datos = [];
     this.covidData.country = country;
@@ -183,7 +192,6 @@ export class DashboardComponent implements OnInit {
   async infoNews() {
     // let country = localStorage.getItem('countryShort').toLowerCase();
     let country = 'us';
-
 
     /*this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
@@ -203,32 +211,35 @@ export class DashboardComponent implements OnInit {
     this.loading = false;
 
     console.log('Health news', this.healthNews);
+    setTimeout(() => {
+      this.loading = false;
+     }, 2000);
   }
 
   horaDelDia() {
     //banner
     if (this.time >= 0 && this.time <= 6) {
-      this.text_color = "white";
+      this.text_color = 'white';
       this.dayImage = 'night-sky';
       this.esDeNoche = true;
     } else if (this.time > 6 && this.time <= 8) {
-      this.text_color = "black";
+      this.text_color = 'black';
       this.dayImage = 'morning-sky';
       this.esDeNoche = false;
     } else if (this.time > 8 && this.time <= 17) {
-      this.text_color = "black";
+      this.text_color = 'black';
       this.dayImage = 'day-sky';
       this.esDeNoche = false;
     } else if (this.time > 17 && this.time <= 19) {
-      this.text_color = "black";
+      this.text_color = 'black';
       this.dayImage = 'evening-sky';
       this.esDeNoche = false;
     } else if (this.time > 19 && this.time <= 23) {
-      this.text_color = "white";
+      this.text_color = 'white';
       this.dayImage = 'night-sky';
       this.esDeNoche = true;
     } else {
-      this.text_color = "black";
+      this.text_color = 'black';
       this.dayImage = 'day-sky';
       this.esDeNoche = false;
     }
@@ -239,8 +250,9 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadMessage() {
-    this.typeN = await Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-    this.alertsN = await Math.floor(Math.random() * (this.ALERTS.length - 1 + 1)) + 1;
+    this.typeN = (await Math.floor(Math.random() * (6 - 1 + 1))) + 1;
+    this.alertsN =
+      (await Math.floor(Math.random() * (this.ALERTS.length - 1 + 1))) + 1;
   }
 
   comprobarSesionIniciada(): boolean {
@@ -250,5 +262,4 @@ export class DashboardComponent implements OnInit {
       return true;
     }
   }
-
 }
