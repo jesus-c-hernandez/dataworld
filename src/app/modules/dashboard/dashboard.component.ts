@@ -111,10 +111,14 @@ export class DashboardComponent implements OnInit {
         this.lat = Number(localStorage.getItem('lat'));
         this.lon = Number(localStorage.getItem('lon'));
       }
+    } else if( localStorage.getItem('countryShort') ) {
+      const country = Constants.countries.find(
+        (c) => c.namea2 === localStorage.getItem('countryShort')
+      );
+      console.log('C', country);
+      this.lat = Number(country.lat);
+      this.lon = Number(country.lon);
     } else {
-
-
-
       this.lat = Number(localStorage.getItem('lat'));
       this.lon = Number(localStorage.getItem('lon'));
     }
@@ -153,8 +157,6 @@ export class DashboardComponent implements OnInit {
     console.log('WEA', this.weather3);
 
     this.horaDelDia();
-
-    this.loading = false;
 
     // setTimeout(() => {
     //   this.loading = false;
@@ -208,7 +210,7 @@ export class DashboardComponent implements OnInit {
     this.scienceNews = await this.newsService.getScienceNews(country);*/
     // console.log('scienceNews', this.scienceNews);
 
-    this.loading = false;
+    // this.loading = false;
 
     console.log('Health news', this.healthNews);
     setTimeout(() => {
