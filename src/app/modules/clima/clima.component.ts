@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import * as moment from 'moment';
 
+import { Constants } from '../../Constants';
+import { UserService } from 'src/app/core/services/user/user.service';
+
 
 @Component({
   selector: 'app-clima',
@@ -30,8 +33,16 @@ export class ClimaComponent implements OnInit {
   //pantalla de carga
   loading: boolean = true;;
 
+  lat: number;
+  lon: number;
+  
+  user: any;
+
+  timeZoneValue;
+
   constructor(
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -150,14 +161,46 @@ export class ClimaComponent implements OnInit {
 
   async init() {
 
-    const lat = Number(localStorage.getItem('lat'));
-    const lon = Number(localStorage.getItem('lon'));
+
+    if (localStorage.getItem('uid')) {
+      this.user = await this.userService.getUser(localStorage.getItem('uid'));
+      console.log('USER', this.user);
+
+      if (localStorage.getItem('countryShort') != this.user.data.country) {
+        console.log('DIFF');
+        const country = Constants.countries.find(
+          (c) => c.namea2 === localStorage.getItem('countryShort')
+        );
+        console.log('C', country);
+        this.lat = Number(country.lat);
+        this.lon = Number(country.lon);
+      } else {
+        this.lat = Number(localStorage.getItem('lat'));
+        this.lon = Number(localStorage.getItem('lon'));
+      }
+    } else if( localStorage.getItem('countryShort') ) {
+      const country = Constants.countries.find(
+        (c) => c.namea2 === localStorage.getItem('countryShort')
+      );
+      console.log('C', country);
+      this.lat = Number(country.lat);
+      this.lon = Number(country.lon);
+    } else {
+      this.lat = Number(localStorage.getItem('lat'));
+      this.lon = Number(localStorage.getItem('lon'));
+    }
 
 
-    this.weather = await this.weatherService.getCurrentWeather(lat, lon);
+    this.weather = await this.weatherService.getCurrentWeather(this.lat, this.lon);
     console.log('RESP', this.weather);
     
     this.guardarDatosWeather();
+
+    this.timeZoneValue = this.weather.timezone / 60;
+
+    console.log('TZ', this.timeZoneValue);
+
+    
 
     // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
       
@@ -168,15 +211,17 @@ export class ClimaComponent implements OnInit {
     //   this.weather3 = resp.data;
     // });
 
-    this.weather5 = await this.weatherService.getCurrentWeatherByHours( lat, lon, 5);
+    this.weather5 = await this.weatherService.getCurrentWeatherByHours( this.lat, this.lon, 5);
 
-    const dateTime = new Date();
-    
     // Cambiar de zona horaria las proximas horas
-    this.weather5.list.forEach( date  => {
-      const weatAux = moment(date.dt_txt).subtract( dateTime.getTimezoneOffset(), 'minutes').format('YYYY MM DD HH:mm:ss');
+    this.weather5.list.forEach((date) => {
+      const weatAux = moment(date.dt_txt)
+        .add(this.timeZoneValue, 'minutes')
+        .format('YYYY MM DD HH:mm:ss');
       date.dt_txt = weatAux;
     });
+
+    console.log('WEA', this.weather5);
 
     this.horaDelDia();
     
