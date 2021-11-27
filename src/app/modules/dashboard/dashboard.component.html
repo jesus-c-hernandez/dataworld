@@ -44,7 +44,7 @@
   <div class="container pronosticos-dash">
     <!-- clima por horas -->
     <div class="contenedor-medio shadow">
-      <h3>En las próximas horas</h3>
+      <h3>{{ Constanst.dashboard.fewHours }}</h3>
       <div class="por-columna">
         <div class="columna">
           <img
@@ -78,7 +78,7 @@
 
     <!-- clima por días -->
     <div class="contenedor-medio shadow">
-      <h3>En los próximos días</h3>
+      <h3>{{ Constanst.dashboard.nextDays }}</h3>
       <div class="por-columna">
         <div class="columna">
           <img src="../assets/img/soleado-icon.png" alt="icono" />
@@ -104,7 +104,7 @@
       style="background-image: url('../assets/img/covid.png')"
     >
       <p class="titulo-covid" style="color: white">
-        Información de Covid en México
+        {{ Constanst.dashboard.infoCovid }} {{ countrySelected.name  }}
       </p>
     </div>
 
@@ -116,16 +116,16 @@
           <!-- inicio contenedor cuadros info -->
           <div class="info-covid">
             <div class="col cuadro-info" id="casos-hoy">
-              <h5>Casos de hoy</h5>
-              <p class="cifra">{{ covidData.todayCases | number | noData }}</p>
+              <h5>{{ Constanst.dashboard.todayCases }}</h5>
+              <p class="cifra">{{ todayCases.data | number | noData }}</p>
             </div>
             <div class="col cuadro-info" id="casos-activos">
-              <h5>Casos activos</h5>
-              <p class="cifra">{{ covidData.activeCases | number | noData }}</p>
+              <h5>{{ Constanst.dashboard.activeCases }}</h5>
+              <p class="cifra">{{ activeCases.data | number | noData }}</p>
             </div>
             <div class="col cuadro-info" id="def-hoy">
-              <h5>Defunciones de hoy</h5>
-              <p class="cifra">{{ covidData.todayDeaths | number | noData }}</p>
+              <h5>{{ Constanst.dashboard.deathsToday }}</h5>
+              <p class="cifra">{{ todayDeaths.data | number | noData }}</p>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@
       class="imagen-covid shadow"
       style="background-image: url('../assets/img/news.png')"
     >
-      <p class="titulo-covid" style="color: white">Noticias del día de hoy</p>
+      <p class="titulo-covid" style="color: white">{{ Constanst.dashboard.newsToday }}</p>
     </div>
 
     <!-- noticia1 -->

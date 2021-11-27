@@ -103,7 +103,12 @@ export class ProfileComponent implements OnInit {
         localStorage.getItem('uid')
       );
       if (variable.result) {
+        console.log('VARIA', variable);
+        localStorage.setItem('language', variable.user.language );
         Swal.fire('Éxito', 'Información actualizada correctamente', 'success');
+        setTimeout(() => {
+          location.reload();
+         }, 1000);
       } else {
         Swal.fire('Error', '¡Ocurrió algún error!', 'error');
       }
