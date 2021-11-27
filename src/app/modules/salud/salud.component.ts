@@ -12,6 +12,9 @@ import {
 import { SharedService } from 'src/app/core/Shared/shared.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 
+import { Constants } from '../../Constants';
+import { textChangeRangeIsUnchanged } from 'typescript';
+
 @Component({
   selector: 'app-salud',
   templateUrl: './salud.component.html',
@@ -28,12 +31,13 @@ export class SaludComponent implements OnInit {
 
   weather: any;
   country: string = '';
+  countrySelected : any;
 
-  cases: any;
   todayCases: any;
+  cases: any;
   activeCases: any;
-  totalDeaths: any;
   todayDeaths: any;
+  totalDeaths: any;
   recoveredCases: any;
   testTotals: any;
   //pantalla de carga
@@ -58,72 +62,23 @@ export class SaludComponent implements OnInit {
   }
 
   getCountry() {
-    this.country = localStorage.getItem('countryShort');
+    this.countrySelected = Constants.countries.find(
+      (c) => c.namea2 === localStorage.getItem('countryShort') )
+    this.country = localStorage.getItem('countryShort') 
   }
 
   async init() {
     this.getCountry();
 
-    /*const labels = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-    ];
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
-
-    const myChart = new Chart(
-      'myChart',
-      {
-        type: 'line',
-        data: data,
-        options: {}
-      }
-    );*/
-
-    /*
-    //casos totales
-    this.cases = await this.covidService.getCases(this.country);
-
-    //casos de hoy
-    this.todayCases = await this.covidService.getTodayCases(this.country);
-
-    //casos activos
-    this.activeCases = await this.covidService.getActiveCases(this.country);
-
-    //muertes totales
-    this.totalDeaths = await this.covidService.getTotalDeaths(this.country);
-
-    //muertes de hoy
-    this.todayDeaths = await this.covidService.getTodayDeaths(this.country);
-
-    //recuperados
-    this.recoveredCases = await this.covidService.getRecoveredCases(this.country);
-
-    //pruebas totales
-    this.testTotals = await this.covidService.getTestTotals(this.country);*/
-
-    this.getPaisesPrincipales();
-
-    setTimeout(() => {
-      this.loading = false;
-    }, 2000);
+    this.todayCases = await this.covidService.getTodayCases( this.countrySelected.code );
+    this.cases = await this.covidService.getCases(  this.countrySelected.code );
+    this.activeCases = await this.covidService.getActiveCases( this.countrySelected.code );
+    this.recoveredCases = await this.covidService.getRecoveredCases( this.countrySelected.code );
+    this.todayDeaths = await this.covidService.getTodayDeaths( this.countrySelected.code );
+    this.totalDeaths = await this.covidService.getTotalDeaths( this.countrySelected.code );
+    this.testTotals = await this.covidService.getTestTotals( this.countrySelected.code );
+    
+    this.loading = false;
   }
 
   async getPaisesPrincipales() {

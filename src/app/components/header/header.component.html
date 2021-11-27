@@ -17,7 +17,8 @@
                 <img src="./assets/icons/search-globe-icon.png" alt="">
               </div>
               <ng-select
-                class="mt-1" 
+                class="mt-1"
+                style="width: 180px;"
                 [items]="countries"
                 bindLabel="name"
                 (change)="chooseCountry()"
@@ -33,31 +34,31 @@
             </div>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" [routerLink]="['dashboard']">Inicio</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['dashboard']">{{ Constants.header.home }}</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" [routerLink]="['clima']">Clima</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['clima']">{{ Constants.header.weather }}</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" [routerLink]="['salud']">Covid</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['salud']">{{ Constants.header.health }}</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" [routerLink]="['noticias']">Noticias</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['noticias']">{{ Constants.header.news }}</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" [routerLink]="['nosotros']">Nosotros</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['nosotros']">{{ Constants.header.us }}</a>
           </li>
           <li *ngIf="!comprobarSesionIniciada()" class="nav-item" routerLinkActive="active">
-            <a  class="nav-link" aria-current="page" [routerLink]="['login']">Iniciar Sesión</a>
+            <a  class="nav-link" aria-current="page" [routerLink]="['login']">{{ Constants.header.login }}</a>
           </li>
           <li *ngIf="comprobarSesionIniciada()" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle icono" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="./assets/icons/user.png" alt="user">
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="['profile']">Perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="['profile']">{{ Constants.header.menu.profile }}</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click)="cerrarSesion()" [routerLink]="['login']">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" (click)="cerrarSesion()" [routerLink]="['login']">{{ Constants.header.menu.logout }}</a></li>
             </ul>
           </li>
 

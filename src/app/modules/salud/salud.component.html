@@ -35,31 +35,31 @@
               <div class="info-covid">
                 <div class="col cuadro-info" id="casos-hoy">
                   <h5>Casos de hoy</h5>
-                  <p class="cifra">{{ todayCases | number | noData }}</p>
+                  <p class="cifra">{{ todayCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="casos-activos">
                   <h5>Casos activos</h5>
-                  <p class="cifra">{{ activeCases | number | noData }}</p>
+                  <p class="cifra">{{ activeCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="def-hoy">
                   <h5>Defunciones de hoy</h5>
-                  <p class="cifra">{{ todayDeaths | number | noData }}</p>
+                  <p class="cifra">{{ todayDeaths.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="casos-totales">
                   <h5>Casos totales</h5>
-                  <p class="cifra">{{ cases | number | noData }}</p>
+                  <p class="cifra">{{ cases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="recuperados">
                   <h5>Recuperados</h5>
-                  <p class="cifra">{{ recoveredCases | number | noData }}</p>
+                  <p class="cifra">{{ recoveredCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="def-totales">
                   <h5>Defunciones totales</h5>
-                  <p class="cifra">{{ totalDeaths | number | noData }}</p>
+                  <p class="cifra">{{ totalDeaths.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="pruebas-totales">
                   <h5>Pruebas totales</h5>
-                  <p class="cifra">{{ testTotals | number | noData }}</p>
+                  <p class="cifra">{{ testTotals.data | number | noData }}</p>
                 </div>
               </div>
             </div>

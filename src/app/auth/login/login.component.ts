@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
           localStorage.removeItem('email');
         }
         localStorage.setItem('uid', res.user.uid);
+        localStorage.setItem('language', res.user.language);
         localStorage.setItem('countryShort', res.user.country);
         localStorage.setItem('case', String(1));
         this.router.navigateByUrl('/dashboard');
@@ -84,7 +85,7 @@ export class LoginComponent implements OnInit {
   // }
 
   async startApp() {
-    await this.userService.googleInit();
+    // await this.userService.googleInit();
     this.auth2 = this.userService.auth2;
     this.attachSignin(document.getElementById('my-signin2'));
   }
