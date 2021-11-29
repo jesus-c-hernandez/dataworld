@@ -12,9 +12,9 @@ export class CovidService {
 
   constructor(private http: HttpClient) { }
 
-  async getCases(country: string) {
+  async getTodayCases(country: string) {
     try {
-      const url = `${base_url}/cases?country=${country}`;
+      const url = `${base_url}/today-cases?country=${country}`;
       const result : any = await this.http.get(url).toPromise();
       return result.data;
     } catch (error) {
@@ -22,9 +22,9 @@ export class CovidService {
     }
   }
 
-  async getTodayCases(country: string) {
+  async getCases(country: string) {
     try {
-      const url = `${base_url}/today-cases?country=${country}`;
+      const url = `${base_url}/cases?country=${country}`;
       const result : any = await this.http.get(url).toPromise();
       return result.data;
     } catch (error) {
@@ -74,7 +74,7 @@ export class CovidService {
 
   async getTestTotals(country: string) {
     try {
-      const url = `${base_url}/test-totals?country=${country}`;
+      const url = `${base_url}/tests?country=${country}`;
       const result : any = await this.http.get(url).toPromise();
       return result.data;
     } catch (error) {

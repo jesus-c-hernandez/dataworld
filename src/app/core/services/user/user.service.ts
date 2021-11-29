@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { User } from '../../../models/user.model';
 
 const base_url = environment.base_url;
-declare const gapi: any;
+// declare const gapi: any;
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class UserService {
     private router: Router,
     private ngZone: NgZone
   ) {
-    this.googleInit();
+    // this.googleInit();
   }
 
   get token(): string {
@@ -46,19 +46,19 @@ export class UserService {
     };
   }
 
-  googleInit() {
-    return new Promise<void>((resolve) => {
-      gapi.load('auth2', () => {
-        // Retrieve the singleton for the GoogleAuth library and set up the client.
-        this.auth2 = gapi.auth2.init({
-          client_id:
-            '505498109082-nf6f858gcb9sejl0mdil65rioa21n7r0.apps.googleusercontent.com',
-          cookiepolicy: 'single_host_origin',
-        });
-        resolve();
-      });
-    });
-  }
+  // googleInit() {
+  //   return new Promise<void>((resolve) => {
+  //     gapi.load('auth2', () => {
+  //       // Retrieve the singleton for the GoogleAuth library and set up the client.
+  //       this.auth2 = gapi.auth2.init({
+  //         client_id:
+  //           '505498109082-nf6f858gcb9sejl0mdil65rioa21n7r0.apps.googleusercontent.com',
+  //         cookiepolicy: 'single_host_origin',
+  //       });
+  //       resolve();
+  //     });
+  //   });
+  // }
 
   saveLocalStorage(token: string) {
     localStorage.setItem('token', token);

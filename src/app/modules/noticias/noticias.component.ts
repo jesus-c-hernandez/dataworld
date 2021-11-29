@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from 'src/app/core/services/news/news.service';
 
+import { Constants } from '../../Constants';
+
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.component.html',
@@ -14,6 +16,8 @@ export class NoticiasComponent implements OnInit {
   techNews: any;
   scienceNews: any;
   arreglo: string[] = ['salud', 'tec', 'ciencia'];
+
+  Constants: any = Constants;
 
   //para el scroll
   @ViewChild('body') contenedorTodo: ElementRef;
