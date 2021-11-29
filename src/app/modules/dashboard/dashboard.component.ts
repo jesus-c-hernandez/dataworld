@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   isNight: string = '';
   //para saber qué hora es
   today = new Date();
-  time = this.today.getHours();
+  time: any;
   //para el color del texto
   text_color = 'black';
 
@@ -70,6 +70,15 @@ export class DashboardComponent implements OnInit {
   lon: number;
 
   timeZoneValue: number;
+
+  // Covid
+  todayCases: any
+  activeCases: any;
+  todayDeaths: any;
+
+  countrySelected: any;
+
+  Constanst: any = Constants;
 
   //info covid
   covidData: CovidData = null;
@@ -87,7 +96,6 @@ export class DashboardComponent implements OnInit {
     this.infoCovid();
     this.loadMessage();
     this.infoNews();
-    
   }
 
   async currentWeather() {
@@ -131,6 +139,16 @@ export class DashboardComponent implements OnInit {
     );
     console.log('RESP', this.weather);
 
+    const hours = (this.weather.timezone / 60)/60;
+    this.time = Number(moment.unix(this.weather.dt).utc().format('HH')) + Number(hours);
+    console.log('H', hours);
+    console.log(Number(moment.unix(this.weather.dt).utc().format('HH')));
+    if ( this.time < 0 ){ this.time *= -1 }
+    
+    console.log('TIME', this.time);
+
+    await this.horaDelDia();
+
     this.weather3 = await this.weatherService.getCurrentWeatherByHours(
       this.lat,
       this.lon,
@@ -155,47 +173,25 @@ export class DashboardComponent implements OnInit {
     });
 
     console.log('WEA', this.weather3);
-
-    this.horaDelDia();
-
-    // setTimeout(() => {
-    //   this.loading = false;
-    //  }, 1000);
-  }
-
-  inicializarCovidData(): void {
-    this.covidData = {
-      country: '',
-      todayCases: 0,
-      activeCases: 0,
-      todayDeaths: 0,
-    };
   }
 
   async infoCovid() {
-    this.inicializarCovidData();
-    //const lat = Number(localStorage.getItem('lat'));
-    //const lon = Number(localStorage.getItem('lon'));
-    // let country = this.getCountry(lat, lon);
-    let country = 'Mexico';
-    // this.covidData.country = country;
-    // let datos = [];
-    this.covidData.country = country;
-    //casos totales
-    //this.covidData.todayCases = await this.covidService.getTodayCases(country);
-    //casos activos
-    //this.covidData.activeCases = await this.covidService.getActiveCases(country);
-    //muertes de hoy
-    //this.covidData.todayDeaths = await this.covidService.getTodayDeaths(country);
+    this.countrySelected = Constants.countries.find(
+      (c) => c.namea2 === localStorage.getItem('countryShort') )
 
-    console.log('covidData', this.covidData);
+    // casos de hoy
+    this.todayCases = await this.covidService.getTodayCases( this.countrySelected.code );
+    // casos activos
+    this.activeCases = await this.covidService.getActiveCases( this.countrySelected.code );
+    // muertes de hoy
+    this.todayDeaths = await this.covidService.getTodayDeaths( this.countrySelected.code );
   }
 
   async infoNews() {
     // let country = localStorage.getItem('countryShort').toLowerCase();
     let country = 'us';
 
-    /*this.healthNews = await this.newsService.getHealthNews(country);
+    this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
     if (this.healthNews.pagination.count == 0) {
       //no trae noticias del país, mostrar las de USA
@@ -207,7 +203,7 @@ export class DashboardComponent implements OnInit {
     this.techNews = await this.newsService.getTechnologyNews(country);
     // console.log('techNews', this.techNews);
 
-    this.scienceNews = await this.newsService.getScienceNews(country);*/
+    this.scienceNews = await this.newsService.getScienceNews(country);
     // console.log('scienceNews', this.scienceNews);
 
     // this.loading = false;
@@ -219,6 +215,11 @@ export class DashboardComponent implements OnInit {
   }
 
   horaDelDia() {
+
+    console.log('Hora del dia');
+    console.log(this.time);
+    
+    
     //banner
     if (this.time >= 0 && this.time <= 6) {
       this.text_color = 'white';

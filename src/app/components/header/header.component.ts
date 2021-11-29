@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
 
   countries: any = [];
 
+  Constants: any = Constants;
+
   //para esconder el select
   select_pais;
 
@@ -68,6 +70,7 @@ export class HeaderComponent implements OnInit {
         );
         localStorage.setItem('countryShort', user.data.country );
         this.case = 2;
+        location.reload();
         break;
       case 2:
         console.log('2');

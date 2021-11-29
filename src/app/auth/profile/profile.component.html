@@ -11,10 +11,10 @@
   </div>
 </div>
 
-<div *ngIf="!loading">
+<div *ngIf="!loading" class="profile-container">
   <div class="container">
-    <h1>Perfil</h1>
-    <p>Edita la información de tu perfil.</p>
+    <h1>{{ Constants.profile.profile }}</h1>
+    <p>{{ Constants.profile.edit }}.</p>
 
     <form
       class="form-horizontal form-material"
@@ -25,39 +25,41 @@
     >
       <div class="form-group m-t-20">
         <div class="col-xs-12 mt-3">
-          <label for="name">Nombre:</label>
+          <label for="name">{{ Constants.profile.name }}:</label>
           <input
             id="name"
             value="{{ user.data.name }}"
             class="form-control"
             type="text"
-            placeholder="Nombre"
+            placeholder="{{ Constants.profile.name }}"
             formControlName="name"
           />
         </div>
       </div>
       <div class="form-group mt-3">
         <div class="col-xs-12">
-          <label for="email">Correo electrónico:</label>
+          <label for="email">{{ Constants.profile.email }}:</label>
           <input
             id="email"
             value="{{ user.data.email }}"
             class="form-control"
             type="text"
-            placeholder="Email"
+            placeholder="{{ Constants.profile.email }}"
             formControlName="email"
+            disabled="true"
           />
         </div>
       </div>
       <div class="form-group mt-3">
         <div class="col-xs-12">
+          <label for="email">{{ Constants.profile.country }}:</label>
           <ng-select
             [items]="countries"
             bindLabel="name"
             bindValue="namea2"
             (change)="chooseCountry()"
             [closeOnSelect]="true"
-            placeholder="Pais"
+            placeholder="{{ Constants.profile.country }}"
             formControlName="country"
           >
           </ng-select>
@@ -65,25 +67,26 @@
       </div>
       <div class="form-group mt-3">
         <div class="col-xs-12">
+          <label for="email">{{ Constants.profile.timeZone }}:</label>
           <ng-select
             [items]="timeZones"
             bindLabel="name"
             bindValue="code"
             [closeOnSelect]=true
-            placeholder="Zona horaria"
+            placeholder="{{ Constants.profile.timeZone }}"
             formControlName="timeZone"
-            [(ngModel)] = "timeZone"
           >
           </ng-select>
         </div>
       </div>
       <div class="form-group mt-3">
         <div class="col-xs-12">
+          <label for="email">{{ Constants.profile.language }}:</label>
           <ng-select
           [items]="languages"
           bindLabel="label"
           bindValue="code"
-          placeholder="Idioma"
+          placeholder="{{ Constants.profile.language }}"
           [closeOnSelect]=true
           formControlName="language"
         >
@@ -93,10 +96,13 @@
 
       <div class="row">
         <div class="col text-danger">
-          <p *ngIf="notValidField('name')">El nombre es obligatorio</p>
+          <p *ngIf="notValidField('name')">{{ Constants.profile.obName }}</p>
           <p *ngIf="notValidField('email')">
-            El email es obligatorio y tiene que ser valido
+            {{ Constants.profile.obEmail }}
           </p>
+          <p *ngIf="notValidField('country')">{{ Constants.profile.obCountry }}</p>
+          <p *ngIf="notValidField('timeZone')">{{ Constants.profile.obTimeZone }}</p>
+          <p *ngIf="notValidField('language')">{{ Constants.profile.obLang }}</p>
           <!-- <p *ngIf="notValidPass()">Las contraseñas deben de ser iguales</p> -->
         </div>
       </div>
@@ -109,7 +115,7 @@
             type="submit"
             class="btn btn-primary btn-block waves-effect waves-light"
           >
-            Guardar cambios
+          {{ Constants.profile.save }}
           </button>
         </div>
       </div>
