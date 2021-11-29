@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
   timeZones: any = [];
   languages: any = [];
 
+  Constants: any = Constants;
+
   public registerForm = this.fb.group({
     name: [, [Validators.required, Validators.minLength(3)]],
     email: [
@@ -38,7 +40,7 @@ export class ProfileComponent implements OnInit {
       ],
     ],
     country: [, [Validators.required]],
-    timeZone: [, [Validators.required]],
+    timeZone: [, [Validators.required, Validators.maxLength(4)]],
     language: [, [Validators.required]],
   });
 
@@ -81,7 +83,7 @@ export class ProfileComponent implements OnInit {
         ],
       ],
       country: [this.user.data.country, [Validators.required]],
-      timeZone: [this.timeZone, [Validators.required]],
+      timeZone: [, [Validators.required]],
       language: [this.user.data.language, [Validators.required]],
     });
     console.log(this.timeZone);
@@ -94,10 +96,17 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {}
 
   async guardarCambios() {
+    const timeZone = typeof this.registerForm.value.timeZone;
+    console.log(timeZone);
+
+    const error = Constants.profile.someError;
+    
     //guardar los cambios
-    if (this.registerForm.invalid) {
-      Swal.fire('Error', '¡Ocurrió algún error!', 'error');
+    if (this.registerForm.invalid || timeZone != 'string' ) {
+      Swal.fire('Error', `¡${Constants.profile.someError}!`, 'error');
     } else {
+      console.log('REG', this.registerForm.value.timeZone);
+      
       let variable: any = await this.userService.updateUser(
         this.registerForm.value,
         localStorage.getItem('uid')
@@ -105,12 +114,12 @@ export class ProfileComponent implements OnInit {
       if (variable.result) {
         console.log('VARIA', variable);
         localStorage.setItem('language', variable.user.language );
-        Swal.fire('Éxito', 'Información actualizada correctamente', 'success');
+        Swal.fire(`${Constants.profile.success}`, `${Constants.profile.infoSucc}`, 'success');
         setTimeout(() => {
           location.reload();
          }, 1000);
       } else {
-        Swal.fire('Error', '¡Ocurrió algún error!', 'error');
+        Swal.fire('Error', `¡${Constants.profile.someError}!`, 'error');
       }
     }
   }

@@ -142,6 +142,8 @@ export class DashboardComponent implements OnInit {
     const hours = (this.weather.timezone / 60)/60;
     this.time = Number(moment.unix(this.weather.dt).utc().format('HH')) + Number(hours);
     console.log('H', hours);
+    console.log(Number(moment.unix(this.weather.dt).utc().format('HH')));
+    if ( this.time < 0 ){ this.time *= -1 }
     
     console.log('TIME', this.time);
 
@@ -189,7 +191,7 @@ export class DashboardComponent implements OnInit {
     // let country = localStorage.getItem('countryShort').toLowerCase();
     let country = 'us';
 
-    /*this.healthNews = await this.newsService.getHealthNews(country);
+    this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
     if (this.healthNews.pagination.count == 0) {
       //no trae noticias del país, mostrar las de USA
@@ -201,7 +203,7 @@ export class DashboardComponent implements OnInit {
     this.techNews = await this.newsService.getTechnologyNews(country);
     // console.log('techNews', this.techNews);
 
-    this.scienceNews = await this.newsService.getScienceNews(country);*/
+    this.scienceNews = await this.newsService.getScienceNews(country);
     // console.log('scienceNews', this.scienceNews);
 
     // this.loading = false;

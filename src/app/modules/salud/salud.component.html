@@ -31,34 +31,34 @@
           <div class="row fluid-container">
             <div class="container">
               <!-- inicio contenedor cuadros info -->
-              <h1>Información general de seguimiento de COVID-19</h1>
+              <h1>{{ Constants.covid.info }} COVID-19</h1>
               <div class="info-covid">
                 <div class="col cuadro-info" id="casos-hoy">
-                  <h5>Casos de hoy</h5>
+                  <h5>{{ Constants.covid.thToday }}</h5>
                   <p class="cifra">{{ todayCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="casos-activos">
-                  <h5>Casos activos</h5>
+                  <h5>{{ Constants.covid.activeCases }}</h5>
                   <p class="cifra">{{ activeCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="def-hoy">
-                  <h5>Defunciones de hoy</h5>
+                  <h5>{{ Constants.covid.deathToday }}</h5>
                   <p class="cifra">{{ todayDeaths.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="casos-totales">
-                  <h5>Casos totales</h5>
+                  <h5>{{ Constants.covid.totalCases }}</h5>
                   <p class="cifra">{{ cases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="recuperados">
-                  <h5>Recuperados</h5>
+                  <h5>{{ Constants.covid.recovered }}</h5>
                   <p class="cifra">{{ recoveredCases.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="def-totales">
-                  <h5>Defunciones totales</h5>
+                  <h5>{{ Constants.covid.totalDeaths }}</h5>
                   <p class="cifra">{{ totalDeaths.data | number | noData }}</p>
                 </div>
                 <div class="col cuadro-info" id="pruebas-totales">
-                  <h5>Pruebas totales</h5>
+                  <h5>{{ Constants.covid.totalTests }}</h5>
                   <p class="cifra">{{ testTotals.data | number | noData }}</p>
                 </div>
               </div>
