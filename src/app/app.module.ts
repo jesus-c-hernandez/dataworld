@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NightIconPipe } from './Pipes/night-icon/night-icon.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LanguagePipe } from './Pipes/language/language.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NoDataPipe,
     NoticiasComponent,
     NoImgPipe,
-    NightIconPipe
+    NightIconPipe,
+    LanguagePipe,
   ],
   imports: [
     BrowserModule,

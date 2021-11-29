@@ -143,7 +143,7 @@
     </div>
 
     <!-- noticia1 -->
-    <!-- <div class="noticia shadow" style="border-color: #55e94a">
+    <div class="noticia shadow" style="border-color: #55e94a">
       <div
         class="imagen-noticia"
         [style]="healthNews.data[0].image | noImg"
@@ -158,13 +158,13 @@
         >
         <p>{{ healthNews.data[0].description }}</p>
         <p class="fuente">
-          <span>Fuente:</span> {{ healthNews.data[0].source }}
+          <span>{{ Constanst.dashboard.source }}:</span> {{ healthNews.data[0].source }}
         </p>
       </div>
-    </div> -->
+    </div>
 
     <!-- noticia2 -->
-    <!-- <div class="noticia shadow" style="border-color: #7bd5f5">
+    <div class="noticia shadow" style="border-color: #7bd5f5">
       <div
         class="imagen-noticia"
         [style]="scienceNews.data[0].image | noImg"
@@ -179,13 +179,13 @@
         >
         <p>{{ scienceNews.data[0].description }}</p>
         <p class="fuente">
-          <span>Fuente:</span> {{ scienceNews.data[0].source }}
+          <span>{{ Constanst.dashboard.source }}:</span> {{ scienceNews.data[0].source }}
         </p>
       </div>
-    </div> -->
+    </div>
 
     <!-- noticia3 -->
-    <!-- <div class="noticia shadow" style="border-color: #2a93d5">
+    <div class="noticia shadow" style="border-color: #2a93d5">
       <div
         class="imagen-noticia"
         [style]="techNews.data[0].image | noImg"
@@ -199,8 +199,8 @@
           >{{ techNews.data[0].title }}</a
         >
         <p>{{ techNews.data[0].description }}</p>
-        <p class="fuente"><span>Fuente:</span> {{ techNews.data[0].source }}</p>
+        <p class="fuente"><span>{{ Constanst.dashboard.source }}:</span> {{ techNews.data[0].source }}</p>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

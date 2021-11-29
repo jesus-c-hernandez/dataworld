@@ -47,6 +47,8 @@ export class SaludComponent implements OnInit {
   //para las estadísticas
   paisesPrincipales: CovidData[] = [];
 
+  Constants: any = Constants;
+
   @ViewChild('myChart') myChart: ElementRef;
 
   constructor(
@@ -71,6 +73,9 @@ export class SaludComponent implements OnInit {
     this.getCountry();
 
     this.todayCases = await this.covidService.getTodayCases( this.countrySelected.code );
+    console.log(this.todayCases);
+    
+    
     this.cases = await this.covidService.getCases(  this.countrySelected.code );
     this.activeCases = await this.covidService.getActiveCases( this.countrySelected.code );
     this.recoveredCases = await this.covidService.getRecoveredCases( this.countrySelected.code );
@@ -78,7 +83,9 @@ export class SaludComponent implements OnInit {
     this.totalDeaths = await this.covidService.getTotalDeaths( this.countrySelected.code );
     this.testTotals = await this.covidService.getTestTotals( this.countrySelected.code );
     
-    this.loading = false;
+    setTimeout(() => {
+      this.loading = false;
+     }, 1000);
   }
 
   async getPaisesPrincipales() {

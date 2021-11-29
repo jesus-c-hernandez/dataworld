@@ -40,6 +40,8 @@ export class ClimaComponent implements OnInit {
 
   timeZoneValue;
 
+  Constants: any = Constants;
+
   constructor(
     private weatherService: WeatherService,
     private userService: UserService
@@ -310,7 +312,7 @@ export class ClimaComponent implements OnInit {
       unit : '%'
     }
     this.datosClimaHoy[11] = {
-      property : 'rain1h3h',
+      property : 'rain1h',
       title : "Volumen de lluvia (Últ. hr)",
       value : this.validateValues(this.weather.rain, 'mm'),
       icon : 'rain1h3h',
@@ -324,7 +326,7 @@ export class ClimaComponent implements OnInit {
       unit : 'mm'
     }
     this.datosClimaHoy[13] = {
-      property : 'snow1h3h',
+      property : 'snow1h',
       title : "Volumen de nieve (Últ. hr)",
       value : this.validateValues(this.weather.snow ,'mm'),
       icon : 'snow1h3h',
@@ -336,27 +338,6 @@ export class ClimaComponent implements OnInit {
       value : this.validateValues(this.weather.snow, 'mm'),
       icon : 'snow1h3h',
       unit : 'mm'
-    }
-    this.datosClimaHoy[15] = {
-      property : 'sunrise',
-      title : "Amanecer",
-      value : this.validateValues(this.weather.sys.sunrise),
-      icon : 'sunrise',
-      unit : ''
-    }
-    this.datosClimaHoy[16] = {
-      property : 'sunset',
-      title : "Anochecer",
-      value : this.validateValues(this.weather.sys.sunset),
-      icon : 'sunset',
-      unit : ''
-    }
-    this.datosClimaHoy[17] = {
-      property : 'timezone',
-      title : "Zona horaria",
-      value : this.validateValues(this.weather.timezone) ,
-      icon : 'timezone',
-      unit : ''
     }
     console.log('datosClimaHoy', this.datosClimaHoy);
   }

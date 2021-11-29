@@ -37,7 +37,7 @@
         <!-- proximas horas -->
         <div id="proximasHoras" class="container arriba shadow" (click)="bajar('proximasHoras','proximosDias','condicionesAd')">
             <div class="container">
-                <h3>En las próximas horas</h3>
+                <h3>{{ Constants.weather.fewHours }}</h3>
                 <div class="fluid-container ">
                     <!-- automatizar esto para que me traiga las próximas 3 horas -->
                     <div class="contenedor-columnas">
@@ -54,19 +54,19 @@
                                     <div class="icono">
                                         <img src="../assets/icons/temp_min.png" alt="icono">
                                     </div>
-                                    <p>Temperatura mínima</p>
+                                    <p>{{ Constants.weather.tempMin }}</p>
                                     <p>{{hora.main.temp_min | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/temp_max.png" alt="icono">
                                     </div>
-                                    <p>Temperatura máxima</p>
+                                    <p>{{ Constants.weather.tempMax }}</p>
                                     <p>{{hora.main.temp_max | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/speed.png" alt="icono">
                                     </div>
-                                    <p>Velocidad del viento</p>
+                                    <p>{{ Constants.weather.windSpeed }}</p>
                                     <p>{{hora.main.speed | noData: 'km/h'}}</p>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
         <!-- proximos dias -->
         <div id="proximosDias" class="container arriba shadow" (click)="bajar('proximosDias','proximasHoras','condicionesAd')">
             <div class="container">
-                <h3>En los próximos días</h3>
+                <h3>{{ Constants.weather.nextDays }}</h3>
                 <div class="row fluid-container">
                     <!-- automatizado -->
                     <div class="contenedor-columnas">
@@ -92,26 +92,26 @@
                                 <div class="icono">
                                     <img src="../assets/icons/{{dia.descripcion}}.png" alt="icono">
                                 </div>
-                                <p class="dia">{{dia.dia}}</p>
+                                <p class="dia">{{dia.dia | language:'days':'weather'}}</p>
                                 <div *ngIf="mostrarInfoDias == true" class="info-columna">
                                     <hr>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/temp_min.png" alt="icono">
                                     </div>
-                                    <p>Temperatura mínima</p>
+                                    <p>{{ Constants.weather.tempMin }}</p>
                                     <p>{{dia.temp_min | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/temp_max.png" alt="icono">
                                     </div>
-                                    <p>Temperatura máxima</p>
+                                    <p>{{ Constants.weather.tempMax }}</p>
                                     <p>{{dia.temp_max | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/speed.png" alt="icono">
                                     </div>
-                                    <p>Velocidad del viento</p>
+                                    <p>{{ Constants.weather.windSpeed }}</p>
                                     <p>{{dia.speed | noData: 'km/h'}}</p>
                                 </div>
                                 
@@ -127,7 +127,7 @@
         <!-- condiciones adicionales -->
         <div id="condicionesAd" class="container abajo shadow" (click)="bajar('condicionesAd','proximasHoras','proximosDias')">
             
-            <h3>Condiciones adicionales</h3>
+            <h3>{{ Constants.weather.addCondi }}</h3>
             <div  class="fluid-container contenedorCondAd" >
 
                 <!-- condicion adicional automatizado-->
@@ -138,8 +138,8 @@
                         <div class="icono">
                             <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
-                        <p class="condicion">{{clima.title}}</p>
-                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value}}</p>
+                        <p class="condicion">{{clima.property | language:'subAddCondi':'weather'}}</p>
+                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value | noData}}</p>
                         <p *ngIf="clima.property == 'sunset' || clima.property == 'sunrise' " class="valor">{{clima.value | date : 'shortTime'}}</p>
                         <p *ngIf="clima.property == 'timezone' " class="valor">{{clima.value | date: 'z'}}</p>
                     </div>
@@ -152,8 +152,8 @@
                         <div class="icono">
                             <img src="../assets/icons/{{clima.icon}}.png" alt="temp_min">
                         </div>
-                        <p class="condicion">{{clima.title}}</p>
-                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value}}</p>
+                        <p class="condicion">{{clima.property | language:'subAddCondi':'weather'}}</p>
+                        <p *ngIf="clima.property != 'sunset' && clima.property != 'sunrise' && clima.property != 'timezone' " class="valor">{{clima.value | noData}}</p>
                         <p *ngIf="clima.property == 'sunset' || clima.property == 'sunrise' " class="valor">{{clima.value | date : 'shortTime'}}</p>
                         <p *ngIf="clima.property == 'timezone' " class="valor">{{clima.value | date: 'z'}}</p>
                     </div>
