@@ -29,8 +29,6 @@ export class ProfileComponent implements OnInit {
   public registerForm = this.fb.group({
       name: ['', [ Validators.required, Validators.minLength(3)]],
       email: ['', [ Validators.required , Validators.email]],
-      // password: [this.user.data.password, [ Validators.required ]],
-      // password2: [this.user.data.password, [ Validators.required ]],
       country: ['', [ Validators.required ]],
       timeZone: ['', [ Validators.required ]],
       language: ['', [ Validators.required ]],
@@ -78,23 +76,28 @@ export class ProfileComponent implements OnInit {
 
   async guardarCambios(){
     //guardar los cambios
+    this.formSubmit = true;
+    //si los dos campos son válidos, entra
     if(!this.notValidField('name') || !this.notValidField('email')){
-      Swal.fire('Error', '¡Ocurrió algún error!', 'error');
-    } else {
       let variable : any = await this.userService.updateUser(this.registerForm.value, localStorage.getItem('uid'));
       if(variable.result){
         Swal.fire('Éxito', 'Información actualizada correctamente', 'success');
       } else {
         Swal.fire('Error', '¡Ocurrió algún error!', 'error');
       }
+    } else { 
+      //alguno de los campos no fue valido, mostrar mensaje
+      Swal.fire('Error', '¡Ocurrió algún error!', 'error');
     }
-    
   }
 
+  //regresa verdadero cuando un campo es inválido
   notValidField ( field: string ):boolean {
     if ( this.registerForm.get(field).invalid && this.formSubmit) {
+      //el campo es inválido, regresar verdadero
       return true;
     } else {
+      //el campo es válido, regresar falso
       return false;
     }
   }
