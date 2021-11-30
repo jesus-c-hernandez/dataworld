@@ -55,13 +55,13 @@
                                         <img src="../assets/icons/temp_min.png" alt="icono">
                                     </div>
                                     <p>{{ Constants.weather.tempMin }}</p>
-                                    <p>{{hora.main.temp_min | noData: '°'}}</p>
+                                    <p>{{hora.main.temp_min | round | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/temp_max.png" alt="icono">
                                     </div>
                                     <p>{{ Constants.weather.tempMax }}</p>
-                                    <p>{{hora.main.temp_max | noData: '°'}}</p>
+                                    <p>{{hora.main.temp_max | round | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/speed.png" alt="icono">
@@ -87,12 +87,12 @@
                 <div class="row fluid-container">
                     <!-- automatizado -->
                     <div class="contenedor-columnas">
-                        <div *ngFor="let dia of proxDias; let i = index">
+                        <div *ngFor="let day of weather5Days.list; let i = index">
                             <div *ngIf="i < cantDias" class="columna">
                                 <div class="icono">
-                                    <img src="../assets/icons/{{dia.descripcion}}.png" alt="icono">
+                                    <img src="../assets/icons/{{day.weather[0].description}}.png" alt="icono">
                                 </div>
-                                <p class="dia">{{dia.dia | language:'days':'weather'}}</p>
+                                <p class="dia">{{day.day | language:'days':'weather'}}</p>
                                 <div *ngIf="mostrarInfoDias == true" class="info-columna">
                                     <hr>
                                     <!-- temperatura minima -->
@@ -100,19 +100,19 @@
                                         <img src="../assets/icons/temp_min.png" alt="icono">
                                     </div>
                                     <p>{{ Constants.weather.tempMin }}</p>
-                                    <p>{{dia.temp_min | noData: '°'}}</p>
+                                    <p>{{day.temp.min | round | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/temp_max.png" alt="icono">
                                     </div>
                                     <p>{{ Constants.weather.tempMax }}</p>
-                                    <p>{{dia.temp_max | noData: '°'}}</p>
+                                    <p>{{day.temp.max | round | noData: '°'}}</p>
                                     <!-- temperatura minima -->
                                     <div class="icono">
                                         <img src="../assets/icons/speed.png" alt="icono">
                                     </div>
                                     <p>{{ Constants.weather.windSpeed }}</p>
-                                    <p>{{dia.speed | noData: 'km/h'}}</p>
+                                    <p>{{day.speed | noData: 'km/h' }}</p>
                                 </div>
                                 
                             </div>

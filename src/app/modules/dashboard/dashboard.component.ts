@@ -10,6 +10,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 // import moment from 'moment';
 // const moment = require('moment'); // require
 import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 import { Constants } from '../../Constants';
 @Component({
@@ -63,6 +64,7 @@ export class DashboardComponent implements OnInit {
 
   weather: any;
   weather3: any;
+  weather5: any;
 
   user: any = null;
 
@@ -154,7 +156,14 @@ export class DashboardComponent implements OnInit {
       this.lon,
       3
     );
+
+    this.weather5 = await this.weatherService.getNextDays(
+      this.lat,
+      this.lon,
+      5
+    );
     console.log('RESP3', this.weather3);
+    console.log('RESP5', this.weather5);
 
     this.timeZoneValue = this.weather.timezone / 60;
 
@@ -172,7 +181,38 @@ export class DashboardComponent implements OnInit {
       date.dt_txt = weatAux;
     });
 
+    this.weather5.list.forEach((date) => {
+      const auxDate = dayjs(date.dt * 1000).format('YYYY MM DD HH:mm:ss');
+      const dayOfWeek = this.numberToDay( new Date(auxDate).getDay() );
+      console.log('DOW', dayOfWeek);
+      date.day = dayOfWeek;
+    });
+
+    console.log('RESP52', this.weather5);
+
+
     console.log('WEA', this.weather3);
+  }
+
+  numberToDay(day) {
+    switch (day) {
+      case 0: return 'Domingo'
+        break;
+      case 1: return 'Lunes'
+        break;
+      case 2: return 'Martes'
+        break;
+      case 3: return 'Miercoles'
+        break;
+      case 4: return 'Jueves'
+        break;
+      case 5: return 'Viernes'
+        break;
+      case 6: return 'Sabado'
+        break;
+      default: return 'Domingo'
+        break;
+    }
   }
 
   async infoCovid() {
@@ -209,9 +249,7 @@ export class DashboardComponent implements OnInit {
     // this.loading = false;
 
     console.log('Health news', this.healthNews);
-    setTimeout(() => {
-      this.loading = false;
-     }, 2000);
+    this.loading = false;
   }
 
   horaDelDia() {
