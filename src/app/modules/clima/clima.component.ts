@@ -162,8 +162,6 @@ export class ClimaComponent implements OnInit {
   }
 
   async init() {
-
-
     if (localStorage.getItem('uid')) {
       this.user = await this.userService.getUser(localStorage.getItem('uid'));
       console.log('USER', this.user);

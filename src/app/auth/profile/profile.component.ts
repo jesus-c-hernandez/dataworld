@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   Constants: any = Constants;
 
   public registerForm = this.fb.group({
+
     name: [, [Validators.required, Validators.minLength(3)]],
     email: [
       ,
@@ -121,13 +122,14 @@ export class ProfileComponent implements OnInit {
       } else {
         Swal.fire('Error', `¡${Constants.profile.someError}!`, 'error');
       }
-    }
+    } 
   }
 
   notValidField(field: string): boolean {
     if (this.registerForm.get(field).invalid && this.formSubmit) {
       return true;
     } else {
+      //el campo es válido, regresar falso
       return false;
     }
   }
