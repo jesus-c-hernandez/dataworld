@@ -42,7 +42,7 @@ export const Constants = {
     days: {
       Lunes: valueLen === 'es'? 'Lunes' : 'Monday',
       Martes: valueLen === 'es'? 'Martes' : 'Tuesday',
-      Miércoles: valueLen === 'es'? 'Miercoles' : 'Wednesday',
+      Miercoles: valueLen === 'es'? 'Miércoles' : 'Wednesday',
       Jueves: valueLen === 'es'? 'Jueves' : 'Thursday',
       Viernes: valueLen === 'es'? 'Viernes' : 'Friday',
       Sabado: valueLen === 'es'? 'Sabado' : 'Saturday',
