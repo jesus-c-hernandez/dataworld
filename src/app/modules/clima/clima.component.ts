@@ -6,6 +6,7 @@ import { Constants } from '../../Constants';
 import { UserService } from 'src/app/core/services/user/user.service';
 
 import * as dayjs from 'dayjs';
+import { CityService } from 'src/app/core/services/city/city.service';
 
 @Component({
   selector: 'app-clima',
@@ -39,12 +40,18 @@ export class ClimaComponent implements OnInit {
   user: any;
 
   timeZoneValue;
+  countrySelected: any = null;
+  citySelected: any = null;
 
   Constants: any = Constants;
 
+  reset: number = 0;
+
   constructor(
     private weatherService: WeatherService,
-    private userService: UserService
+    private userService: UserService,
+    private cityService: CityService
+
   ) {}
 
   ngOnInit(): void {
@@ -161,32 +168,30 @@ export class ClimaComponent implements OnInit {
   }
 
   async init() {
-    if (localStorage.getItem('uid')) {
-      this.user = await this.userService.getUser(localStorage.getItem('uid'));
-      console.log('USER', this.user);
 
-      if (localStorage.getItem('countryShort') != this.user.data.country) {
-        console.log('DIFF');
+    this.reset = localStorage.getItem('reset') ? Number(localStorage.getItem('reset')) : 0;
+
+    if( this.reset != 0 ) {
+      this.lat = Number(localStorage.getItem('lat'));
+      this.lon = Number(localStorage.getItem('lon'));
+    } else {
+      if( localStorage.getItem('city') ) {
+        const cities = await this.cityService.getCities();
+        console.log('CITIES', cities);
+        
+        this.citySelected = await cities.find( c => c.id === Number(localStorage.getItem('city')) );
+
+        console.log('CITY', this.citySelected);
+        this.lat = this.citySelected.coord.lat;
+        this.lon = this.citySelected.coord.lon;
+      } else {
         const country = Constants.countries.find(
           (c) => c.namea2 === localStorage.getItem('countryShort')
         );
         console.log('C', country);
         this.lat = Number(country.lat);
         this.lon = Number(country.lon);
-      } else {
-        this.lat = Number(localStorage.getItem('lat'));
-        this.lon = Number(localStorage.getItem('lon'));
       }
-    } else if (localStorage.getItem('countryShort')) {
-      const country = Constants.countries.find(
-        (c) => c.namea2 === localStorage.getItem('countryShort')
-      );
-      console.log('C', country);
-      this.lat = Number(country.lat);
-      this.lon = Number(country.lon);
-    } else {
-      this.lat = Number(localStorage.getItem('lat'));
-      this.lon = Number(localStorage.getItem('lon'));
     }
 
     this.weather = await this.weatherService.getCurrentWeather(
@@ -200,6 +205,9 @@ export class ClimaComponent implements OnInit {
     this.timeZoneValue = this.weather.timezone / 60;
 
     console.log('TZ', this.timeZoneValue);
+
+    this.countrySelected = Constants.countries.find(
+      (c) => c.namea2 === localStorage.getItem('countryShort') )
 
     // this.weatherService.getCurrentWeather(lat, lon).subscribe( (resp) => {
 
@@ -219,7 +227,7 @@ export class ClimaComponent implements OnInit {
     this.weather5Days = await this.weatherService.getNextDays(
       this.lat,
       this.lon,
-      5
+      6
     );
 
     // Cambiar de zona horaria las proximas horas
@@ -229,6 +237,8 @@ export class ClimaComponent implements OnInit {
         .format('YYYY MM DD HH:mm:ss');
       date.dt_txt = weatAux;
     });
+    
+    this.weather5Days.list = this.weather5Days.list.slice(1);
 
     this.weather5Days.list.forEach((date) => {
       // const weatAux = moment(date.dt_txt)
