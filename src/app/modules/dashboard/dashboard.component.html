@@ -81,16 +81,16 @@
       <h3>{{ Constanst.dashboard.nextDays }}</h3>
       <div class="por-columna">
         <div class="columna">
-          <img src="../assets/img/soleado-icon.png" alt="icono" />
-          <p class="dia">Martes</p>
+          <img src="../assets/icons/{{weather5.list[0].weather[0].description}}.png" alt="icono" />
+          <p class="dia">{{ weather5.list[0].day | language:'days':'weather'}}</p>
         </div>
         <div class="columna">
-          <img src="../assets/img/soleado-icon.png" alt="icono" />
-          <p class="dia">Miércoles</p>
+          <img src="../assets/icons/{{weather5.list[1].weather[0].description}}.png" alt="icono" />
+          <p class="dia">{{ weather5.list[1].day | language:'days':'weather'}}</p>
         </div>
         <div class="columna">
-          <img src="../assets/img/soleado-icon.png" alt="icono" />
-          <p class="dia">Jueves</p>
+          <img src="../assets/icons/{{weather5.list[2].weather[0].description}}.png" alt="icono" />
+          <p class="dia">{{ weather5.list[2].day | language:'days':'weather'}}</p>
         </div>
       </div>
     </div>

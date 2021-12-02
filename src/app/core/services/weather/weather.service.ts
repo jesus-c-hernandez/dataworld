@@ -34,5 +34,15 @@ export class WeatherService {
     }
   }
 
+  async getNextDays( lat: number, lon: number, days:number) {
+    try {
+      const url = `${base_url}/next-days?lat=${lat}&lon=${lon}&cnt=${days}`;
+      const result : any = await this.http.get(url).toPromise();
+      return result.data;
+    } catch (error) {
+      return error;      
+    }
+  }
+
 
 }
