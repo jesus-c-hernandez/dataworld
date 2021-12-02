@@ -108,7 +108,7 @@ export const Constants = {
     { name: valueLen === 'es'? 'Australia' : 'Australia', value: 2,  code: 'Australia', namea2: 'au', capital: 'Canberra', lat: -35.28346 , lon: 149.12807},
     { name: valueLen === 'es'? 'Austria' : 'Austria', value: 3,  code: 'Austria', namea2: 'at', capital: 'Vienna', lat: 48.20849, lon: 16.37208},
     { name: valueLen === 'es'? 'Bélgica' : 'Belgium', value: 4,  code: 'Belgium', namea2: 'be', capital: '	Bruselas', lat: 50.85045, lon: 4.34878},
-    { name: valueLen === 'es'? 'Argentina' : 'Brazil', value: 5,  code: 'Brazil', namea2: 'br', capital: 'Brasilia', lat: -15.77972, lon: -47.92972},
+    { name: valueLen === 'es'? 'Brasil' : 'Brazil', value: 5,  code: 'Brazil', namea2: 'br', capital: 'Brasilia', lat: -15.77972, lon: -47.92972},
     { name: valueLen === 'es'? 'Bulgaria' : 'Bulgaria', value: 6,  code: 'Bulgaria', namea2: 'bg', capital: 'Sofía', lat: 42.69751, lon: 23.32415 },
     { name: valueLen === 'es'? 'Cánada' : 'Canada', value: 7,  code: 'Canada', namea2: 'ca', capital: 'Ottawa', lat: 45.41117, lon: -75.69812},
     { name: valueLen === 'es'? 'Chile' : 'Chile', value: 8,  code: 'Chile', namea2: 'cl', capital: 'Santiago de Chile', lat: -33.45694, lon: -70.64827},
