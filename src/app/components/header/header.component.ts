@@ -3,6 +3,8 @@ import { GeolocationService } from 'src/app/core/services/geolocation/geolocatio
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { Constants } from '../../Constants';
+import { LogicalFileSystem } from '@angular/compiler-cli/src/ngtsc/file_system';
+import { CityService } from 'src/app/core/services/city/city.service';
 
 @Component({
   selector: 'app-header',
@@ -13,19 +15,25 @@ export class HeaderComponent implements OnInit {
   sesionIniciada: boolean = false;
 
   countrySelect = null;
+  citySelect = null;
   case: number = 3;
 
   countries: any = [];
+  cities: any = [];
 
   Constants: any = Constants;
 
   //para esconder el select
   select_pais;
 
+  user: any;
+  reset: number = 0;
+
   constructor(
     private geolocationService: GeolocationService,
     private weatherService: WeatherService,
-    private userService: UserService
+    private userService: UserService,
+    private cityService: CityService
   ) {}
 
   ngOnInit(): void {
@@ -43,72 +51,28 @@ export class HeaderComponent implements OnInit {
     
 
     this.countries = Constants.countries;
+    this.cities = await this.cityService.getCities();
 
     console.log('C', this.countries);
+
+    this.reset = localStorage.getItem('reset') ? Number(localStorage.getItem('reset')) : 0;
     
-
-    // Case 1: Si el usuario esta registrado se debe de seleccionar el pais por defecto.
-    // Case 2: El usuario tiene iniciada la sesion y cambia de pais
-    // Case 3: El usuario no tiene iniciada la sesion.
-    // Case 4: El usuario no ha iniciado sesion y cambia de pais.
-
-    if( !localStorage.getItem('uid') && !localStorage.getItem('case')) { 
-      this.case = 3
+    if( this.reset != 0 ) {
+      if( localStorage.getItem('uid') ){
+        this.user = await this.userService.getUser( localStorage.getItem('uid') );
+        this.countrySelect = Constants.countries.find( c => c.namea2 === this.user.data.country);
+        localStorage.setItem('countryShort', this.user.data.country);
+        console.log(this.countrySelect);
+      } else {
+        this.countrySelect = Constants.countries.find( c => c.namea2 === 'mx' );
+      }
     } else {
-      this.case = Number(localStorage.getItem('case'));
+      this.citySelect = this.cities.find( c => c.id === localStorage.getItem('city') );
+      this.countrySelect = Constants.countries.find( c => c.namea2 === localStorage.getItem('countryShort') );
+
+      console.log('CITY', this.citySelect);
+
     }
-
-    switch (this.case) {
-      case 1:
-        console.log('1');
-
-        const user: any = await this.userService.getUser(
-          localStorage.getItem('uid')
-        );
-        this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === user.data.country
-        );
-        localStorage.setItem('countryShort', user.data.country );
-        this.case = 2;
-        location.reload();
-        break;
-      case 2:
-        console.log('2');
-        this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
-        );
-        localStorage.setItem('countryShort', this.countrySelect.namea2);
-        break;
-      case 3:
-        console.log('3');
-        const countryShort: string = weather.sys.country;
-        localStorage.setItem(
-          'countryShort',
-          String(countryShort).toLowerCase()
-        );
-        console.log('COUNTRY', countryShort);
-        
-        this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
-        );
-        this.case = 4;
-        break;
-      case 4:
-        console.log('4');
-        this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
-        );
-        localStorage.setItem('countryShort', this.countrySelect.namea2);
-        break;
-      default:
-        this.countrySelect = Constants.countries.find(
-          (c) => c.namea2 === 'mx'
-        );
-        localStorage.setItem('countryShort', this.countrySelect.namea2);
-        break;
-    }
-
-    localStorage.setItem('case', String(this.case) )
 
     // if( localStorage.getItem('uid')){
     //   const user: any = await this.userService.getUser(localStorage.getItem('uid'));
@@ -146,7 +110,16 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseCountry() {
+    localStorage.setItem('reset', '0');
     localStorage.setItem('countryShort', this.countrySelect.namea2);
+    localStorage.removeItem('city');
+    location.reload();
+  }
+
+  chooseCity() {
+    localStorage.setItem('reset', '0');
+    localStorage.setItem('countryShort', this.citySelect.country.toLowerCase());
+    localStorage.setItem('city', this.citySelect.id);
     location.reload();
   }
 
@@ -156,5 +129,17 @@ export class HeaderComponent implements OnInit {
 
   normalizar(texto) {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  async resetear() {
+    localStorage.setItem('reset', '1');
+    if( localStorage.getItem('uid') ) {
+      this.user = await this.userService.getUser( localStorage.getItem('uid') );
+      localStorage.setItem('countryShort', this.user.data.country);
+    } else {
+      localStorage.setItem('countryShort', 'mx');
+    }
+    localStorage.removeItem('city');
+    location.reload();
   }
 }

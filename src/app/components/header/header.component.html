@@ -13,6 +13,24 @@
           <!-- active -->
           <li>
             <div class="seleccionar-pais">
+              <div class="icono mx-2" (click)="toggleSelect()">
+                <img src="./assets/icons/city.png" alt="">
+              </div>
+              <ng-select
+                class="mt-1"
+                style="width: 200px;"
+                [items]="cities"
+                bindLabel="name"
+                (change)="chooseCity()"
+                [closeOnSelect]=true
+                [(ngModel)]="citySelect"
+                placeholder="{{ Constants.header.selectCity }}"
+                >
+              </ng-select>
+            </div>
+          </li>
+          <li>
+            <div class="seleccionar-pais">
               <div class="icono" (click)="toggleSelect()">
                 <img src="./assets/icons/search-globe-icon.png" alt="">
               </div>
@@ -24,14 +42,13 @@
                 (change)="chooseCountry()"
                 [closeOnSelect]=true
                 [(ngModel)]="countrySelect"
-                placeholder="Seleccionar pais"
+                placeholder="{{ Constants.header.selectCountry }}"
                 >
               </ng-select>
-              <!-- <select   class="" [(ngModel)]="countrySelect" (change)="cambiarUbicacion()">
-                <option value="0">Selecciona una opción</option>
-                <option *ngFor="let pais of countries" >{{pais.name}}</option>
-              </select> -->
             </div>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary mx-1 mt-1" (click)="resetear()">Reset</button>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" aria-current="page" [routerLink]="['dashboard']">{{ Constants.header.home }}</a>

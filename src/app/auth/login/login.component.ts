@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 
 declare const gapi: any;
 
+import { Constants } from '../../Constants';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,6 +38,8 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
     remember: [false],
   });
+
+  Constants: any = Constants;
 
   constructor(
     private router: Router,

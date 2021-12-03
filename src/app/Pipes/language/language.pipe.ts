@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { BarVerticalNormalizedComponent } from '@swimlane/ngx-charts';
 import { from } from 'rxjs';
 
 const lenguajeValue: any = localStorage.getItem('language');
@@ -13,7 +14,10 @@ import { Constants } from '../../Constants'
 export class LanguagePipe implements PipeTransform {
 
   transform(value, type, mod): String {
-    return valueLen === 'es'? value : Constants[mod][type][value];
+    const valor = Constants[mod][type][value];
+    console.log('VALOR', valor);
+    return valor;
+    
   }
 
 }

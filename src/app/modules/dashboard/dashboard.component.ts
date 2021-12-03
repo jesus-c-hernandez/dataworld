@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import * as dayjs from 'dayjs';
 
 import { Constants } from '../../Constants';
+import { CityService } from 'src/app/core/services/city/city.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -79,18 +80,21 @@ export class DashboardComponent implements OnInit {
   todayDeaths: any;
 
   countrySelected: any;
+  citySelected: any;
 
   Constanst: any = Constants;
 
   //info covid
   covidData: CovidData = null;
   datos = [];
+  reset: number = 0;
 
   constructor(
     private weatherService: WeatherService,
     private covidService: CovidService,
     private newsService: NewsService,
-    private userService: UserService
+    private userService: UserService,
+    private cityService: CityService
   ) {}
 
   ngOnInit(): void {
@@ -101,36 +105,29 @@ export class DashboardComponent implements OnInit {
   }
 
   async currentWeather() {
-    // const {lat, lon} = await this.geolocationService.getPosition();
-    // localStorage.setItem('lat', String(lat))
-    // localStorage.setItem('lon', String(lon))
+    this.reset = localStorage.getItem('reset') ? Number(localStorage.getItem('reset')) : 0;
 
-    if (localStorage.getItem('uid')) {
-      this.user = await this.userService.getUser(localStorage.getItem('uid'));
-      console.log('USER', this.user);
+    if( this.reset != 0 ) {
+      this.lat = Number(localStorage.getItem('lat'));
+      this.lon = Number(localStorage.getItem('lon'));
+    } else {
+      if( localStorage.getItem('city') ) {
+        const cities = await this.cityService.getCities();
+        console.log('CITIES', cities);
+        
+        this.citySelected = await cities.find( c => c.id === Number(localStorage.getItem('city')) );
 
-      if (localStorage.getItem('countryShort') != this.user.data.country) {
-        console.log('DIFF');
+        console.log('CITY', this.citySelected);
+        this.lat = this.citySelected.coord.lat;
+        this.lon = this.citySelected.coord.lon;
+      } else {
         const country = Constants.countries.find(
           (c) => c.namea2 === localStorage.getItem('countryShort')
         );
         console.log('C', country);
         this.lat = Number(country.lat);
         this.lon = Number(country.lon);
-      } else {
-        this.lat = Number(localStorage.getItem('lat'));
-        this.lon = Number(localStorage.getItem('lon'));
       }
-    } else if( localStorage.getItem('countryShort') ) {
-      const country = Constants.countries.find(
-        (c) => c.namea2 === localStorage.getItem('countryShort')
-      );
-      console.log('C', country);
-      this.lat = Number(country.lat);
-      this.lon = Number(country.lon);
-    } else {
-      this.lat = Number(localStorage.getItem('lat'));
-      this.lon = Number(localStorage.getItem('lon'));
     }
 
     console.log('POS', this.lat, this.lon);
@@ -160,7 +157,7 @@ export class DashboardComponent implements OnInit {
     this.weather5 = await this.weatherService.getNextDays(
       this.lat,
       this.lon,
-      5
+      6
     );
     console.log('RESP3', this.weather3);
     console.log('RESP5', this.weather5);
@@ -189,7 +186,6 @@ export class DashboardComponent implements OnInit {
     });
 
     console.log('RESP52', this.weather5);
-
 
     console.log('WEA', this.weather3);
   }
@@ -229,9 +225,10 @@ export class DashboardComponent implements OnInit {
 
   async infoNews() {
     // let country = localStorage.getItem('countryShort').toLowerCase();
+    //=================================================
     let country = 'us';
 
-    this.healthNews = await this.newsService.getHealthNews(country);
+    /*this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
     if (this.healthNews.pagination.count == 0) {
       //no trae noticias del país, mostrar las de USA
@@ -249,7 +246,11 @@ export class DashboardComponent implements OnInit {
     // this.loading = false;
 
     console.log('Health news', this.healthNews);
-    this.loading = false;
+    this.loading = false; */
+    //=====================================================
+    setTimeout(() => {
+      this.loading = false;
+     }, 1500);
   }
 
   horaDelDia() {

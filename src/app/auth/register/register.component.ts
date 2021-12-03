@@ -51,6 +51,8 @@ export class RegisterComponent implements OnInit {
     }
   );
 
+  Constants: any = Constants;
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
