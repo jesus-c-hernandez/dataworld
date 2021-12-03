@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
   Constants: any = Constants;
 
   public registerForm = this.fb.group({
-
     name: [, [Validators.required, Validators.minLength(3)]],
     email: [
       ,
