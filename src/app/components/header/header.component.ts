@@ -1,15 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
-import { FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
-
 import { Constants } from '../../Constants';
 import { LogicalFileSystem } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { CityService } from 'src/app/core/services/city/city.service';
@@ -132,8 +124,6 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSelect() {
-    console.log('hola desde toggleSelect!');
-
     this.select_pais.classList.toggle('activar-select');
   }
 

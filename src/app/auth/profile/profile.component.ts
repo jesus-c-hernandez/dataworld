@@ -121,13 +121,14 @@ export class ProfileComponent implements OnInit {
       } else {
         Swal.fire('Error', `¡${Constants.profile.someError}!`, 'error');
       }
-    }
+    } 
   }
 
   notValidField(field: string): boolean {
     if (this.registerForm.get(field).invalid && this.formSubmit) {
       return true;
     } else {
+      //el campo es válido, regresar falso
       return false;
     }
   }
