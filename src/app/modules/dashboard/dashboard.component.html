@@ -31,7 +31,7 @@
     style="background-image: url('../assets/img/{{ dayImage }}.jpg')"
   >
     <div class="icono-temp">
-      <img src="../assets/icons/{{ weather.weather[0].description | nightIcon}}.png" alt="icono" />
+      <img src="../assets/icons/{{ weather.weather[0].description | nightIcon}}.png" alt="{{weather.weather[0].description}}" />
     </div>
     <p class="temp-actual" style="color: {{ text_color }};">
       {{ weather.main.temp | round }}°
@@ -44,14 +44,14 @@
   <div class="container pronosticos-dash">
     <!-- clima por horas -->
     <div class="contenedor-medio shadow">
-      <h3>{{ Constanst.dashboard.fewHours }}</h3>
+      <h3>{{ Constants.dashboard.fewHours }}</h3>
       <div class="por-columna">
         <div class="columna">
           <img
             src="../assets/icons/{{
               weather3.list[0].weather[0].description
             }}.png"
-            alt="icono"
+            alt="{{weather3.list[0].weather[0].description}}"
           />
           <p>{{ weather3.list[0].dt_txt | date: "shortTime" }}</p>
         </div>
@@ -60,7 +60,7 @@
             src="../assets/icons/{{
               weather3.list[1].weather[0].description
             }}.png"
-            alt="icono"
+            alt="{{weather3.list[1].weather[0].description}}"
           />
           <p>{{ weather3.list[1].dt_txt | date: "shortTime" }}</p>
         </div>
@@ -69,7 +69,7 @@
             src="../assets/icons/{{
               weather3.list[2].weather[0].description
             }}.png"
-            alt="icono"
+            alt="{{weather3.list[2].weather[0].description}}"
           />
           <p>{{ weather3.list[2].dt_txt | date: "shortTime" }}</p>
         </div>
@@ -78,18 +78,18 @@
 
     <!-- clima por días -->
     <div class="contenedor-medio shadow">
-      <h3>{{ Constanst.dashboard.nextDays }}</h3>
+      <h3>{{ Constants.dashboard.nextDays }}</h3>
       <div class="por-columna">
-        <div class="columna">
-          <img src="../assets/icons/{{weather5.list[1].weather[0].description}}.png" alt="icono" />
+        <div class="columna"> 
+          <img src="../assets/icons/{{weather5.list[1].weather[0].description}}.png" alt="{{weather5.list[1].weather[0].description}}" />
           <p class="dia">{{ weather5.list[1].day | language:'days':'weather'}}</p>
         </div>
         <div class="columna">
-          <img src="../assets/icons/{{weather5.list[2].weather[0].description}}.png" alt="icono" />
+          <img src="../assets/icons/{{weather5.list[2].weather[0].description}}.png" alt="{{weather5.list[2].weather[0].description}}" />
           <p class="dia">{{ weather5.list[2].day | language:'days':'weather'}}</p>
         </div>
         <div class="columna">
-          <img src="../assets/icons/{{weather5.list[3].weather[0].description}}.png" alt="icono" />
+          <img src="../assets/icons/{{weather5.list[3].weather[0].description}}.png" alt="{{weather5.list[3].weather[0].description}}" />
           <p class="dia">{{ weather5.list[3].day | language:'days':'weather'}}</p>
         </div>
       </div>
@@ -104,7 +104,7 @@
       style="background-image: url('../assets/img/covid.png')"
     >
       <p class="titulo-covid" style="color: white">
-        {{ Constanst.dashboard.infoCovid }} {{ countrySelected.name  }}
+        {{ Constants.dashboard.infoCovid }} {{ countrySelected.name  }}
       </p>
     </div>
 
@@ -116,15 +116,15 @@
           <!-- inicio contenedor cuadros info -->
           <div class="info-covid">
             <div class="col cuadro-info" id="casos-hoy">
-              <h5>{{ Constanst.dashboard.todayCases }}</h5>
+              <h5>{{ Constants.dashboard.todayCases }}</h5>
               <p class="cifra">{{ todayCases.data | number | noData }}</p>
             </div>
             <div class="col cuadro-info" id="casos-activos">
-              <h5>{{ Constanst.dashboard.activeCases }}</h5>
+              <h5>{{ Constants.dashboard.activeCases }}</h5>
               <p class="cifra">{{ activeCases.data | number | noData }}</p>
             </div>
             <div class="col cuadro-info" id="def-hoy">
-              <h5>{{ Constanst.dashboard.deathsToday }}</h5>
+              <h5>{{ Constants.dashboard.deathsToday }}</h5>
               <p class="cifra">{{ todayDeaths.data | number | noData }}</p>
             </div>
           </div>
@@ -139,7 +139,7 @@
       class="imagen-covid shadow"
       style="background-image: url('../assets/img/news.png')"
     >
-      <p class="titulo-covid" style="color: white">{{ Constanst.dashboard.newsToday }}</p>
+      <p class="titulo-covid" style="color: white">{{ Constants.dashboard.newsToday }}</p>
     </div>
 
     <!-- noticia1 -->
@@ -158,8 +158,9 @@
         >
         <p>{{ healthNews.data[0].description }}</p>
         <p class="fuente">
-          <span>{{ Constanst.dashboard.source }}:</span> {{ healthNews.data[0].source }}
+          <span>{{ Constants.dashboard.source }}:</span> {{ healthNews.data[0].source }}
         </p>
+        <p class="fecha">{{Constants.news.date}}{{healthNews.data[0].published_at | date : 'mediumDate'}}</p>
       </div>
     </div> -->
 
@@ -179,8 +180,9 @@
         >
         <p>{{ scienceNews.data[0].description }}</p>
         <p class="fuente">
-          <span>{{ Constanst.dashboard.source }}:</span> {{ scienceNews.data[0].source }}
+          <span>{{ Constants.dashboard.source }}:</span> {{ scienceNews.data[0].source }}
         </p>
+        <p class="fecha">{{Constants.news.date}}{{scienceNews.data[0].published_at | date : 'mediumDate'}}</p>
       </div>
     </div> -->
 
@@ -199,7 +201,8 @@
           >{{ techNews.data[0].title }}</a
         >
         <p>{{ techNews.data[0].description }}</p>
-        <p class="fuente"><span>{{ Constanst.dashboard.source }}:</span> {{ techNews.data[0].source }}</p>
+        <p class="fuente"><span>{{ Constants.dashboard.source }}:</span> {{ techNews.data[0].source }}</p>
+        <p class="fecha">{{Constants.news.date}}{{techNews.data[0].published_at | date : 'mediumDate'}}</p>
       </div>
     </div>
   </div> -->

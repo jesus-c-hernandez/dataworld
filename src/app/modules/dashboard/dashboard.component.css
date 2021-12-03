@@ -102,6 +102,11 @@
     align-items: center;
     justify-content: center;
 }
+@media only screen and (max-width: 500px){
+    .titulo-covid{
+        font-size: 30px;
+    }
+}
 
 .info-covid{
     display: flex;

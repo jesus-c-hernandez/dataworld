@@ -87,6 +87,7 @@
               >
               <p>{{ noticia.description }}</p>
               <p class="fuente"><span>{{ Constants.news.source }}:</span> {{ noticia.source }}</p>
+              <p class="fecha">{{Constants.news.date}}{{noticia.published_at | date : 'mediumDate'}}</p>
             </div>
           </div>
         </div>
@@ -160,7 +161,4 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="fluid-container justify-content-center" id="top">
-  </div>
 </div>

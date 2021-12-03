@@ -70,9 +70,9 @@ export const Constants = {
   },
   covid: {
     info: valueLen === 'es'? 'Información general de seguimiento de' : 'General tracking information for',
-    thToday: valueLen === 'es'? 'Casos de hoy' : 'Cases of today',
+    thToday: valueLen === 'es'? 'Casos de hoy' : 'Today cases',
     activeCases: valueLen === 'es'? 'Casos activos' : 'Active cases',
-    deathToday: valueLen === 'es'? 'Defunciones de hoy' : 'Deaths today',
+    deathToday: valueLen === 'es'? 'Defunciones de hoy' : 'Today deaths',
     totalCases: valueLen === 'es'? 'Casos totales' : 'Total cases',
     recovered: valueLen === 'es'? 'Recuperados' : 'Recovered',
     totalDeaths: valueLen === 'es'? 'Defunciones totales' : 'Total deaths',
@@ -85,6 +85,7 @@ export const Constants = {
     science: valueLen === 'es'? 'Ciencia' : 'Science',
     top: valueLen === 'es'? 'Ir arriba' : 'Top of page',
     source: valueLen === 'es'? 'Fuente' : 'Source',
+    date: valueLen === 'es' ? 'Publicado el ' : 'Published at ',
   },
   profile: {
     profile: valueLen === 'es'? 'Perfil' : 'Profile',
