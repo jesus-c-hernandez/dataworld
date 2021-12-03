@@ -120,6 +120,7 @@ export class HeaderComponent implements OnInit {
   chooseCountry() {
     localStorage.setItem('reset', '0');
     localStorage.setItem('countryShort', this.countrySelect.namea2);
+    localStorage.removeItem('city');
     location.reload();
   }
 
