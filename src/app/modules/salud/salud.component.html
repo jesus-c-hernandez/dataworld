@@ -17,6 +17,9 @@
     <div class="row align-self-center">
       <div class="col-4">
         <div class="container-map">
+          <div class="name-map">
+            <h2>{{ countrySelected.name }}</h2>
+          </div>
           <div class="mapa">
             <img src="../../../assets/img/countries/{{country}}.png" alt="Mapa paises" />
           </div>
@@ -31,7 +34,7 @@
           <div class="row fluid-container">
             <div class="container">
               <!-- inicio contenedor cuadros info -->
-              <h1>{{ Constants.covid.info }} COVID-19</h1>
+              <h2>{{ Constants.covid.info }} COVID-19</h2>
               <div class="info-covid">
                 <div class="col cuadro-info" id="casos-hoy">
                   <h5>{{ Constants.covid.thToday }}</h5>
