@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
   countrySelected: any;
   citySelected: any;
 
-  Constanst: any = Constants;
+  Constants: any = Constants;
 
   //info covid
   covidData: CovidData = null;

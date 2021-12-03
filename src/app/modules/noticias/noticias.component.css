@@ -59,10 +59,7 @@ a{
 .fuente span{
     font-weight: bold;
 }
-#top{
-    display: flex;
-}
-.top{
-    text-align: center;
-    color: white;
+.fecha{
+    font-style: italic;
+    font-size: 12px;
 }

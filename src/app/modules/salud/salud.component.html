@@ -13,67 +13,59 @@
 <div *ngIf="!loading" class="row gap-3 fluid-container">
   <!-- inicia contenedor de todo -->
 
-  <div class="main-container">
-    <div class="row align-self-center">
-      <div class="col-4">
-        <div class="container-map">
-          <div class="name-map">
-            <h2>{{ countrySelected.name }}</h2>
+  <div class="contenedor-todo">
+
+      <div class="contenedor-img-pais">
+          <h2>{{ countrySelected.name }}</h2>
+          <div class="img-pais">
+            <img src="../../../assets/img/countries/{{country}}.png" alt="Img pais" />
           </div>
-          <div class="mapa">
-            <img src="../../../assets/img/countries/{{country}}.png" alt="Mapa paises" />
-          </div>
-        </div>
       </div>
 
-      <div class="col-8">
+      <div class="contenedor-info-covid">
         <!-- inicio columna derecha -->
-
-        <div class="col-lg container">
           <!-- inicio info-covid -->
-          <div class="row fluid-container">
-            <div class="container">
+            <div class="contenedor1">
               <!-- inicio contenedor cuadros info -->
               <h2>{{ Constants.covid.info }} COVID-19</h2>
               <div class="info-covid">
-                <div class="col cuadro-info" id="casos-hoy">
+                <div class="cuadro-info" id="casos-hoy">
                   <h5>{{ Constants.covid.thToday }}</h5>
                   <p class="cifra">{{ todayCases.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="casos-activos">
+                <div class="cuadro-info" id="casos-activos">
                   <h5>{{ Constants.covid.activeCases }}</h5>
                   <p class="cifra">{{ activeCases.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="def-hoy">
+                <div class="cuadro-info" id="def-hoy">
                   <h5>{{ Constants.covid.deathToday }}</h5>
                   <p class="cifra">{{ todayDeaths.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="casos-totales">
+                <div class="cuadro-info" id="casos-totales">
                   <h5>{{ Constants.covid.totalCases }}</h5>
                   <p class="cifra">{{ cases.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="recuperados">
+                <div class="cuadro-info" id="recuperados">
                   <h5>{{ Constants.covid.recovered }}</h5>
                   <p class="cifra">{{ recoveredCases.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="def-totales">
+                <div class="cuadro-info" id="def-totales">
                   <h5>{{ Constants.covid.totalDeaths }}</h5>
                   <p class="cifra">{{ totalDeaths.data | number | noData }}</p>
                 </div>
-                <div class="col cuadro-info" id="pruebas-totales">
+                <div class="cuadro-info" id="pruebas-totales">
                   <h5>{{ Constants.covid.totalTests }}</h5>
                   <p class="cifra">{{ testTotals.data | number | noData }}</p>
                 </div>
               </div>
             </div>
             <!-- fin contenedor cuadros info -->
-          </div>
+          
           <!-- fin info-covid -->
-        </div>
+        
         <!-- fin columna derecha -->
       </div>
     </div>
-  </div>
 
   <!-- fin contenedor de todo -->
 </div>

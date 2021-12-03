@@ -19,7 +19,7 @@
         background-image: url('../assets/img/{{dayImage}}.jpg');">
             <div class="tempActIcon">
                 <div class="icono">
-                    <img src="../assets/icons/{{ weather.weather[0].description}}.png" alt="icono">
+                    <img src="../assets/icons/{{ weather.weather[0].description}}.png" alt="{{ weather.weather[0].description}}">
                 </div>
             </div>
             <div class="tempActText">
@@ -44,7 +44,7 @@
                         <div  *ngFor="let hora of weather5.list; let i = index">
                             <div *ngIf="i < cantHoras" class="columna">
                                 <div class="icono">
-                                    <img src="../assets/icons/{{hora.weather[0].description}}.png" alt="Ícono">
+                                    <img src="../assets/icons/{{hora.weather[0].description}}.png" alt="{{hora.weather[0].description}}">
                                 </div>
                                 <p class="hora">{{hora.dt_txt | date : 'shortTime'}}</p>
                                 <!-- este panel muestra la info adicional que solo se muestra cuando está abajo -->
@@ -90,7 +90,7 @@
                         <div *ngFor="let day of weather5Days.list; let i = index">
                             <div *ngIf="i < cantDias" class="columna">
                                 <div class="icono">
-                                    <img src="../assets/icons/{{day.weather[0].description}}.png" alt="icono">
+                                    <img src="../assets/icons/{{day.weather[0].description}}.png" alt="{{day.weather[0].description}}">
                                 </div>
                                 <p class="dia">{{day.day | language:'days':'weather'}}</p>
                                 <div *ngIf="mostrarInfoDias == true" class="info-columna">
