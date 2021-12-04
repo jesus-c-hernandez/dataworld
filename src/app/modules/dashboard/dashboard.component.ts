@@ -121,12 +121,17 @@ export class DashboardComponent implements OnInit {
         this.lat = this.citySelected.coord.lat;
         this.lon = this.citySelected.coord.lon;
       } else {
-        const country = Constants.countries.find(
-          (c) => c.namea2 === localStorage.getItem('countryShort')
-        );
-        console.log('C', country);
-        this.lat = Number(country.lat);
-        this.lon = Number(country.lon);
+        if ( localStorage.getItem('countryShort') ){
+          const country = Constants.countries.find(
+            (c) => c.namea2 === localStorage.getItem('countryShort')
+          );
+          console.log('C', country);
+          this.lat = Number(country.lat);
+          this.lon = Number(country.lon);
+        } else {
+          this.lat = Number(localStorage.getItem('lat'));
+          this.lon = Number(localStorage.getItem('lon'));
+        }
       }
     }
 
@@ -228,7 +233,7 @@ export class DashboardComponent implements OnInit {
     //=================================================
     let country = 'us';
 
-    /*this.healthNews = await this.newsService.getHealthNews(country);
+    this.healthNews = await this.newsService.getHealthNews(country);
     //para comprobar que el objeto traiga noticias
     if (this.healthNews.pagination.count == 0) {
       //no trae noticias del país, mostrar las de USA
@@ -246,7 +251,7 @@ export class DashboardComponent implements OnInit {
     // this.loading = false;
 
     console.log('Health news', this.healthNews);
-    this.loading = false; */
+    this.loading = false;
     //=====================================================
     setTimeout(() => {
       this.loading = false;
